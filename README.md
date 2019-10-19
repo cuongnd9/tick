@@ -1,6 +1,6 @@
-# expo-boilerplate
+# tick
 
-👻🌍 Simple boilerplate for React Native (Expo).
+✔️ Tick: Task & Reminder
 
 ## Require
 
