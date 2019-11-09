@@ -31,6 +31,6 @@ $ yarn start
 
 ### Logo
 
-![logo](./images/logo.png)
+<img src="./images/logo.png" width="120"/>
 
 Build with 🙌 and ❤️
