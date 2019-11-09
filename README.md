@@ -25,57 +25,6 @@ $ yarn start
 
 ## Documentation:
 
-This template is using [UI Kitten components][link:ui-kitten], [here you can find documentation and other useful articles][link:doc-ui-kitten].
-
-## Mobile backend Bundles
-
-Easy way to integrate UI Kitten with backend ([Java][link:ui-kitten-bundle-java], [.NET Core][link:ui-kitten-bundle-dotnet-core]).
-
-[<img src="https://i.imgur.com/oSaGaCv.jpg">][link:ui-kitten-bundles]
-
-## How can I support the developers?
-- Star our GitHub repo :star:
-- Create pull requests, submit bugs, suggest new features or documentation updates :wrench:
-- Read us on [Medium][link:akveo-medium]
-- Follow us on [Twitter][link:akveo-twitter]
-- Like our page on [Facebook][link:akveo-facebook]
-
-## How can I support the developers?
-
-- Star our GitHub repo :star:
-- Create pull requests, submit bugs, suggest new features or documentation updates :wrench:
-- Read us on [Medium][link:akveo-medium]
-- Follow us on [Twitter][link:akveo-twitter] :feet:
-- Like our page on [Facebook][link:akveo-facebook] :thumbsup:
-
-## License
-
-[MIT](LICENSE.txt) license.
-
-## More from Akveo
-
-- [Eva Icons][link:eva-icons] - 480+ beautiful Open Source icons
-
-## From Developers
-
-Made with :heart: by [Akveo team][link:akveo-homepage]. Follow us on [Twitter][link:akveo-twitter] to get the latest news first!
-We're always happy to receive your feedback!
-
-[badge:travis]: https://travis-ci.com/akveo/kittenTricks.svg?branch=master
-
-[link:travis]: https://travis-ci.com/akveo/kittenTricks
-[link:eva]: https://eva.design
-[link:doc-ui-kitten]: https://akveo.github.io/react-native-ui-kitten
-[link:ui-kitten]: https://github.com/akveo/react-native-ui-kitten
-[link:app-store]: https://itunes.apple.com/us/app/kitten-tricks/id1246143230
-[link:google-play]: https://play.google.com/store/apps/details?id=com.akveo.kittenTricks
-[link:eva-icons]: https://github.com/akveo/eva-icons
-[link:akveo-homepage]: https://akveo.com
-[link:akveo-medium]: https://medium.com/akveo-engineering
-[link:akveo-twitter]: https://twitter.com/akveo_inc
-[link:akveo-facebook]: https://www.facebook.com/akveo
-[link:ui-kitten-bundles]: https://bit.ly/35AzNit
-[link:ui-kitten-bundle-java]: https://bit.ly/2IWdE4r
-[link:ui-kitten-bundle-dotnet-core]: http://bit.ly/2pl0kzL
+This proect is using [Kitten Tricks boilerplate][https://github.com/akveo/kittenTricks], [here you can find documentation and other useful articles][https://github.com/akveo/kittenTricks].
 
 Build with 🙌 and ❤️
