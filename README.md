@@ -18,12 +18,16 @@ $ yarn start
 
 ### Color
 
-[![Color Palette](./images/Color_Palette.png)](https://colorhunt.co/palette/66990)
+<a href="https://colorhunt.co/palette/66990">
+  <img src="./images/Color_Palette.png" width="200"/>
+</a>
 
-- 07689f
-- a2d5f2
-- fafafa
-- ff7e67
+```
+07689f
+a2d5f2
+fafafa
+ff7e67
+```
 
 ### Font
 
