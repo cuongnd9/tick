@@ -25,6 +25,6 @@ $ yarn start
 
 ## Documentation:
 
-This proect is using [Kitten Tricks boilerplate][https://github.com/akveo/kittenTricks], [here you can find documentation and other useful articles][https://github.com/akveo/kittenTricks].
+This project is using [Kitten Tricks boilerplate](https://github.com/akveo/kittenTricks).
 
 Build with 🙌 and ❤️
