@@ -1,16 +1,19 @@
-# Kitten Tricks [<img src="https://i.imgur.com/oMcxwZ0.png" alt="Eva Design System" height="20px" />][link:eva] [![Build Status][badge:travis]][link:travis]
+# tick
 
-This perfect starter kit is an app based on React Native and [**UI Kitten library**][link:ui-kitten] with Light and Dark themes support. It’s completely free and Open Source. 
-Compose the application from available screens, add backend integration and you will end up with A-grade cross-platform mobile application.
-The themes can be changed in the runtime, without any need of reloading the application.
+⏳📒 Tick: Task & Reminder
 
-Download a live Demo published on both [App Store][link:app-store] and [Google Play][link:google-play]
- or simply run it yourself by cloning a GitHub repo. 
+## Require
 
-![Preview](https://i.imgur.com/2E2nWHc.jpg)
+- [NodeJS](https://nodejs.org/en/)
+- [Expo](https://expo.io/)
+- [Yarn](https://yarnpkg.com/lang/en/) (Optional)
 
-[<img src="http://i.imgur.com/7IxtMV0.png" width="200"/>][link:app-store]
-[<img src="http://i.imgur.com/pxFfB0S.png" width="200"/>][link:google-play]
+## Quick start
+
+```shell
+$ yarn
+$ yarn start
+```
 
 ## Key features:
  
@@ -74,3 +77,5 @@ We're always happy to receive your feedback!
 [link:ui-kitten-bundles]: https://bit.ly/35AzNit
 [link:ui-kitten-bundle-java]: https://bit.ly/2IWdE4r
 [link:ui-kitten-bundle-dotnet-core]: http://bit.ly/2pl0kzL
+
+Build with 🙌 and ❤️
