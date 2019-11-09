@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Button } from 'react-native';
+import { Layout, Text, Button, Icon } from 'react-native-ui-kitten';
 import { NavigationStackProp } from 'react-navigation-stack';
 
 interface Props {
@@ -8,11 +8,16 @@ interface Props {
 
 const LoginScreen: React.FC<Props> = ({ navigation }) => {
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Text>Login Screen</Text>
-      <Button title="Login" onPress={() => navigation.navigate('Home')} />
-    </View>
+      <Button
+        icon={() => <Icon name='facebook' />}
+        onPress={() => navigation.navigate('Home')}
+      >
+        Login with Facebook
+      </Button>
+    </Layout>
   );
-}
+};
 
 export default LoginScreen;
