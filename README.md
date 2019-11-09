@@ -1,6 +1,6 @@
 # tick
 
-✔️ Tick: Task & Reminder
+⏳📒 Tick: Task & Reminder
 
 ## Require
 
