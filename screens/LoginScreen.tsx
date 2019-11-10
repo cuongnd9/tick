@@ -29,6 +29,7 @@ const LoginScreen: NavigationStackScreenComponent = ({ navigation }) => {
         appearance='ghost'
         activeOpacity={0.75}
         style={styles.forgotBtn}
+        textStyle={{ color: color.secondary }}
         onPress={() => navigation.navigate('Home')}
       >
         Forgot your password?
@@ -45,6 +46,7 @@ const LoginScreen: NavigationStackScreenComponent = ({ navigation }) => {
         appearance='ghost'
         activeOpacity={0.75}
         style={styles.registerBnt}
+        textStyle={{ color: color.secondary }}
         onPress={() => navigation.navigate('Home')}
       >
         Don't have an account? Create
@@ -71,7 +73,7 @@ const styles = StyleSheet.create({
     marginBottom: 15
   },
   bigTitle: {
-    color: color.textDarker
+    color: color.secondary
   },
   title: {
     color: color.textDark,
@@ -93,11 +95,9 @@ const styles = StyleSheet.create({
     marginBottom: 50,
     paddingHorizontal: 0,
     alignSelf: 'flex-end',
-    color: color.secondary
   },
   registerBnt: {
     paddingHorizontal: 0,
-    color: color.secondary
   }
 });
 
