@@ -31,7 +31,7 @@ ff7e67
 
 ### Font
 
-[Quicksand](https://fonts.google.com/specimen/Quicksand)
+[Dosis](https://fonts.google.com/specimen/Dosis)
 
 ### Logo
 

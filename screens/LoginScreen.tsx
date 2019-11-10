@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Image } from 'react-native';
-import { Layout, Text, Button, Icon, Input } from 'react-native-ui-kitten';
+import { Layout, Button, Icon, Input, Text } from 'react-native-ui-kitten';
 import { NavigationStackScreenComponent } from 'react-navigation-stack';
 import { color } from '../config/theme';
 
@@ -64,6 +64,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     padding: 16,
+    fontFamily: 'dosis-regular',
     paddingTop: 60,
     backgroundColor: color.background
   },
@@ -73,10 +74,10 @@ const styles = StyleSheet.create({
     marginBottom: 15
   },
   bigTitle: {
-    color: color.secondary
+    color: color.secondary,
   },
   title: {
-    color: color.textDark,
+    color: color.secondary,
     marginBottom: 50
   },
   username: {
