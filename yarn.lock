@@ -5293,6 +5293,11 @@ url-parse@^1.4.4:
     querystringify "^2.1.1"
     requires-port "^1.0.0"
 
+use-async-effect@^2.2.1:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/use-async-effect/-/use-async-effect-2.2.1.tgz#6b7c598df86b98b4bfa3481aaf9f01da08da7467"
+  integrity sha512-nPsDhym63uBWMRwWwcBclUWb3aPRYEwMIgXDylytQjM3r0BvzsqtRwuuxiNi5EBUa5bmo4Q206xr2LlmBWmd/g==
+
 use@^3.1.0:
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/use/-/use-3.1.1.tgz#d50c8cac79a19fbc20f2911f56eb973f4e10070f"
