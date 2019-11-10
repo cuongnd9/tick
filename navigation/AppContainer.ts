@@ -6,12 +6,17 @@ import { AuthLoadingScreen } from '../screens';
 export default createAppContainer(
   createSwitchNavigator(
     {
-      AuthLoading: AuthLoadingScreen,
+      AuthLoading: {
+        screen: AuthLoadingScreen,
+        navigationOptions: {
+          header: null
+        }
+      },
       App: AppStack,
-      Auth: AuthStack,
+      Auth: AuthStack
     },
     {
-      initialRouteName: 'AuthLoading',
+      initialRouteName: 'AuthLoading'
     }
   )
 );

@@ -3,7 +3,12 @@ import { LoginScreen } from '../screens';
 
 const AuthNavigator = createStackNavigator(
   {
-    Login: LoginScreen,
+    Login: {
+      screen: LoginScreen,
+      navigationOptions: {
+        header: null
+      }
+    }
   },
   {
     initialRouteName: 'Login'

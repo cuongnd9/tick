@@ -1,10 +1,14 @@
 import React from 'react';
 import { StyleSheet, Image } from 'react-native';
 import { Layout, Button, Icon, Input, Text } from 'react-native-ui-kitten';
-import { NavigationStackScreenComponent } from 'react-navigation-stack';
+import { NavigationStackProp } from 'react-navigation-stack';
 import { color } from '../config/theme';
 
-const LoginScreen: NavigationStackScreenComponent = ({ navigation }) => {
+interface Props {
+  navigation: NavigationStackProp;
+}
+
+const LoginScreen: React.FC<Props> = ({ navigation }) => {
   return (
     <Layout style={styles.container}>
       <Image style={styles.logo} source={require('../assets/logo.png')} />
@@ -53,10 +57,6 @@ const LoginScreen: NavigationStackScreenComponent = ({ navigation }) => {
       </Button>
     </Layout>
   );
-};
-
-LoginScreen.navigationOptions = {
-  header: null
 };
 
 const styles = StyleSheet.create({
