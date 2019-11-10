@@ -64,7 +64,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     padding: 16,
-    fontFamily: 'dosis-regular',
     paddingTop: 60,
     backgroundColor: color.background
   },
