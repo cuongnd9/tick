@@ -1,41 +1,22 @@
 import React from 'react';
+import { SplashScreen } from 'expo';
 import useAsyncEffect from 'use-async-effect';
-import { StyleSheet, AsyncStorage } from 'react-native';
-import { Layout, Button, Icon, Input, Text } from 'react-native-ui-kitten';
-import { NavigationStackScreenComponent } from 'react-navigation-stack';
-import { color } from '../config/theme';
+import { AsyncStorage, View, Text } from 'react-native';
+import { NavigationStackProp } from 'react-navigation-stack';
 
-const AuthLoadingScreen: NavigationStackScreenComponent = ({ navigation }) => {
+interface Props {
+  navigation: NavigationStackProp;
+}
+
+const AuthLoadingScreen: React.FC<Props> = ({ navigation }) => {
   useAsyncEffect(async () => {
+    SplashScreen.preventAutoHide();
     const token = await AsyncStorage.getItem('token');
     navigation.navigate(token ? 'App' : 'Auth')
+    SplashScreen.hide();
   }, []);
 
-  return (
-    <Layout style={styles.container}>
-      <Text category='h1' style={styles.bigTitle}>
-        Loading...
-      </Text>
-    </Layout>
-  );
+  return <View />
 };
-
-AuthLoadingScreen.navigationOptions = {
-  header: null
-};
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    padding: 16,
-    fontFamily: 'dosis-regular',
-    paddingTop: 60,
-    backgroundColor: color.background
-  },
-  bigTitle: {
-    color: color.secondary,
-  },
-});
 
 export default AuthLoadingScreen;

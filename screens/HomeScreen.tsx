@@ -16,7 +16,7 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
       />
       <Button
         title="Go back"
-        onPress={() => navigation.goBack()}
+        onPress={() => navigation.navigate('Auth')}
       />
     </View>
   );
