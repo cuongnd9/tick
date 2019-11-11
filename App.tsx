@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Provider } from 'react-redux';
 import { AppLoading } from 'expo';
 import * as Font from 'expo-font';
 import useAsyncEffect from 'use-async-effect';
@@ -6,6 +7,7 @@ import { mapping, light as lightTheme } from '@eva-design/eva';
 import { EvaIconsPack } from '@ui-kitten/eva-icons';
 import { ApplicationProvider, IconRegistry } from 'react-native-ui-kitten';
 import AppContainer from './navigation/AppContainer';
+import store from './config/store';
 
 function App() {
   const [fontLoaded, setFontLoaded] = useState<boolean>(false);
@@ -25,14 +27,14 @@ function App() {
     await loadFont();
   }, []);
   return (
-    <>
+    <Provider store={store}>
       <IconRegistry icons={EvaIconsPack} />
       <ApplicationProvider mapping={mapping} theme={lightTheme}>
         {
           fontLoaded ? <AppContainer /> : <AppLoading />
         }
       </ApplicationProvider>
-    </>
+    </Provider>
   );
 }
 

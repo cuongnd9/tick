@@ -1,7 +1,10 @@
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { StyleSheet, Image } from 'react-native';
 import { Layout, Button, Icon, Input, Text } from 'react-native-ui-kitten';
 import { NavigationStackProp } from 'react-navigation-stack';
+import { AppState } from '../models';
+import { loginAction } from '../models/auth/login';
 import { color } from '../config/theme';
 
 interface Props {
@@ -9,6 +12,15 @@ interface Props {
 }
 
 const LoginScreen: React.FC<Props> = ({ navigation }) => {
+  const dispatch = useDispatch();
+  const loginResult = useSelector((state: AppState) => state.login);
+  console.log(loginResult, '...........loginResult');
+
+  const handleLogin = () => {
+    dispatch(loginAction({ username: 'admin', password: 'admin' }));
+    // navigation.navigate('Home');
+  }
+
   return (
     <Layout style={styles.container}>
       <Image style={styles.logo} source={require('../assets/logo.png')} />
@@ -41,10 +53,11 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
       <Button
         style={styles.loginBnt}
         size='large'
-        onPress={() => navigation.navigate('Home')}
+        onPress={handleLogin}
       >
         LOGIN
       </Button>
+      <Text>{loginResult.toString()}</Text>
       <Button
         size='small'
         appearance='ghost'
