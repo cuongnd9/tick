@@ -56,6 +56,7 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
       >
         LOGIN
       </Button>
+      <Text>{loginResult.toString()}</Text>
       <Button
         size='small'
         appearance='ghost'
