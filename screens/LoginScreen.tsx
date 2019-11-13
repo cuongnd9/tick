@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { StyleSheet, Image } from 'react-native';
 import { Layout, Button, Icon, Input, Text } from 'react-native-ui-kitten';
@@ -12,13 +12,17 @@ interface Props {
 }
 
 const LoginScreen: React.FC<Props> = ({ navigation }) => {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const dispatch = useDispatch();
   const loginResult = useSelector((state: AppState) => state.login);
 
   const handleLogin = () => {
-    dispatch(loginAction({ username: 'admin', password: 'admin' }));
-    // navigation.navigate('Home');
-  }
+    dispatch(loginAction({ username, password }));
+    navigation.navigate('Home');
+    setUsername('');
+    setPassword('');
+  };
 
   return (
     <Layout style={styles.container}>
@@ -31,11 +35,16 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
       </Text>
       <Input
         placeholder='Username'
+        value={username}
+        onChangeText={text => setUsername(text)}
         style={styles.username}
         icon={() => <Icon name='checkmark-outline' />}
       />
       <Input
+        secureTextEntry
         placeholder='Password'
+        value={password}
+        onChangeText={text => setPassword(text)}
         style={styles.password}
         icon={() => <Icon name='eye' />}
       />
@@ -49,14 +58,9 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
       >
         Forgot your password?
       </Button>
-      <Button
-        style={styles.loginBnt}
-        size='large'
-        onPress={handleLogin}
-      >
+      <Button style={styles.loginBnt} size='large' onPress={handleLogin}>
         LOGIN
       </Button>
-      <Text>{loginResult.toString()}</Text>
       <Button
         size='small'
         appearance='ghost'
@@ -85,7 +89,7 @@ const styles = StyleSheet.create({
     marginBottom: 15
   },
   bigTitle: {
-    color: color.secondary,
+    color: color.secondary
   },
   title: {
     color: color.secondary,
@@ -106,10 +110,10 @@ const styles = StyleSheet.create({
   forgotBtn: {
     marginBottom: 50,
     paddingHorizontal: 0,
-    alignSelf: 'flex-end',
+    alignSelf: 'flex-end'
   },
   registerBnt: {
-    paddingHorizontal: 0,
+    paddingHorizontal: 0
   }
 });
 
