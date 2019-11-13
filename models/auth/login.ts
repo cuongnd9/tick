@@ -53,10 +53,11 @@ export const loginSuccessAction = (data: LoginResult): LoginSuccessType => ({
 });
 
 // Effects.
-function* loginAsyncAction (payload) {
+function* loginAsyncAction ({ payload }: LoginActionType) {
   try {
-    const loginResult: LoginResult = (yield call(login, payload)).data;
+    const loginResult: LoginResult = yield (yield call(login, payload)).json();
     yield put(loginSuccessAction(loginResult));
+    console.log(loginResult, 'login............');
   }
   catch(err) {
     console.log(err, 'err..............');

@@ -14,7 +14,6 @@ interface Props {
 const LoginScreen: React.FC<Props> = ({ navigation }) => {
   const dispatch = useDispatch();
   const loginResult = useSelector((state: AppState) => state.login);
-  console.log(loginResult, '...........loginResult');
 
   const handleLogin = () => {
     dispatch(loginAction({ username: 'admin', password: 'admin' }));
