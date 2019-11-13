@@ -53,17 +53,16 @@ export const loginSuccessAction = (data: LoginResult): LoginSuccessType => ({
 });
 
 // Effects.
-function* loginAsyncAction ({ payload }: LoginActionType) {
+function* loginAsyncAction({ payload }: LoginActionType) {
   try {
     const loginResult: LoginResult = yield (yield call(login, payload)).json();
     yield put(loginSuccessAction(loginResult));
     console.log(loginResult, 'login............');
-  }
-  catch(err) {
+  } catch (err) {
     console.log(err, 'err..............');
   }
 }
-function* watchLoginAsyncAction () {
+function* watchLoginAsyncAction() {
   yield takeEvery(LOGIN, loginAsyncAction);
 }
 function* effects() {
@@ -79,9 +78,9 @@ const reducer = (state: LoginState = {}, action: LoginActions): LoginState => {
     default:
       return state;
   }
-}
+};
 
 export const loginModel = {
   reducer,
   effects
-}
+};
