@@ -8,6 +8,7 @@ import { EvaIconsPack } from '@ui-kitten/eva-icons';
 import { ApplicationProvider, IconRegistry } from 'react-native-ui-kitten';
 import AppContainer from './navigation/AppContainer';
 import store from './config/store';
+import { GlobalLoading } from './components';
 
 function App() {
   const [fontLoaded, setFontLoaded] = useState<boolean>(false);
@@ -19,10 +20,10 @@ function App() {
       'dosis-light': require('./assets/fonts/Dosis-Light.ttf'),
       'dosis-medium': require('./assets/fonts/Dosis-Medium.ttf'),
       'dosis-regular': require('./assets/fonts/Dosis-Regular.ttf'),
-      'dosis-semi-bold': require('./assets/fonts/Dosis-SemiBold.ttf'),
+      'dosis-semi-bold': require('./assets/fonts/Dosis-SemiBold.ttf')
     });
     setFontLoaded(true);
-  }
+  };
   useAsyncEffect(async () => {
     await loadFont();
   }, []);
@@ -30,9 +31,14 @@ function App() {
     <Provider store={store}>
       <IconRegistry icons={EvaIconsPack} />
       <ApplicationProvider mapping={mapping} theme={lightTheme}>
-        {
-          fontLoaded ? <AppContainer /> : <AppLoading />
-        }
+        {fontLoaded ? (
+          <>
+            <AppContainer />
+            <GlobalLoading />
+          </>
+        ) : (
+          <AppLoading />
+        )}
       </ApplicationProvider>
     </Provider>
   );

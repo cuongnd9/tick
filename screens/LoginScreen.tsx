@@ -1,7 +1,13 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { StyleSheet, Image } from 'react-native';
-import { Layout, Button, Icon, Input, Text } from 'react-native-ui-kitten';
+import {
+  Layout,
+  Button,
+  Icon,
+  Input,
+  Text
+} from 'react-native-ui-kitten';
 import { NavigationStackProp } from 'react-navigation-stack';
 import { AppState } from '../models';
 import { loginAction } from '../models/auth/login';
