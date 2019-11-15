@@ -4,6 +4,8 @@
 
 ⏳📒 Tick: Task & Reminder
 
+![cat](./images/cat.gif)
+
 ## Require
 
 - [NodeJS](https://nodejs.org/en/)
