@@ -10,6 +10,14 @@ import { AppState } from './models';
 import AppContainer from './navigation/AppContainer';
 import { GlobalLoading } from './components';
 
+const customMapping = {
+  ...mapping,
+  strict: {
+    ...mapping.strict,
+    'text-font-family': 'dosis-regular'
+  }
+};
+
 function Main() {
   const loadingState = useSelector((state: AppState) => state.global.loading);
   const [fontLoaded, setFontLoaded] = useState<boolean>(false);
@@ -31,7 +39,10 @@ function Main() {
   return (
     <>
       <IconRegistry icons={EvaIconsPack} />
-      <ApplicationProvider mapping={mapping} theme={lightTheme}>
+      <ApplicationProvider
+        mapping={customMapping}
+        theme={lightTheme}
+      >
         {fontLoaded ? (
           <>
             <AppContainer />
