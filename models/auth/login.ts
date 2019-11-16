@@ -1,6 +1,7 @@
 import { all, call, put, takeEvery } from 'redux-saga/effects';
 import { login } from '../../services/auth.service';
 import { hideLoadingAction, showLoadingAction } from '../global/loading';
+import { showNotificationAction } from '../global/notification';
 
 // Constants.
 export const LOGIN = '@auth/login';
@@ -59,8 +60,10 @@ function* loginAsyncAction({ payload }: LoginActionType) {
   try {
     const loginResult: LoginResult = yield (yield call(login, payload)).json();
     yield put(loginSuccessAction(loginResult));
+    yield put(showNotificationAction({ content: 'success' }));
     console.log(loginResult, 'login............');
   } catch (err) {
+    yield put(showNotificationAction({ content: 'error' }));
     console.log(err, 'err..............');
   }
   yield put(hideLoadingAction());

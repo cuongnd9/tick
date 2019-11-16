@@ -33,7 +33,8 @@ const GlobalLoading: React.FC<Props> = ({ visible, size, content }) => {
 GlobalLoading.defaultProps = {
   visible: false,
   size: 'medium',
-  status: 'primary'
+  status: 'primary',
+  content: ''
 };
 
 const styles = StyleSheet.create({

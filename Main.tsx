@@ -8,7 +8,7 @@ import { ApplicationProvider, IconRegistry } from 'react-native-ui-kitten';
 import { useSelector } from 'react-redux';
 import { AppState } from './models';
 import AppContainer from './navigation/AppContainer';
-import { GlobalLoading } from './components';
+import { GlobalLoading, GlobalNotification } from './components';
 
 const customMapping = {
   ...mapping,
@@ -20,6 +20,9 @@ const customMapping = {
 
 function Main() {
   const loadingState = useSelector((state: AppState) => state.global.loading);
+  const notificationState = useSelector(
+    (state: AppState) => state.global.notification
+  );
   const [fontLoaded, setFontLoaded] = useState<boolean>(false);
   const loadFont = async () => {
     await Font.loadAsync({
@@ -39,10 +42,7 @@ function Main() {
   return (
     <>
       <IconRegistry icons={EvaIconsPack} />
-      <ApplicationProvider
-        mapping={customMapping}
-        theme={lightTheme}
-      >
+      <ApplicationProvider mapping={customMapping} theme={lightTheme}>
         {fontLoaded ? (
           <>
             <AppContainer />
@@ -51,6 +51,11 @@ function Main() {
               content={loadingState.content}
               size={loadingState.size}
               status={loadingState.status}
+            />
+            <GlobalNotification
+              visible={notificationState.visible}
+              content={notificationState.content}
+              status={notificationState.status}
             />
           </>
         ) : (
