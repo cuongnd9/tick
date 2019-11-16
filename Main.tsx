@@ -23,7 +23,6 @@ function Main() {
   const notificationState = useSelector(
     (state: AppState) => state.global.notification
   );
-  console.log(notificationState);
   const [fontLoaded, setFontLoaded] = useState<boolean>(false);
   const loadFont = async () => {
     await Font.loadAsync({

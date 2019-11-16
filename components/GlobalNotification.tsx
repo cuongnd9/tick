@@ -21,16 +21,15 @@ export interface Props {
 
 const GlobalNotification: React.FC<Props> = ({ visible, status, content }) => {
   const dispatch = useDispatch();
-  // useEffect(() => {
-  //   let timer;
-  //   if (visible) {
-  //     timer = setTimeout(() => {
-  //       console.log('dispatch action');
-  //       dispatch(hideNotificationAction());
-  //     }, 3000);
-  //   }
-  //   return () => clearTimeout(timer);
-  // }, []);
+  useEffect(() => {
+    let timer;
+    if (visible) {
+      timer = setTimeout(() => {
+        dispatch(hideNotificationAction());
+      }, 3000);
+    }
+    return () => clearTimeout(timer);
+  }, [visible]);
   return (
     <Modal visible={visible} transparent>
       <Animatable.View animation='bounceInUp' style={styles.container}>
