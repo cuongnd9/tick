@@ -1,5 +1,6 @@
 import { all, call, put, takeEvery } from 'redux-saga/effects';
 import { login } from '../../services/auth.service';
+import { hideLoadingAction, showLoadingAction } from '../global/loading';
 
 // Constants.
 export const LOGIN = '@auth/login';
@@ -20,6 +21,7 @@ interface LoginResult {
   token?: string;
   account?: Account;
 }
+
 interface LoginActionType {
   type: typeof LOGIN;
   payload: {
@@ -31,7 +33,6 @@ interface LoginSuccessType {
   type: typeof LOGIN_SUCCESS;
   payload: LoginResult;
 }
-type LoginActions = LoginSuccessType;
 
 // Actions.
 export const loginAction = ({
@@ -54,6 +55,7 @@ export const loginSuccessAction = (data: LoginResult): LoginSuccessType => ({
 
 // Effects.
 function* loginAsyncAction({ payload }: LoginActionType) {
+  yield put(showLoadingAction());
   try {
     const loginResult: LoginResult = yield (yield call(login, payload)).json();
     yield put(loginSuccessAction(loginResult));
@@ -61,6 +63,7 @@ function* loginAsyncAction({ payload }: LoginActionType) {
   } catch (err) {
     console.log(err, 'err..............');
   }
+  yield put(hideLoadingAction());
 }
 function* watchLoginAsyncAction() {
   yield takeEvery(LOGIN, loginAsyncAction);
@@ -70,8 +73,10 @@ function* effects() {
 }
 
 // Reducer.
-type LoginState = LoginResult;
-const reducer = (state: LoginState = {}, action: LoginActions): LoginState => {
+type State = LoginResult;
+type Action = LoginSuccessType;
+
+const reducer = (state: State = {}, action: Action): State => {
   switch (action.type) {
     case LOGIN_SUCCESS:
       return action.payload;

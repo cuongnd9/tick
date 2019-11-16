@@ -25,7 +25,7 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
 
   const handleLogin = () => {
     dispatch(loginAction({ username, password }));
-    navigation.navigate('Home');
+    // navigation.navigate('Home');
     setUsername('');
     setPassword('');
   };
