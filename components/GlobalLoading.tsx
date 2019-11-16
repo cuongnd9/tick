@@ -12,7 +12,7 @@ type Status =
   | 'danger'
   | 'alternative';
 
-interface Props {
+export interface Props {
   visible?: boolean;
   size?: Size;
   status?: Status;
@@ -24,7 +24,7 @@ const GlobalLoading: React.FC<Props> = ({ visible, size, content }) => {
     <Modal visible={visible} transparent>
       <View style={styles.container}>
         <Spinner size={size} />
-        <Text>{content}</Text>
+        <Text style={styles.content}>{content}</Text>
       </View>
     </Modal>
   );
@@ -44,6 +44,9 @@ const styles = StyleSheet.create({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center'
+  },
+  content: {
+    marginTop: 10
   }
 });
 
