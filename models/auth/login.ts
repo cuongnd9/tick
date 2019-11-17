@@ -59,13 +59,14 @@ export const loginSuccessAction = (data: LoginResult): LoginSuccessType => ({
 function* loginAsyncAction({ payload }: LoginActionType) {
   yield put(showLoadingAction());
   try {
-    const loginResult: LoginResult = yield (yield call(login, payload)).json();
+    console.log(yield call(login, payload), '........................');
+    const loginResult: LoginResult = yield (yield call(login, payload));
     yield put(loginSuccessAction(loginResult));
     Navigation.navigate('Home');
     console.log(loginResult, 'login............');
   } catch (err) {
     yield put(showNotificationAction({ content: 'error' }));
-    console.log(err, 'err..............');
+    console.log(JSON.stringify(err), 'err..............');
   }
   yield put(hideLoadingAction());
 }
