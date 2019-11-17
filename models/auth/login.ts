@@ -60,7 +60,6 @@ function* loginAsyncAction({ payload }: LoginActionType) {
   try {
     const loginResult: LoginResult = yield (yield call(login, payload)).json();
     yield put(loginSuccessAction(loginResult));
-    yield put(showNotificationAction({ content: 'success' }));
     console.log(loginResult, 'login............');
   } catch (err) {
     yield put(showNotificationAction({ content: 'error' }));
