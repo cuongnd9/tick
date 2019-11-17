@@ -1,4 +1,5 @@
 import { all, call, put, takeEvery } from 'redux-saga/effects';
+import Navigation from '../../helpers/Navigation';
 import { login } from '../../services/auth.service';
 import { hideLoadingAction, showLoadingAction } from '../global/loading';
 import { showNotificationAction } from '../global/notification';
@@ -60,6 +61,7 @@ function* loginAsyncAction({ payload }: LoginActionType) {
   try {
     const loginResult: LoginResult = yield (yield call(login, payload)).json();
     yield put(loginSuccessAction(loginResult));
+    Navigation.navigate('Home');
     console.log(loginResult, 'login............');
   } catch (err) {
     yield put(showNotificationAction({ content: 'error' }));
