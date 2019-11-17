@@ -9,6 +9,7 @@ import { useSelector } from 'react-redux';
 import { AppState } from './models';
 import AppContainer from './navigation/AppContainer';
 import { GlobalLoading, GlobalNotification } from './components';
+import Navigation from './helpers/Navigation';
 
 const customMapping = {
   ...mapping,
@@ -45,7 +46,11 @@ function Main() {
       <ApplicationProvider mapping={customMapping} theme={lightTheme}>
         {fontLoaded ? (
           <>
-            <AppContainer />
+            <AppContainer
+              ref={navigatorRef => {
+                Navigation.setTopLevelNavigator(navigatorRef);
+              }}
+            />
             <GlobalLoading
               visible={loadingState.visible}
               content={loadingState.content}
