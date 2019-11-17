@@ -1,15 +1,8 @@
 import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { StyleSheet, Image } from 'react-native';
-import {
-  Layout,
-  Button,
-  Icon,
-  Input,
-  Text
-} from 'react-native-ui-kitten';
+import { Layout, Button, Icon, Input, Text } from 'react-native-ui-kitten';
 import { NavigationStackProp } from 'react-navigation-stack';
-import { AppState } from '../models';
 import { loginAction } from '../models/auth/login';
 import { color } from '../config/theme';
 
@@ -20,14 +13,23 @@ interface Props {
 const LoginScreen: React.FC<Props> = ({ navigation }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [validUsername, setValidUsername] = useState(true);
+  const [validPassword, setValidPassword] = useState(true);
+
   const dispatch = useDispatch();
-  const loginResult = useSelector((state: AppState) => state.login);
+
+  const changeUsername = text => {
+    setUsername(text);
+    text && text.length > 3 ? setValidUsername(true) : setValidUsername(false);
+  };
+
+  const changePassword = text => {
+    setPassword(text);
+    text && text.length > 3 ? setValidPassword(true) : setValidPassword(false);
+  };
 
   const handleLogin = () => {
     dispatch(loginAction({ username, password }));
-    // navigation.navigate('Home');
-    setUsername('');
-    setPassword('');
   };
 
   return (
@@ -42,17 +44,21 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
       <Input
         placeholder='Username'
         value={username}
-        onChangeText={text => setUsername(text)}
+        onChangeText={changeUsername}
         style={styles.username}
-        icon={() => <Icon name='checkmark-outline' />}
+        icon={() => <Icon name='person-outline' />}
+        caption={!validUsername ? 'Invalid username' : ''}
+        captionTextStyle={{ color: '#FF3D71' }}
       />
       <Input
         secureTextEntry
         placeholder='Password'
         value={password}
-        onChangeText={text => setPassword(text)}
+        onChangeText={changePassword}
         style={styles.password}
-        icon={() => <Icon name='eye' />}
+        icon={() => <Icon name='lock-outline' />}
+        caption={!validPassword ? 'Invalid password' : ''}
+        captionTextStyle={{ color: '#FF3D71' }}
       />
       <Button
         size='small'
@@ -64,7 +70,17 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
       >
         Forgot your password?
       </Button>
-      <Button style={styles.loginBnt} size='large' onPress={handleLogin}>
+      <Button
+        disabled={!username || !password || !validUsername || !validPassword}
+        style={
+          !username || !password || !validUsername || !validPassword
+            ? styles.disabledLoginBtn
+            : styles.loginBnt
+        }
+        textStyle={{ color: 'white' }}
+        size='large'
+        onPress={handleLogin}
+      >
         LOGIN
       </Button>
       <Button
@@ -102,7 +118,7 @@ const styles = StyleSheet.create({
     marginBottom: 50
   },
   username: {
-    marginBottom: 10
+    marginBottom: 15
   },
   password: {
     marginBottom: 10
@@ -111,6 +127,12 @@ const styles = StyleSheet.create({
     width: '100%',
     backgroundColor: color.primary,
     borderColor: color.primary,
+    marginBottom: 10
+  },
+  disabledLoginBtn: {
+    width: '100%',
+    backgroundColor: '#EDF1F7',
+    borderColor: '#EDF1F7',
     marginBottom: 10
   },
   forgotBtn: {

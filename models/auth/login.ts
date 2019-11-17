@@ -1,4 +1,6 @@
-import { all, call, put, takeEvery } from 'redux-saga/effects';
+import { all, call, put, takeEvery, select } from 'redux-saga/effects';
+import { AsyncStorage } from 'react-native';
+import { AppState } from '..';
 import Navigation from '../../helpers/Navigation';
 import { login } from '../../services/auth.service';
 import { hideLoadingAction, showLoadingAction } from '../global/loading';
@@ -59,14 +61,18 @@ export const loginSuccessAction = (data: LoginResult): LoginSuccessType => ({
 function* loginAsyncAction({ payload }: LoginActionType) {
   yield put(showLoadingAction());
   try {
-    console.log(yield call(login, payload), '........................');
-    const loginResult: LoginResult = yield (yield call(login, payload));
+    const loginResult: LoginResult = yield yield call(login, payload);
     yield put(loginSuccessAction(loginResult));
     Navigation.navigate('Home');
-    console.log(loginResult, 'login............');
+    const token = yield select((appState: AppState) => appState.login.token)
+    yield AsyncStorage.setItem('x-access-token', token);
   } catch (err) {
-    yield put(showNotificationAction({ content: 'error' }));
-    console.log(JSON.stringify(err), 'err..............');
+    yield put(
+      showNotificationAction({
+        content: err.message,
+        status: 'danger'
+      })
+    );
   }
   yield put(hideLoadingAction());
 }

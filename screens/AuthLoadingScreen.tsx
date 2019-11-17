@@ -1,7 +1,7 @@
 import React from 'react';
 import { SplashScreen } from 'expo';
 import useAsyncEffect from 'use-async-effect';
-import { AsyncStorage, View, Text } from 'react-native';
+import { AsyncStorage, View } from 'react-native';
 import { NavigationStackProp } from 'react-navigation-stack';
 
 interface Props {
@@ -11,7 +11,7 @@ interface Props {
 const AuthLoadingScreen: React.FC<Props> = ({ navigation }) => {
   useAsyncEffect(async () => {
     SplashScreen.preventAutoHide();
-    const token = await AsyncStorage.getItem('token');
+    const token = await AsyncStorage.getItem('x-access-token');
     navigation.navigate(token ? 'App' : 'Auth')
     SplashScreen.hide();
   }, []);

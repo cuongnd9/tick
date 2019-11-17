@@ -6,12 +6,11 @@ interface Options {
   body?: any;
 }
 
-function checkStatus(response: any): any {
+async function checkStatus(response: any): Promise<any> {
   if (response.status >= 200 && response.status < 300) {
     return response;
   } else {
-    const error: any = new Error(response.statusText);
-    error.response = response;
+    const error: Error = new Error((await response.json()).message);
     throw error;
   }
 }
