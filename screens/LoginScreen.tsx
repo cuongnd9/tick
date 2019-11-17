@@ -66,7 +66,7 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
         activeOpacity={0.75}
         style={styles.forgotBtn}
         textStyle={{ color: color.secondary }}
-        onPress={() => navigation.navigate('Home')}
+        onPress={() => navigation.navigate('Task')}
       >
         Forgot your password?
       </Button>
@@ -89,7 +89,7 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
         activeOpacity={0.75}
         style={styles.registerBnt}
         textStyle={{ color: color.secondary }}
-        onPress={() => navigation.navigate('Home')}
+        onPress={() => navigation.navigate('Task')}
       >
         Don't have an account? Create
       </Button>

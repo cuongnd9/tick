@@ -63,7 +63,7 @@ function* loginAsyncAction({ payload }: LoginActionType) {
   try {
     const loginResult: LoginResult = yield yield call(login, payload);
     yield put(loginSuccessAction(loginResult));
-    Navigation.navigate('Home');
+    Navigation.navigate('Task');
     const token = yield select((appState: AppState) => appState.login.token)
     yield AsyncStorage.setItem('x-access-token', token);
   } catch (err) {
