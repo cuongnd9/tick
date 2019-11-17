@@ -1,17 +1,17 @@
 import { createStackNavigator } from 'react-navigation-stack';
-import { HomeScreen } from '../screens';
+import { ProfileScreen } from '../screens';
 
 const AppNavigator = createStackNavigator(
   {
-    Home: {
-      screen: HomeScreen,
+    Profile: {
+      screen: ProfileScreen,
       navigationOptions: {
         header: null,
       }
     }
   },
   {
-    initialRouteName: 'Home'
+    initialRouteName: 'Profile'
   }
 );
 
