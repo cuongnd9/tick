@@ -1,7 +1,7 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import store from './config/store';
-import Main from './Main';
+import store from './src/config/store';
+import Main from './src/Main';
 
 function App() {
   return (
