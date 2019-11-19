@@ -1,5 +1,5 @@
 import { createStackNavigator } from 'react-navigation-stack';
-import { CategoryScreen } from '../screens';
+import { CategoryScreen } from 'src/screens';
 
 const CategoryNavigator = createStackNavigator(
   {

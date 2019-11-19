@@ -1,4 +1,4 @@
-import { Props as NotificationProps } from '../../components/GlobalNotification';
+import { Props as NotificationProps } from 'src/components/GlobalNotification';
 
 // Constants.
 export const SHOW_NOTIFICATION = '@global/show_notification';

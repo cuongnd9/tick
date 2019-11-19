@@ -1,5 +1,5 @@
 import { createStackNavigator } from 'react-navigation-stack';
-import { AddTaskScreen } from '../screens';
+import { AddTaskScreen } from 'src/screens';
 
 const AddTaskNavigator = createStackNavigator(
   {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Modal, View, StyleSheet } from 'react-native';
 import { Text, Spinner } from 'react-native-ui-kitten';
-import { color } from '../config/theme';
+import { color } from 'src/config/theme';
 
 type Size = 'giant' | 'large' | 'medium' | 'small' | 'tiny';
 type Status =

@@ -3,7 +3,7 @@ import { Modal, View, StyleSheet, Animated } from 'react-native';
 import { Text } from 'react-native-ui-kitten';
 import * as Animatable from 'react-native-animatable';
 import { useDispatch } from 'react-redux';
-import { hideNotificationAction } from '../models/global/notification';
+import { hideNotificationAction } from 'src/models/global/notification';
 
 type Status = 'primary' | 'success' | 'info' | 'warning' | 'danger';
 
