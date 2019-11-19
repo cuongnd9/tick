@@ -1,10 +1,10 @@
 import { all, call, put, takeEvery, select } from 'redux-saga/effects';
 import { AsyncStorage } from 'react-native';
-import { AppState } from '..';
-import Navigation from '../../helpers/Navigation';
-import { login } from '../../services/auth.service';
-import { hideLoadingAction, showLoadingAction } from '../global/loading';
-import { showNotificationAction } from '../global/notification';
+import { AppState } from 'src/models';
+import Navigation from 'src/helpers/Navigation';
+import { login } from 'src/services/auth.service';
+import { hideLoadingAction, showLoadingAction } from 'src/models/global/loading';
+import { showNotificationAction } from 'src/models/global/notification';
 
 // Constants.
 export const LOGIN = '@auth/login';

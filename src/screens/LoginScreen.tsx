@@ -3,8 +3,8 @@ import { useDispatch } from 'react-redux';
 import { StyleSheet, Image } from 'react-native';
 import { Layout, Button, Icon, Input, Text } from 'react-native-ui-kitten';
 import { NavigationStackProp } from 'react-navigation-stack';
-import { loginAction } from '../models/auth/login';
-import { color } from '../config/theme';
+import { loginAction } from 'src/models/auth/login';
+import { color } from 'src/config/theme';
 
 interface Props {
   navigation: NavigationStackProp;

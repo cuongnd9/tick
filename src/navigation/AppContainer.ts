@@ -4,7 +4,7 @@ import TaskStack from './TaskStack';
 import AddTaskStack from './AddTaskStack';
 import CategoryStack from './CategoryStack';
 import OtherStack from './OtherStack';
-import { AuthLoadingScreen } from '../screens';
+import { AuthLoadingScreen } from 'src/screens';
 
 export default createAppContainer(
   createSwitchNavigator(

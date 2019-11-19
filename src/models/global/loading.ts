@@ -1,4 +1,4 @@
-import { Props as LoadingProps } from '../../components/GlobalLoading';
+import { Props as LoadingProps } from 'src/components/GlobalLoading';
 
 // Constants.
 export const SHOW_LOADING = '@global/show_loading';

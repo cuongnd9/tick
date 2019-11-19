@@ -1,4 +1,4 @@
-import config from '../config';
+import config from 'src/config';
 
 interface Options {
   method?: string;
