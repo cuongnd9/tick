@@ -12,7 +12,7 @@ const AuthLoadingScreen: React.FC<Props> = ({ navigation }) => {
   useAsyncEffect(async () => {
     SplashScreen.preventAutoHide();
     const token = await AsyncStorage.getItem('x-access-token');
-    navigation.navigate(token ? 'AppTabs' : 'AuthStack')
+    navigation.navigate(token ? 'TaskStack' : 'AuthStack')
     SplashScreen.hide();
   }, []);
 

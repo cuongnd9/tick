@@ -1,7 +1,9 @@
 import { createSwitchNavigator, createAppContainer } from 'react-navigation';
 import AuthStack from './AuthStack';
-import AppStack from './AppStack';
-import AppTabs from './AppTabs';
+import TaskStack from './TaskStack';
+import AddTaskStack from './AddTaskStack';
+import CategoryStack from './CategoryStack';
+import OtherStack from './OtherStack';
 import { AuthLoadingScreen } from '../screens';
 
 export default createAppContainer(
@@ -14,8 +16,10 @@ export default createAppContainer(
         }
       },
       AuthStack,
-      AppStack,
-      AppTabs
+      TaskStack,
+      AddTaskStack,
+      CategoryStack,
+      OtherStack
     },
     {
       initialRouteName: 'AuthLoading'

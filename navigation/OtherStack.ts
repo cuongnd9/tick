@@ -1,7 +1,7 @@
 import { createStackNavigator } from 'react-navigation-stack';
 import { ProfileScreen } from '../screens';
 
-const AppNavigator = createStackNavigator(
+const OtherNavigator = createStackNavigator(
   {
     Profile: {
       screen: ProfileScreen,
@@ -15,4 +15,4 @@ const AppNavigator = createStackNavigator(
   }
 );
 
-export default AppNavigator;
+export default OtherNavigator;
