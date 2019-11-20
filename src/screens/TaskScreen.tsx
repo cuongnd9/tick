@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layout, Text, Icon } from 'react-native-ui-kitten';
+import { Layout, Text } from 'react-native-ui-kitten';
 
 const TaskScreen: React.FC = () => {
   return (
