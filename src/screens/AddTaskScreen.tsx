@@ -3,7 +3,7 @@ import { Layout, Text } from 'react-native-ui-kitten'
 
 const AddTaskScreen: React.FC = () => {
   return (
-    <Layout>
+    <Layout style={{ height: '100%', backgroundColor: 'seagreen' }}>
       <Text>Add Task screen</Text>
     </Layout>
   );
