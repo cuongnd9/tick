@@ -1,5 +1,12 @@
 import React from 'react';
-import { View, TextInput as TextInputCore, StyleSheet } from 'react-native';
+import {
+  View,
+  TextInput as TextInputCore,
+  TouchableWithoutFeedback,
+  StyleSheet,
+  NativeSyntheticEvent,
+  TextInputSubmitEditingEventData
+} from 'react-native';
 import { Icon } from 'react-native-ui-kitten';
 import { color } from 'src/config/theme';
 
@@ -9,7 +16,7 @@ interface Props {
   style?: any;
   width?: number;
   height?: number;
-  onPress?: Function;
+  onEnter?: Function;
 }
 
 const TextInput: React.FC<Props> = ({
@@ -18,12 +25,17 @@ const TextInput: React.FC<Props> = ({
   style,
   width,
   height,
-  onPress
+  onEnter
 }) => {
+  const handleSubmit = (
+    e: NativeSyntheticEvent<TextInputSubmitEditingEventData>
+  ) => {
+    onEnter(e.nativeEvent.text);
+  };
   return (
     <View style={{ ...styles.container, ...style }}>
       <Icon
-        style={styles.icon}
+        style={styles.iconLeft}
         name={iconName}
         width={width}
         height={height}
@@ -34,7 +46,21 @@ const TextInput: React.FC<Props> = ({
         placeholder={placeholder}
         underlineColorAndroid='transparent'
         autoFocus
+        onSubmitEditing={handleSubmit}
+        ref={input => {
+          this.textInput = input;
+        }}
       />
+      <TouchableWithoutFeedback onPress={() => this.textInput.clear()}>
+        <View style={styles.iconRight}>
+          <Icon
+            name='close-outline'
+            width={width}
+            height={height}
+            fill={color.text}
+          />
+        </View>
+      </TouchableWithoutFeedback>
     </View>
   );
 };
@@ -53,8 +79,11 @@ const styles = StyleSheet.create({
     shadowRadius: 2,
     elevation: 1
   },
-  icon: {
+  iconLeft: {
     marginLeft: 10
+  },
+  iconRight: {
+    marginRight: 10
   },
   input: {
     padding: 10,
@@ -69,7 +98,7 @@ const styles = StyleSheet.create({
 
 TextInput.defaultProps = {
   width: 24,
-  height: 24,
+  height: 24
 };
 
 export default TextInput;
