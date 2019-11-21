@@ -34,7 +34,7 @@ const SearchHeader: React.FC<Props> = ({
         <IconButton style={styles.filter} iconName='bell-outline' />
       )}
       {!showSearchBtn && <IconButton iconName='person-outline' />}
-      {showSearchBtn && <Button title='Search' />}
+      {showSearchBtn && <Button showShadow={false} title='Close' />}
     </View>
   );
 };

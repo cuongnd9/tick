@@ -33,7 +33,7 @@ const Button: React.FC<Props> = ({ title, style, showShadow }) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: color.primary,
+    backgroundColor: 'transparent',
     padding: 10,
     paddingLeft: 22,
     paddingRight: 22,
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     elevation: 1
   },
   text: {
-    color: 'white'
+    color: color.text
   }
 });
 
