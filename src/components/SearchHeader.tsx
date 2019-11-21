@@ -1,20 +1,20 @@
 import React from 'react';
-import {
-  StyleSheet,
-  View,
-  Platform,
-  TouchableWithoutFeedback
-} from 'react-native';
-import { Icon } from 'react-native-ui-kitten';
+import { StyleSheet, View, Platform } from 'react-native';
 import TextInput from './TextInput';
 import IconButton from './IconButon';
 import { color } from 'src/config/theme';
 
-const SearchHeader: React.FC = () => {
+interface Props {
+  showFilter?: boolean;
+}
+
+const SearchHeader: React.FC<Props> = ({ showFilter }) => {
   return (
     <View style={styles.container}>
       <TextInput style={styles.search} iconName='search-outline' />
-      <IconButton style={styles.filter} iconName='funnel-outline' />
+      {showFilter && (
+        <IconButton style={styles.filter} iconName='funnel-outline' />
+      )}
       <IconButton iconName='person-outline' />
     </View>
   );
@@ -38,5 +38,9 @@ const styles = StyleSheet.create({
     marginRight: 5
   }
 });
+
+SearchHeader.defaultProps = {
+  showFilter: true
+};
 
 export default SearchHeader;
