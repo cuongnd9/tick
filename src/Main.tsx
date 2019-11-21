@@ -27,13 +27,13 @@ function Main() {
   const [fontLoaded, setFontLoaded] = useState<boolean>(false);
   const loadFont = async () => {
     await Font.loadAsync({
-      'dosis-bold': require('./assets/fonts/Dosis-Bold.ttf'),
-      'dosis-extra-bold': require('./assets/fonts/Dosis-ExtraBold.ttf'),
-      'dosis-extra-light': require('./assets/fonts/Dosis-ExtraLight.ttf'),
-      'dosis-light': require('./assets/fonts/Dosis-Light.ttf'),
-      'dosis-medium': require('./assets/fonts/Dosis-Medium.ttf'),
-      'dosis-regular': require('./assets/fonts/Dosis-Regular.ttf'),
-      'dosis-semi-bold': require('./assets/fonts/Dosis-SemiBold.ttf')
+      'dosis-bold': require('../assets/fonts/Dosis-Bold.ttf'),
+      'dosis-extra-bold': require('../assets/fonts/Dosis-ExtraBold.ttf'),
+      'dosis-extra-light': require('../assets/fonts/Dosis-ExtraLight.ttf'),
+      'dosis-light': require('../assets/fonts/Dosis-Light.ttf'),
+      'dosis-medium': require('../assets/fonts/Dosis-Medium.ttf'),
+      'dosis-regular': require('../assets/fonts/Dosis-Regular.ttf'),
+      'dosis-semi-bold': require('../assets/fonts/Dosis-SemiBold.ttf')
     });
     setFontLoaded(true);
   };
