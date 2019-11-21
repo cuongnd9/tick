@@ -4,14 +4,16 @@ import { Layout, Text } from 'react-native-ui-kitten';
 import { Header, StatusBar } from 'src/components';
 import { color } from 'src/config/theme';
 
-const AddTaskScreen: React.FC = () => {
+const SearchTaskScreen: React.FC = () => {
   return (
     <Layout style={styles.container}>
       <StatusBar />
       <Header
-        title='New task'
+        leftIconName='close-outline'
+        rightIconName='refresh-outline'
+        title='Find a task'
       />
-      <Text>Add Task screen</Text>
+      <Text>Search Task screen</Text>
     </Layout>
   );
 };
@@ -24,4 +26,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default AddTaskScreen;
+export default SearchTaskScreen;
