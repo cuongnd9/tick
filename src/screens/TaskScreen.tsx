@@ -17,7 +17,7 @@ const TaskScreen: React.FC<Props> = ({ navigation }) => {
   return (
     <Layout style={styles.container}>
       <StatusBar />
-      <SearchHeader onSearchPress={pressSearchButton} />
+      <SearchHeader isfakeSearchInput onSearchPress={pressSearchButton} />
       <Text>Task screen</Text>
     </Layout>
   );

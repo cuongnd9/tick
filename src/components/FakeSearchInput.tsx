@@ -1,41 +1,34 @@
 import React from 'react';
-import { View, TextInput as TextInputCore, StyleSheet } from 'react-native';
+import { View, StyleSheet, TouchableWithoutFeedback } from 'react-native';
 import { Icon } from 'react-native-ui-kitten';
 import { color } from 'src/config/theme';
 
 interface Props {
-  iconName: string;
-  placeholder?: string;
+  iconName?: string;
   style?: any;
   width?: number;
   height?: number;
   onPress?: Function;
 }
 
-const TextInput: React.FC<Props> = ({
+const FakeSearchInput: React.FC<Props> = ({
   iconName,
-  placeholder,
   style,
   width,
   height,
   onPress
 }) => {
   return (
-    <View style={{ ...styles.container, ...style }}>
+    <TouchableWithoutFeedback onPress={() => onPress()}>
+      <View style={{ ...styles.container, ...style }}>
       <Icon
-        style={styles.icon}
         name={iconName}
         width={width}
         height={height}
         fill={color.primary}
       />
-      <TextInputCore
-        style={styles.input}
-        placeholder={placeholder}
-        underlineColorAndroid='transparent'
-        autoFocus
-      />
     </View>
+    </TouchableWithoutFeedback>
   );
 };
 
@@ -44,32 +37,22 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'flex-start',
     backgroundColor: '#fff',
     borderRadius: 10,
-    overflow: 'visible',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.8,
     shadowRadius: 2,
-    elevation: 1
+    elevation: 1,
+    padding: 11
   },
-  icon: {
-    marginLeft: 10
-  },
-  input: {
-    padding: 10,
-    marginRight: 10,
-    backgroundColor: '#fff',
-    color: '#424242',
-    overflow: 'hidden',
-    alignSelf: 'stretch',
-    flex: 1
-  }
 });
 
-TextInput.defaultProps = {
+FakeSearchInput.defaultProps = {
   width: 24,
   height: 24,
+  iconName: 'search'
 };
 
-export default TextInput;
+export default FakeSearchInput;
