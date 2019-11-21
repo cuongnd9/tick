@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import {
   View,
   TextInput as TextInputCore,
@@ -27,6 +27,7 @@ const TextInput: React.FC<Props> = ({
   height,
   onEnter
 }) => {
+  const refInput = useRef(null);
   const handleSubmit = (
     e: NativeSyntheticEvent<TextInputSubmitEditingEventData>
   ) => {
@@ -47,11 +48,9 @@ const TextInput: React.FC<Props> = ({
         underlineColorAndroid='transparent'
         autoFocus
         onSubmitEditing={handleSubmit}
-        ref={input => {
-          this.textInput = input;
-        }}
+        ref={refInput}
       />
-      <TouchableWithoutFeedback onPress={() => this.textInput.clear()}>
+      <TouchableWithoutFeedback onPress={() => refInput.current.clear()}>
         <View style={styles.iconRight}>
           <Icon
             name='close-outline'
