@@ -10,14 +10,12 @@ const TaskScreen: React.FC = () => {
       <StatusBar />
       <SearchHeader />
       <Text>Task screen</Text>
-      <TextInput iconName='search-outline' placeholder='Search' />
     </Layout>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: color.background,
     display: 'flex',
     flex: 1,
   }

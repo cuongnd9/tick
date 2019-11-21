@@ -34,7 +34,7 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
 
   return (
     <Layout style={styles.container}>
-      <Image style={styles.logo} source={require('../assets/logo.png')} />
+      <Image style={styles.logo} source={require('../../assets/logo.png')} />
       <Text category='h1' style={styles.bigTitle}>
         Welcome
       </Text>

@@ -6,16 +6,19 @@ import { color } from 'src/config/theme';
 interface Props {
   iconName: string;
   placeholder?: string;
+  style?: any;
+  width?: number;
+  height?: number;
 }
 
-const TextInput: React.FC<Props> = ({ iconName, placeholder }) => {
+const TextInput: React.FC<Props> = ({ iconName, placeholder, style, width, height }) => {
   return (
-    <View style={styles.container}>
+    <View style={{ ...styles.container, ...style }}>
       <Icon
         style={styles.icon}
         name={iconName}
-        width={32}
-        height={32}
+        width={width}
+        height={height}
         fill={color.primary}
       />
       <TextInputCore
@@ -54,5 +57,10 @@ const styles = StyleSheet.create({
     flex: 1
   }
 });
+
+TextInput.defaultProps = {
+  width: 24,
+  height: 24
+}
 
 export default TextInput;
