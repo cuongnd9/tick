@@ -1,29 +1,16 @@
 import React from 'react';
 import {
-  Input,
   Icon,
   TopNavigation,
   TopNavigationAction
 } from 'react-native-ui-kitten';
+import TextInput from './TextInput';
 import { color } from 'src/config/theme';
 
 const renderSearchInput = (props?: any) => (
-  <Input
-    placeholder='Search'
-    size='small'
-    icon={() => (
-      <TopNavigationAction
-        {...props}
-        icon={() => (
-          <Icon
-            name='search-outline'
-            width={32}
-            height={32}
-            fill={color.primary}
-          />
-        )}
-      />
-    )}
+  <TopNavigationAction
+    {...props}
+    icon={() => <TextInput iconName='search-outline' />}
   />
 );
 
