@@ -46,8 +46,9 @@ const AppTabs = createBottomTabNavigator(
     initialRouteName: 'TaskStack',
     tabBarOptions: {
       showIcon: true,
-      showLabel: false
-    }
+      showLabel: false,
+    },
+    lazy: true,
   }
 );
 
