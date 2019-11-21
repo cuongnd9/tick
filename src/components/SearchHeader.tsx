@@ -2,21 +2,39 @@ import React from 'react';
 import { StyleSheet, View, Platform } from 'react-native';
 import TextInput from './TextInput';
 import IconButton from './IconButon';
+import Button from './Button';
+import FakeSearchInput from './FakeSearchInput';
 import { color } from 'src/config/theme';
 
 interface Props {
   showNoti?: boolean;
+  showSearchBtn?: boolean;
+  isfakeSearchInput?: boolean;
   onSearchPress?: Function;
 }
 
-const SearchHeader: React.FC<Props> = ({ showNoti, onSearchPress }) => {
+const SearchHeader: React.FC<Props> = ({
+  showNoti,
+  showSearchBtn,
+  isfakeSearchInput,
+  onSearchPress
+}) => {
   return (
     <View style={styles.container}>
-      <TextInput style={styles.search} onPress={onSearchPress} iconName='search-outline' />
-      {showNoti && (
+      {!isfakeSearchInput ? (
+        <TextInput
+          style={styles.search}
+          onPress={onSearchPress}
+          iconName='search-outline'
+        />
+      ) : (
+        <FakeSearchInput style={styles.search} onPress={onSearchPress} />
+      )}
+      {showNoti && !showSearchBtn && (
         <IconButton style={styles.filter} iconName='bell-outline' />
       )}
-      <IconButton iconName='person-outline' />
+      {!showSearchBtn && <IconButton iconName='person-outline' />}
+      {showSearchBtn && <Button title='Search' />}
     </View>
   );
 };
@@ -41,7 +59,9 @@ const styles = StyleSheet.create({
 });
 
 SearchHeader.defaultProps = {
-  showNoti: true
+  showNoti: true,
+  showSearchBtn: false,
+  isfakeSearchInput: false
 };
 
 export default SearchHeader;
