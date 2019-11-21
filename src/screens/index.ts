@@ -4,3 +4,4 @@ export { default as TaskScreen } from './TaskScreen';
 export { default as CategoryScreen } from './CategoryScreen';
 export { default as AddTaskScreen } from './AddTaskScreen';
 export { default as ProfileScreen } from './ProfileScreen';
+export { default as SearchTaskScreen } from './SearchTaskScreen';

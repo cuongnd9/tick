@@ -5,15 +5,16 @@ import IconButton from './IconButon';
 import { color } from 'src/config/theme';
 
 interface Props {
-  showFilter?: boolean;
+  showNoti?: boolean;
+  onSearchPress?: Function;
 }
 
-const SearchHeader: React.FC<Props> = ({ showFilter }) => {
+const SearchHeader: React.FC<Props> = ({ showNoti, onSearchPress }) => {
   return (
     <View style={styles.container}>
-      <TextInput style={styles.search} iconName='search-outline' />
-      {showFilter && (
-        <IconButton style={styles.filter} iconName='funnel-outline' />
+      <TextInput style={styles.search} onPress={onSearchPress} iconName='search-outline' />
+      {showNoti && (
+        <IconButton style={styles.filter} iconName='bell-outline' />
       )}
       <IconButton iconName='person-outline' />
     </View>
@@ -40,7 +41,7 @@ const styles = StyleSheet.create({
 });
 
 SearchHeader.defaultProps = {
-  showFilter: true
+  showNoti: true
 };
 
 export default SearchHeader;

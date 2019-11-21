@@ -9,9 +9,17 @@ interface Props {
   style?: any;
   width?: number;
   height?: number;
+  onPress?: Function;
 }
 
-const TextInput: React.FC<Props> = ({ iconName, placeholder, style, width, height }) => {
+const TextInput: React.FC<Props> = ({
+  iconName,
+  placeholder,
+  style,
+  width,
+  height,
+  onPress
+}) => {
   return (
     <View style={{ ...styles.container, ...style }}>
       <Icon
@@ -25,6 +33,7 @@ const TextInput: React.FC<Props> = ({ iconName, placeholder, style, width, heigh
         style={styles.input}
         placeholder={placeholder}
         underlineColorAndroid='transparent'
+        onFocus={() => onPress()}
       />
     </View>
   );
@@ -61,6 +70,6 @@ const styles = StyleSheet.create({
 TextInput.defaultProps = {
   width: 24,
   height: 24
-}
+};
 
 export default TextInput;

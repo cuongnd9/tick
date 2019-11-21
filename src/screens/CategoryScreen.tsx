@@ -8,7 +8,7 @@ const CategoryScreen: React.FC = () => {
   return (
     <Layout style={styles.container}>
       <StatusBar />
-      <SearchHeader showFilter={false} />
+      <SearchHeader showNoti={false} />
       <Text>Category screen</Text>
     </Layout>
   );

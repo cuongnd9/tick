@@ -11,7 +11,7 @@ const AppTabs = createBottomTabNavigator(
       screen: TaskStack,
       navigationOptions: {
         tabBarIcon: ({ focused }) => (
-          <TabBarIcon focused={focused} name='compass' height={32} width={32} />
+          <TabBarIcon focused={focused} name='cube' height={32} width={32} />
         )
       }
     },
@@ -21,9 +21,9 @@ const AppTabs = createBottomTabNavigator(
         tabBarIcon: ({ focused }) => (
           <TabBarIcon
             focused={focused}
-            name='plus-square'
-            height={48}
-            width={48}
+            name='plus-circle'
+            height={52}
+            width={52}
           />
         )
       }

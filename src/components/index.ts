@@ -5,3 +5,4 @@ export { default as SearchHeader } from './SearchHeader';
 export { default as StatusBar } from './StatusBar';
 export { default as TextInput } from './TextInput';
 export { default as IconButon } from './IconButon';
+export { default as Header } from './Header';
