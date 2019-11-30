@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Layout, Text, Input, Icon } from 'react-native-ui-kitten';
 import { Header, StatusBar } from 'src/components';
-import { CategoryList } from './components'
+import { CategoryList, AttachmentList } from './components'
 import { color } from 'src/config/theme';
 
 const AddTaskScreen: React.FC = () => {
@@ -19,6 +19,7 @@ const AddTaskScreen: React.FC = () => {
         <Text category='label'>Choose category</Text>
         <CategoryList />
         <Text category='label'>Add attachments</Text>
+        <AttachmentList />
         <Text category='label'>Add due date</Text>
         <Text category='label'>Reminder me</Text>
       </View>
