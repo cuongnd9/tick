@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, View, Platform, ViewStyle } from 'react-native';
 import { Text } from 'react-native-ui-kitten';
 import IconButton from './IconButon';
+import { color } from 'src/config/theme';
 
 interface Props {
   leftIconName?: string;
@@ -25,7 +26,9 @@ const Header: React.FC<Props> = ({ leftIconName, rightIconName, title }) => {
       {leftIconName && (
         <IconButton showShadow={false} iconName={leftIconName} />
       )}
-      <Text category='s1'>{title}</Text>
+      <Text style={styles.title} category='s1'>
+        {title}
+      </Text>
       {rightIconName && (
         <IconButton showShadow={false} iconName={rightIconName} />
       )}
@@ -42,6 +45,9 @@ const styles = StyleSheet.create({
     height: Platform.OS === 'ios' ? 44 : 56,
     paddingRight: 8,
     paddingLeft: 8
+  },
+  title: {
+    color: color.primary
   }
 });
 

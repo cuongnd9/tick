@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
   },
   iconRight: {
     marginRight: 10,
-    backgroundColor: '#C5CEE0',
+    backgroundColor: color.background,
     borderRadius: 15,
     padding: 5
   },
