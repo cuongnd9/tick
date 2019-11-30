@@ -52,12 +52,7 @@ const TextInput: React.FC<Props> = ({
       />
       <TouchableWithoutFeedback onPress={() => refInput.current.clear()}>
         <View style={styles.iconRight}>
-          <Icon
-            name='close-outline'
-            width={width}
-            height={height}
-            fill={color.text}
-          />
+          <Icon name='close-outline' width={15} height={15} fill={color.text} />
         </View>
       </TouchableWithoutFeedback>
     </View>
@@ -82,7 +77,10 @@ const styles = StyleSheet.create({
     marginLeft: 10
   },
   iconRight: {
-    marginRight: 10
+    marginRight: 10,
+    backgroundColor: '#C5CEE0',
+    borderRadius: 15,
+    padding: 5
   },
   input: {
     padding: 10,
