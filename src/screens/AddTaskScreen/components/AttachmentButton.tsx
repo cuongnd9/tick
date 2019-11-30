@@ -7,11 +7,51 @@ import {
   Modal,
   Dimensions
 } from 'react-native';
+import * as ImagePicker from 'expo-image-picker';
+import Constants from 'expo-constants';
+import * as Permissions from 'expo-permissions';
 import { Icon, Text } from 'react-native-ui-kitten';
 import { color } from 'src/config/theme';
 
-const AttachmentButton: React.FC = () => {
+interface Props {
+  onGetImages: Function;
+}
+
+const AttachmentButton: React.FC<Props> = ({ onGetImages }) => {
   const [visible, setVisible] = useState(false);
+  const getPermissionAsync = async () => {
+    if (Constants.platform.ios) {
+      const { status } = await Permissions.askAsync(
+        Permissions.CAMERA_ROLL,
+        Permissions.CAMERA
+      );
+      if (status !== 'granted') {
+        alert('Sorry, we need camera roll permissions to make this work!');
+      }
+    }
+  };
+  const pickImageFromLibrary = async () => {
+    await getPermissionAsync();
+    let result: any = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images
+    });
+
+    if (!result.cancelled) {
+      onGetImages(result.uri);
+    }
+    setVisible(!visible);
+  };
+  const pickImageFromCamera = async () => {
+    await getPermissionAsync();
+    let result: any = await ImagePicker.launchCameraAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images
+    });
+
+    if (!result.cancelled) {
+      onGetImages(result.uri);
+    }
+    setVisible(!visible);
+  };
   const handlePress = () => {
     setVisible(!visible);
   };
@@ -30,7 +70,7 @@ const AttachmentButton: React.FC = () => {
       <Modal transparent animationType='fade' visible={visible}>
         <View style={styles.modal}>
           <View style={styles.modalContainer}>
-            <TouchableHighlight onPress={() => setVisible(!visible)}>
+            <TouchableHighlight onPress={pickImageFromCamera}>
               <View
                 style={{
                   ...styles.button,
@@ -45,7 +85,7 @@ const AttachmentButton: React.FC = () => {
                 </Text>
               </View>
             </TouchableHighlight>
-            <TouchableHighlight onPress={() => setVisible(!visible)}>
+            <TouchableHighlight onPress={pickImageFromLibrary}>
               <View
                 style={{
                   ...styles.button,
@@ -79,9 +119,13 @@ const AttachmentButton: React.FC = () => {
   );
 };
 
+AttachmentButton.defaultProps = {
+  onGetImages: () => {}
+};
+
 const styles = StyleSheet.create({
   container: {
-    padding: 12,
+    padding: 20,
     marginRight: 10,
     borderRadius: 10,
     backgroundColor: '#fff',
