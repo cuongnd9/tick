@@ -21,8 +21,8 @@ const AddTaskScreen: React.FC = () => {
         <CategoryList />
         <Text category='label'>Add attachments</Text>
         <AttachmentList />
-        <Text category='label'>Add due date</Text>
-        <Text category='label'>Reminder me</Text>
+        <Text category='label'>Set due date</Text>
+        <Text category='label'>Set reminder date</Text>
       </View>
     </Layout>
   );
