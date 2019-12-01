@@ -14,7 +14,7 @@ const AddTaskScreen: React.FC = () => {
         <Text category='label'>Enter title</Text>
         <Input
           placeholder='Title'
-          style={styles.title}
+          style={styles.input}
           icon={() => <Icon name='bulb-outline' fill={color.primary} />}
         />
         <Text category='label'>Choose category</Text>
@@ -22,6 +22,13 @@ const AddTaskScreen: React.FC = () => {
         <Text category='label'>Add attachments</Text>
         <AttachmentList />
         <DatePickerList />
+        <Text category='label'>Enter description</Text>
+        <Input
+          placeholder='Description'
+          size='large'
+          style={styles.input}
+          icon={() => <Icon name='edit-outline' fill={color.primary} />}
+        />
       </View>
     </Layout>
   );
@@ -37,7 +44,7 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 15
   },
-  title: {
+  input: {
     borderColor: color.secondary,
     borderRadius: 10
   }
