@@ -106,7 +106,7 @@ const AttachmentButton: React.FC<Props> = ({ onGetImages }) => {
                   borderBottomStartRadius: 10
                 }}
               >
-                <Text style={{ textAlign: 'center' }} category='s2'>
+                <Text style={{ textAlign: 'center', color: '#fff' }} category='s2'>
                   Cancel
                 </Text>
               </View>
@@ -134,14 +134,14 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     backgroundColor: '#fff',
     borderWidth: 1,
-    borderColor: color.primary
+    borderColor: 'rgba(255, 126, 103, 0.2)'
   },
   modal: {
     display: 'flex',
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(250, 250, 250, 0.9)',
+    backgroundColor: 'rgba(250, 250, 250, 0.8)',
     padding: 15
   },
   modalContainer: {

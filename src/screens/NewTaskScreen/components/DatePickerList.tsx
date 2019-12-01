@@ -72,6 +72,7 @@ const styles = StyleSheet.create({
   },
   dateContainer: {
     display: 'flex',
+    flex: 1
   },
   dateContent: {
     display: 'flex',
@@ -79,7 +80,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 10,
-    borderColor: color.secondary,
+    borderColor: 'rgba(7,104,159,0.2)',
     borderWidth: 1,
     borderStyle: 'dashed',
     padding: 12,

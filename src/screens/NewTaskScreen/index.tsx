@@ -2,7 +2,12 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Layout, Text, Input, Icon } from 'react-native-ui-kitten';
 import { Header, StatusBar } from 'src/components';
-import { CategoryList, AttachmentList, DatePickerList } from './components';
+import {
+  CategoryList,
+  AttachmentList,
+  DatePickerList,
+  StepList
+} from './components';
 import { color } from 'src/config/theme';
 
 const NewTaskScreen: React.FC = () => {
@@ -15,19 +20,21 @@ const NewTaskScreen: React.FC = () => {
         <Input
           placeholder='Title'
           style={styles.input}
-          icon={() => <Icon name='bulb-outline' fill={color.primary} />}
+          icon={() => <Icon name='bulb-outline' fill={color.secondary} />}
         />
         <Text category='label'>Choose category</Text>
         <CategoryList />
+        <Text category='label'>Enter steps</Text>
+        <StepList />
+        <DatePickerList />
         <Text category='label'>Add attachments</Text>
         <AttachmentList />
-        <DatePickerList />
         <Text category='label'>Enter description</Text>
         <Input
           placeholder='Description'
           size='large'
           style={styles.input}
-          icon={() => <Icon name='edit-outline' fill={color.primary} />}
+          icon={() => <Icon name='edit-outline' fill={color.secondary} />}
         />
       </View>
     </Layout>
@@ -45,7 +52,7 @@ const styles = StyleSheet.create({
     padding: 15
   },
   input: {
-    borderColor: color.secondary,
+    borderColor: 'rgba(7,104,159,0.2)',
     borderRadius: 10
   }
 });
