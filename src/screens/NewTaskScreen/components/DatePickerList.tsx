@@ -11,7 +11,7 @@ const DatePickerList: React.FC = () => {
     <View style={styles.container}>
       <TouchableWithoutFeedback onPress={() => setShowDueDate(!showDueDate)}>
         <View style={{ ...styles.dateContainer, marginRight: 5 }}>
-          <Text category='label'>Set due date</Text>
+          <Text style={styles.label} category='label'>Set due date</Text>
           <View style={styles.dateContent}>
             <Icon
               style={styles.icon}
@@ -28,7 +28,7 @@ const DatePickerList: React.FC = () => {
         onPress={() => setShowReminderDate(!showReminderDate)}
       >
         <View style={{ ...styles.dateContainer, marginLeft: 5 }}>
-          <Text category='label'>Set reminder date</Text>
+          <Text style={styles.label} category='label'>Set reminder date</Text>
           <View style={styles.dateContent}>
             <Icon
               style={styles.icon}
@@ -88,7 +88,11 @@ const styles = StyleSheet.create({
   },
   icon: {
     marginRight: 5
-  }
+  },
+  label: {
+    marginBottom: 10,
+    marginTop: 20
+  },
 });
 
 export default DatePickerList;
