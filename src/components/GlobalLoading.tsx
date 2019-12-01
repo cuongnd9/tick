@@ -39,8 +39,7 @@ GlobalLoading.defaultProps = {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: color.background,
-    opacity: 0.5,
+    backgroundColor: 'rgba(250, 250, 250, 0.9)',
     height: '100%',
     display: 'flex',
     alignItems: 'center',
