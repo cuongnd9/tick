@@ -37,9 +37,6 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
     <Layout style={styles.container}>
       <StatusBar/>
       <Image style={styles.logo} source={require('../../assets/logo.png')} />
-      <Text category='h1' style={styles.bigTitle}>
-        Welcome
-      </Text>
       <Text category='p1' style={styles.title}>
         Sign in to continue
       </Text>
@@ -110,9 +107,6 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
     height: 30,
     marginBottom: 15
-  },
-  bigTitle: {
-    color: color.secondary
   },
   title: {
     color: color.secondary,

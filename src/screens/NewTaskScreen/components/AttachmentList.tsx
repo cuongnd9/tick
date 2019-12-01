@@ -4,11 +4,18 @@ import { thinid } from 'thinid';
 import AttachmentButton from './AttachmentButton';
 import AttachmentItem from './AtttachmentItem';
 
-const AttachmentList: React.FC = () => {
+interface Props {
+  onGetAttachments?: Function
+}
+
+const AttachmentList: React.FC<Props> = ({ onGetAttachments }) => {
   const [images, setImages] = useState([]);
   return (
     <View style={styles.container}>
-      <AttachmentButton onGetImages={image => setImages([...images, image])} />
+      <AttachmentButton onGetImages={image => {
+        setImages([...images, image]);
+        onGetAttachments([...images, image]);
+      }} />
       <FlatList
         horizontal
         showsHorizontalScrollIndicator={false}
@@ -19,6 +26,10 @@ const AttachmentList: React.FC = () => {
     </View>
   );
 };
+
+AttachmentList.defaultProps = {
+  onGetAttachments: () => {}
+}
 
 const styles = StyleSheet.create({
   container: {

@@ -27,7 +27,6 @@ const CategoryItem: React.FC<Props> = ({
       }
     });
   }, [name]);
-  useEffect(() => console.log(isActive));
   const containerStyle = isActive
     ? {
         ...styles.container,
