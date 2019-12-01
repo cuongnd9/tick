@@ -11,6 +11,7 @@ const AddTaskScreen: React.FC = () => {
       <StatusBar />
       <Header title='New task' />
       <View style={styles.content}>
+        <Text category='label'>Enter title</Text>
         <Input
           placeholder='Title'
           style={styles.title}
@@ -35,7 +36,7 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
-    padding: 16
+    padding: 15
   },
   title: {
     borderColor: color.secondary,

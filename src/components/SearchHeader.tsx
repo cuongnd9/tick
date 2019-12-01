@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
   },
   search: {
     flex: 1,
-    marginRight: 16
+    marginRight: 15
   },
   filter: {
     marginRight: 5
