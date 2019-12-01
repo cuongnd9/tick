@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Layout, Text, Input, Icon } from 'react-native-ui-kitten';
+import { Layout, Text, Input, Icon, Button } from 'react-native-ui-kitten';
 import { Header, StatusBar } from 'src/components';
 import {
   CategoryList,
@@ -36,6 +36,7 @@ const NewTaskScreen: React.FC = () => {
           style={styles.input}
           icon={() => <Icon name='edit-outline' fill={color.secondary} />}
         />
+        <Button style={styles.submit}>ADD TASK</Button>
       </View>
     </Layout>
   );
@@ -54,6 +55,11 @@ const styles = StyleSheet.create({
   input: {
     borderColor: 'rgba(7,104,159,0.2)',
     borderRadius: 10
+  },
+  submit: {
+    backgroundColor: color.secondary,
+    borderColor: color.secondary,
+    borderRadius: 10,
   }
 });
 
