@@ -22,8 +22,8 @@ const AppTabs = createBottomTabNavigator(
           <TabBarIcon
             focused={focused}
             name='plus-circle'
-            height={52}
-            width={52}
+            height={54}
+            width={54}
           />
         )
       }
@@ -43,7 +43,8 @@ const AppTabs = createBottomTabNavigator(
       showIcon: true,
       showLabel: false,
       style: {
-        borderTopColor: 'transparent'
+        borderTopColor: 'transparent',
+        height: 80
       }
     },
     lazy: true
