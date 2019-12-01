@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, StyleSheet, TouchableWithoutFeedback } from 'react-native';
 import { Text, Icon } from 'react-native-ui-kitten';
+import DateTimePicker from 'react-native-modal-datetime-picker';
 import { color } from 'src/config/theme';
 
 const DatePickerList: React.FC = () => {
+  const [showDueDate, setShowDueDate] = useState(false);
+  const [showReminderDate, setShowReminderDate] = useState(false);
   return (
     <View style={styles.container}>
-      <TouchableWithoutFeedback>
+      <TouchableWithoutFeedback onPress={() => setShowDueDate(!showDueDate)}>
         <View style={{ ...styles.dateContainer, marginRight: 5 }}>
           <Text category='label'>Set due date</Text>
           <View style={styles.dateContent}>
@@ -21,7 +24,9 @@ const DatePickerList: React.FC = () => {
           </View>
         </View>
       </TouchableWithoutFeedback>
-      <TouchableWithoutFeedback>
+      <TouchableWithoutFeedback
+        onPress={() => setShowReminderDate(!showReminderDate)}
+      >
         <View style={{ ...styles.dateContainer, marginLeft: 5 }}>
           <Text category='label'>Set reminder date</Text>
           <View style={styles.dateContent}>
@@ -36,6 +41,24 @@ const DatePickerList: React.FC = () => {
           </View>
         </View>
       </TouchableWithoutFeedback>
+      <DateTimePicker
+        mode='datetime'
+        onConfirm={(date: any) => {
+          console.log(date, 'due date');
+          setShowDueDate(!showDueDate);
+        }}
+        onCancel={() => setShowDueDate(!showDueDate)}
+        isVisible={showDueDate}
+      />
+      <DateTimePicker
+        mode='datetime'
+        onConfirm={(date: any) => {
+          console.log(date, 'reminder date');
+          setShowReminderDate(!showReminderDate);
+        }}
+        onCancel={() => setShowReminderDate(!showReminderDate)}
+        isVisible={showReminderDate}
+      />
     </View>
   );
 };
