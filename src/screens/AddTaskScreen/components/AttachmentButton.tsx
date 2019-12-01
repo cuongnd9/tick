@@ -125,7 +125,12 @@ AttachmentButton.defaultProps = {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 20,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 100,
+    height: 100,
+    padding: 0,
     marginRight: 10,
     borderRadius: 10,
     backgroundColor: '#fff',
@@ -139,7 +144,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: color.background,
     opacity: 0.5,
-    padding: 16
+    padding: 15
   },
   modalContainer: {
     display: 'flex',
