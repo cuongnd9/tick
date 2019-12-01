@@ -2,7 +2,7 @@ import React from 'react';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { TabBarIcon } from 'src/components';
 import TaskStack from './TaskStack';
-import AddTaskStack from './AddTaskStack';
+import NewTaskStack from './NewTaskStack';
 import CategoryStack from './CategoryStack';
 
 const AppTabs = createBottomTabNavigator(
@@ -15,8 +15,8 @@ const AppTabs = createBottomTabNavigator(
         )
       }
     },
-    AddTaskStack: {
-      screen: AddTaskStack,
+    NewTaskStack: {
+      screen: NewTaskStack,
       navigationOptions: {
         tabBarIcon: ({ focused }) => (
           <TabBarIcon
@@ -38,7 +38,7 @@ const AppTabs = createBottomTabNavigator(
     }
   },
   {
-    initialRouteName: 'TaskStack',
+    initialRouteName: 'NewTaskStack',
     tabBarOptions: {
       showIcon: true,
       showLabel: false,

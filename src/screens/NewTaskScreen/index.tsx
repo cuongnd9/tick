@@ -5,7 +5,7 @@ import { Header, StatusBar } from 'src/components';
 import { CategoryList, AttachmentList, DatePickerList } from './components';
 import { color } from 'src/config/theme';
 
-const AddTaskScreen: React.FC = () => {
+const NewTaskScreen: React.FC = () => {
   return (
     <Layout style={styles.container}>
       <StatusBar />
@@ -50,4 +50,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default AddTaskScreen;
+export default NewTaskScreen;
