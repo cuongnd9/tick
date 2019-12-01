@@ -14,9 +14,11 @@ interface Props {
 
 const AttachmentItem: React.FC<Props> = ({ uri }) => {
   return (
-    <View style={styles.container}>
+    <View>
+      <View style={styles.container}>
       <Image source={{ uri: uri }} style={styles.image} />
-      <TouchableWithoutFeedback>
+    </View>
+    <TouchableWithoutFeedback onPress={() => console.log('press...')}>
         <View style={styles.icon}>
           <Icon name='close-outline' width={15} height={15} fill='#fff' />
         </View>
@@ -27,6 +29,7 @@ const AttachmentItem: React.FC<Props> = ({ uri }) => {
 
 const styles = StyleSheet.create({
   container: {
+    position: 'relative',
     borderRadius: 10,
     padding: 0,
     width: 100,
@@ -40,8 +43,8 @@ const styles = StyleSheet.create({
   },
   icon: {
     position: 'absolute',
-    top: -10,
-    right: -10,
+    top: 0,
+    right: 0,
     backgroundColor: color.primary,
     borderRadius: 15,
     padding: 5
