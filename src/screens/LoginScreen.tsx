@@ -127,13 +127,13 @@ const styles = StyleSheet.create({
   loginBnt: {
     width: '100%',
     backgroundColor: color.primary,
-    borderColor: color.primary,
+    borderColor: 'rgba(255, 126, 103, 0.2)',
     marginBottom: 10
   },
   disabledLoginBtn: {
     width: '100%',
     backgroundColor: '#EDF1F7',
-    borderColor: '#EDF1F7',
+    borderColor: 'rgba(237, 241, 247, 0.2)',
     marginBottom: 10
   },
   forgotBtn: {

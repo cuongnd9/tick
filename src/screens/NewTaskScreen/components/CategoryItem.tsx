@@ -76,12 +76,12 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     backgroundColor: '#fff',
     borderWidth: 1,
-    borderColor: color.secondary
+    borderColor: 'rgba(7,104,159,0.2)'
   },
   active: {
     backgroundColor: color.primary,
     borderWidth: 1,
-    borderColor: color.primary
+    borderColor: 'rgba(255, 126, 103, 0.2)'
   },
   name: {
     marginLeft: 5
