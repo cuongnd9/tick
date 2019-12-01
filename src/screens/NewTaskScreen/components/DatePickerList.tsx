@@ -67,11 +67,11 @@ const styles = StyleSheet.create({
   container: {
     display: 'flex',
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
+    justifyContent: 'space-between'
   },
   dateContainer: {
     display: 'flex',
-    width: '50%'
   },
   dateContent: {
     display: 'flex',
