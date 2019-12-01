@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import {
-  TouchableHighlight,
   TouchableWithoutFeedback,
   StyleSheet,
   View,
@@ -32,6 +31,7 @@ const AttachmentButton: React.FC<Props> = ({ onGetImages }) => {
   };
   const pickImageFromLibrary = async () => {
     await getPermissionAsync();
+    setVisible(!visible);
     let result: any = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images
     });
@@ -39,10 +39,10 @@ const AttachmentButton: React.FC<Props> = ({ onGetImages }) => {
     if (!result.cancelled) {
       onGetImages(result.uri);
     }
-    setVisible(!visible);
   };
   const pickImageFromCamera = async () => {
     await getPermissionAsync();
+    setVisible(!visible);
     let result: any = await ImagePicker.launchCameraAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images
     });
@@ -50,7 +50,6 @@ const AttachmentButton: React.FC<Props> = ({ onGetImages }) => {
     if (!result.cancelled) {
       onGetImages(result.uri);
     }
-    setVisible(!visible);
   };
   const handlePress = () => {
     setVisible(!visible);
@@ -70,7 +69,7 @@ const AttachmentButton: React.FC<Props> = ({ onGetImages }) => {
       <Modal transparent animationType='fade' visible={visible}>
         <View style={styles.modal}>
           <View style={styles.modalContainer}>
-            <TouchableHighlight onPress={pickImageFromCamera}>
+            <TouchableWithoutFeedback onPress={pickImageFromCamera}>
               <View
                 style={{
                   ...styles.button,
@@ -84,8 +83,8 @@ const AttachmentButton: React.FC<Props> = ({ onGetImages }) => {
                   Choose from Camera
                 </Text>
               </View>
-            </TouchableHighlight>
-            <TouchableHighlight onPress={pickImageFromLibrary}>
+            </TouchableWithoutFeedback>
+            <TouchableWithoutFeedback onPress={pickImageFromLibrary}>
               <View
                 style={{
                   ...styles.button,
@@ -94,11 +93,11 @@ const AttachmentButton: React.FC<Props> = ({ onGetImages }) => {
                 }}
               >
                 <Text style={{ textAlign: 'center' }} category='s2'>
-                  Choose for Library
+                  Choose from Library
                 </Text>
               </View>
-            </TouchableHighlight>
-            <TouchableHighlight onPress={() => setVisible(!visible)}>
+            </TouchableWithoutFeedback>
+            <TouchableWithoutFeedback onPress={() => setVisible(!visible)}>
               <View
                 style={{
                   ...styles.button,
@@ -111,7 +110,7 @@ const AttachmentButton: React.FC<Props> = ({ onGetImages }) => {
                   Cancel
                 </Text>
               </View>
-            </TouchableHighlight>
+            </TouchableWithoutFeedback>
           </View>
         </View>
       </Modal>
