@@ -53,7 +53,6 @@ const AddStepItem: React.FC<Props> = ({ onAddStep }) => {
       ) : (
         <TouchableWithoutFeedback
           onPress={() => {
-            console.log(editable, '........editable');
             setEditable(!editable);
           }}
         >

@@ -18,7 +18,7 @@ const AttachmentItem: React.FC<Props> = ({ uri }) => {
       <View style={styles.container}>
       <Image source={{ uri: uri }} style={styles.image} />
     </View>
-    <TouchableWithoutFeedback onPress={() => console.log('press...')}>
+    <TouchableWithoutFeedback>
         <View style={styles.icon}>
           <Icon name='close-outline' width={15} height={15} fill='#fff' />
         </View>
