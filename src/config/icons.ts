@@ -21,7 +21,8 @@ export const categoryIcons = [
       'man',
       'girl',
       'boy',
-      'woman'
+      'woman',
+      'me'
     ],
     icon: 'person-outline'
   },

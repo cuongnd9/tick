@@ -1,3 +1,4 @@
+import { AsyncStorage } from 'react-native';
 import config from 'src/config';
 
 interface Options {
@@ -19,19 +20,21 @@ function parseJSON(response: any): any {
   return response.json();
 }
 
-export default function request(
+export default async function request(
   url: string = '',
   options: Options = {}
 ): Promise<Response> {
   const { method = 'GET', headers, body = {} } = options;
+  const token = await AsyncStorage.getItem('x-access-token');
   return fetch(`${config.domain}/${url}`, {
     method,
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
+      'x-access-token': token,
       ...headers
     },
-    body: JSON.stringify(body)
+    body:  method !== 'GET' ? JSON.stringify(body) : null
   })
     .then(checkStatus)
     .then(parseJSON);

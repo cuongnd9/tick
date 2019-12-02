@@ -3,7 +3,10 @@ import { AsyncStorage } from 'react-native';
 import { AppState } from 'src/models';
 import Navigation from 'src/helpers/Navigation';
 import { login } from 'src/services/auth.service';
-import { hideLoadingAction, showLoadingAction } from 'src/models/global/loading';
+import {
+  hideLoadingAction,
+  showLoadingAction
+} from 'src/models/global/loading';
 import { showNotificationAction } from 'src/models/global/notification';
 
 // Constants.
@@ -61,10 +64,10 @@ export const loginSuccessAction = (data: LoginResult): LoginSuccessType => ({
 function* loginAsyncAction({ payload }: LoginActionType) {
   yield put(showLoadingAction());
   try {
-    const loginResult: LoginResult = yield yield call(login, payload);
+    const loginResult: LoginResult = yield call(login, payload);
     yield put(loginSuccessAction(loginResult));
     Navigation.navigate('Task');
-    const token = yield select((appState: AppState) => appState.login.token)
+    const token = yield select((appState: AppState) => appState.login.token);
     yield AsyncStorage.setItem('x-access-token', token);
   } catch (err) {
     yield put(
