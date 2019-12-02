@@ -8,26 +8,27 @@ import {
 import { Icon, Text } from 'react-native-ui-kitten';
 import { color } from 'src/config/theme';
 
-interface Props {}
+interface Props {
+  content: string;
+  id: string;
+  onRemove?: Function;
+}
 
-const StepItem: React.FC<Props> = () => {
-  const [editable, setEditable] = useState(false);
+const StepItem: React.FC<Props> = ({ content, id, onRemove }) => {
   return (
-    <View style={styles.container}>
-      <Icon name='plus-outline' width={24} height={24} fill={color.secondary} />
-      <TouchableWithoutFeedback>
-        {editable ? (
-          <TextInput
-            style={styles.input}
-            placeholder='Step'
-            underlineColorAndroid='transparent'
-            autoFocus
-          />
-        ) : (
-          <Text style={styles.content}>Step 1</Text>
-        )}
-      </TouchableWithoutFeedback>
-      <TouchableWithoutFeedback>
+    <View style={{ position: 'relative' }}>
+      <View style={styles.container}>
+        <Icon
+          name='radio-button-off-outline'
+          width={24}
+          height={24}
+          fill={color.secondary}
+        />
+        <TouchableWithoutFeedback>
+          <Text style={styles.content}>{content}</Text>
+        </TouchableWithoutFeedback>
+      </View>
+      <TouchableWithoutFeedback onPress={() => onRemove(id)}>
         <View style={styles.closeIcon}>
           <Icon name='close-outline' width={15} height={15} fill='#fff' />
         </View>
@@ -35,6 +36,10 @@ const StepItem: React.FC<Props> = () => {
     </View>
   );
 };
+
+StepItem.defaultProps = {
+  onRemove: () => {}
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -51,9 +56,9 @@ const styles = StyleSheet.create({
   },
   closeIcon: {
     position: 'absolute',
-    top: -10,
-    right: -10,
-    backgroundColor: color.primary,
+    top: 0,
+    right: 0,
+    backgroundColor: color.secondary,
     borderRadius: 15,
     padding: 5
   },
@@ -61,15 +66,6 @@ const styles = StyleSheet.create({
     marginHorizontal: 12,
     color: color.secondary
   },
-  input: {
-    padding: 10,
-    marginRight: 10,
-    backgroundColor: '#fff',
-    color: '#424242',
-    overflow: 'hidden',
-    alignSelf: 'stretch',
-    flex: 1
-  }
 });
 
 export default StepItem;

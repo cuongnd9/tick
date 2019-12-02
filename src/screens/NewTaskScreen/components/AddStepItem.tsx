@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import {
   StyleSheet,
   View,
   TouchableWithoutFeedback,
   TextInput,
   NativeSyntheticEvent,
-  TextInputKeyPressEventData
+  TextInputSubmitEditingEventData
 } from 'react-native';
 import { Icon, Text } from 'react-native-ui-kitten';
 import { color } from 'src/config/theme';
@@ -15,30 +15,40 @@ interface Props {
 }
 
 const AddStepItem: React.FC<Props> = ({ onAddStep }) => {
-  const handleEnterPress = (
-    e: NativeSyntheticEvent<TextInputKeyPressEventData>
-  ) => {};
-
   const [editable, setEditable] = useState(false);
+  const inputRef = useRef(null);
+  const handleSubmit = (
+    e: NativeSyntheticEvent<TextInputSubmitEditingEventData>
+  ) => {
+    onAddStep(e.nativeEvent.text);
+    inputRef.current.clear();
+    setEditable(!editable);
+  };
+
   return (
     <View>
       {editable ? (
         <View>
           <View
-            style={{ ...styles.container, borderColor: 'rgba(7,104,159,0.2)' }}
+            style={{
+              ...styles.container,
+              borderColor: 'rgba(255, 126, 103, 0.2)',
+              backgroundColor: '#fff'
+            }}
           >
             <Icon
               name='edit-outline'
               width={24}
               height={24}
-              fill={color.secondary}
+              fill={color.primary}
             />
             <TextInput
+              ref={inputRef}
               style={styles.input}
               placeholder='Step'
               underlineColorAndroid='transparent'
               autoFocus
-              onKeyPress={handleEnterPress}
+              onSubmitEditing={handleSubmit}
             />
           </View>
           <TouchableWithoutFeedback
@@ -57,13 +67,8 @@ const AddStepItem: React.FC<Props> = ({ onAddStep }) => {
           }}
         >
           <View style={styles.container}>
-            <Icon
-              name='plus-outline'
-              width={24}
-              height={24}
-              fill={color.primary}
-            />
-            <Text style={styles.content}>Add step</Text>
+            <Icon name='plus-outline' width={24} height={24} fill='#fff' />
+            <Text style={{ ...styles.content, color: '#fff' }}>Add step</Text>
           </View>
         </TouchableWithoutFeedback>
       )}
@@ -86,8 +91,8 @@ const styles = StyleSheet.create({
     marginRight: 10,
     borderRadius: 10,
     borderWidth: 1,
-    borderColor: 'rgba(255, 126, 103, 0.2)',
-    backgroundColor: '#fff'
+    borderColor: color.primary,
+    backgroundColor: color.primary
   },
   content: {
     marginHorizontal: 15,
@@ -99,6 +104,8 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     alignSelf: 'stretch',
     flex: 1,
+    margin: 0,
+    padding: 0,
     marginLeft: 12
   },
   closeIcon: {
