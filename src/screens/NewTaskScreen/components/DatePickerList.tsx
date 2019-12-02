@@ -29,7 +29,10 @@ const DatePickerList: React.FC<Props> = ({ onGetDateList }) => {
               height={24}
               fill={color.secondary}
             />
-            <Text>{moment(dueDate).format('MMMM Do YYYY, hh:mm:ss A')}</Text>
+            <View style={styles.textGroup}>
+              <Text style={{ color: color.secondary }}>{moment(dueDate).format('MMM Do YYYY')}</Text>
+              <Text style={{ color: color.secondary }} category='p2'>{moment(dueDate).format('hh:mm:ss A')}</Text>
+            </View>
           </View>
         </View>
       </TouchableWithoutFeedback>
@@ -48,9 +51,12 @@ const DatePickerList: React.FC<Props> = ({ onGetDateList }) => {
               height={24}
               fill={color.secondary}
             />
-            <Text>
-              {moment(reminderDate).format('MMMM Do YYYY, hh:mm:ss A')}
-            </Text>
+            <View style={styles.textGroup}>
+              <Text style={{ color: color.secondary }}>{moment(reminderDate).format('MMM Do YYYY')}</Text>
+              <Text style={{ color: color.secondary }} category='p2'>
+                {moment(reminderDate).format('hh:mm:ss A')}
+              </Text>
+            </View>
           </View>
         </View>
       </TouchableWithoutFeedback>
@@ -99,7 +105,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     borderRadius: 10,
     borderColor: 'rgba(7,104,159,0.2)',
     borderWidth: 1,
@@ -107,8 +113,13 @@ const styles = StyleSheet.create({
     padding: 12,
     backgroundColor: '#fff'
   },
+  textGroup: {
+    display: 'flex',
+    justifyContent: 'center',
+    flex: 1
+  },
   icon: {
-    marginRight: 5
+    marginRight: 10
   },
   label: {
     marginBottom: 10,
