@@ -4,7 +4,8 @@
 
 Tick: Task & Reminder
 
-![cat](./images/cat.gif)
+<span style="margin: 30px"><img src="./images/cat.gif" height=200 /></span>
+<a href="https://expo.io/@cuongndt/tick"><img src="./images/qr_code.png" height=200 /></a>
 
 ## Require
 
