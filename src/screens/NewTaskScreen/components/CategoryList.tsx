@@ -4,11 +4,16 @@ import { useSelector } from 'react-redux';
 import { AppState } from 'src/models';
 import CategoryItem from './CategoryItem';
 
-const CategoryList: React.FC = () => {
+interface Props {
+  onGetSelectedId?: Function;
+}
+
+const CategoryList: React.FC<Props> = ({ onGetSelectedId }) => {
   const data = useSelector((state: AppState) => state.category.categoryList);
   const [selectedId, setSelectedId] = useState(null);
   const handleSelect = (id: string) => {
     setSelectedId(id);
+    onGetSelectedId(id);
   };
 
   return (
@@ -31,6 +36,10 @@ const CategoryList: React.FC = () => {
       />
     </View>
   );
+};
+
+CategoryList.defaultProps = {
+  onGetSelectedId: () => {}
 };
 
 export default CategoryList;
