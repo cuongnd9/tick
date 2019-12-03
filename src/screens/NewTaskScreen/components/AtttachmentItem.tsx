@@ -9,22 +9,28 @@ import { Icon } from 'react-native-ui-kitten';
 import { color } from 'src/config/theme';
 
 interface Props {
+  id: string;
   uri: string;
+  onRemove?: Function;
 }
 
-const AttachmentItem: React.FC<Props> = ({ uri }) => {
+const AttachmentItem: React.FC<Props> = ({ id, uri, onRemove }) => {
   return (
     <View>
       <View style={styles.container}>
-      <Image source={{ uri: uri }} style={styles.image} />
-    </View>
-    <TouchableWithoutFeedback>
+        <Image source={{ uri: uri }} style={styles.image} />
+      </View>
+      <TouchableWithoutFeedback onPress={() => onRemove(id)}>
         <View style={styles.icon}>
           <Icon name='close-outline' width={15} height={15} fill='#fff' />
         </View>
       </TouchableWithoutFeedback>
     </View>
   );
+};
+
+AttachmentItem.defaultProps = {
+  onRemove: () => {}
 };
 
 const styles = StyleSheet.create({
