@@ -26,13 +26,15 @@ const NewTaskScreen: React.FC = () => {
 
   const handleSubmit = () => {
     console.log(
-      title,
-      category,
-      steps,
-      dueDate,
-      reminderDate,
-      attachments,
-      description
+      JSON.stringify({
+        title,
+        category,
+        steps,
+        dueDate,
+        reminderDate,
+        attachments,
+        description
+      })
     );
   };
 
@@ -59,11 +61,11 @@ const NewTaskScreen: React.FC = () => {
             <Text style={styles.label} category='label'>
               Choose category
             </Text>
-            <CategoryList />
+            <CategoryList onGetSelectedId={id => setCategory(id)} />
             <Text style={{ ...styles.label, marginBottom: 5 }} category='label'>
               Enter steps
             </Text>
-            <StepList />
+            <StepList onGetStepList={list => setSteps(list)} />
             <DatePickerList
               onGetDateList={(dueDate, reminderDate) => {
                 setDueDate(dueDate);

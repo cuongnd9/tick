@@ -1,12 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, FlatList } from 'react-native';
 import { thinid } from 'thinid';
 import AddStepItem from './AddStepItem';
 import StepItem from './StepItem';
 
-const StepList: React.FC = () => {
+interface Props {
+  onGetStepList?: Function;
+}
+
+const StepList: React.FC<Props> = ({ onGetStepList }) => {
   const [stepList, setStepList] = useState([]);
-  const handleRemoveItem = id => {
+  useEffect(() => {
+    onGetStepList(stepList.map(step => ({ title: step.content })));
+  }, [stepList]);
+  const handleAddStep = (step: string) => {
+    setStepList([...stepList, { id: thinid(), content: step }]);
+  };
+  const handleRemoveItem = (id: string) => {
     setStepList([...stepList].filter(step => step.id !== id));
   };
   return (
@@ -24,11 +34,7 @@ const StepList: React.FC = () => {
         keyExtractor={_ => thinid()}
         extraData={stepList}
       />
-      <AddStepItem
-        onAddStep={step =>
-          setStepList([...stepList, { id: thinid(), content: step }])
-        }
-      />
+      <AddStepItem onAddStep={handleAddStep} />
     </View>
   );
 };
@@ -38,5 +44,9 @@ const styles = StyleSheet.create({
     display: 'flex'
   }
 });
+
+StepList.defaultProps = {
+  onGetStepList: () => {}
+};
 
 export default StepList;
