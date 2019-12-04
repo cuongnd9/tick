@@ -1,9 +1,5 @@
 import { all, call, put, takeEvery } from 'redux-saga/effects';
 import { getCategoryList } from 'src/services/category.service';
-import {
-  hideLoadingAction,
-  showLoadingAction
-} from 'src/models/global/loading';
 import { showNotificationAction } from 'src/models/global/notification';
 
 // Constants.
@@ -37,7 +33,6 @@ export const getListSuccessAction = (
 
 // Effects.
 function* getListAsyncAction() {
-  yield put(showLoadingAction());
   try {
     const categoryList = yield call(getCategoryList);
     yield put(getListSuccessAction(categoryList));
@@ -49,7 +44,6 @@ function* getListAsyncAction() {
       })
     );
   }
-  yield put(hideLoadingAction());
 }
 function* watchGetListAsyncAction() {
   yield takeEvery(GET_LIST, getListAsyncAction);

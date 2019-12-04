@@ -6,6 +6,8 @@ import {
   KeyboardAvoidingView
 } from 'react-native';
 import { Layout, Text, Input, Icon, Button } from 'react-native-ui-kitten';
+import { useSelector, useDispatch } from 'react-redux';
+import { uploadImageAction } from 'src/models/image';
 import { Header, StatusBar } from 'src/components';
 import {
   CategoryList,
@@ -16,6 +18,8 @@ import {
 import { color } from 'src/config/theme';
 
 const NewTaskScreen: React.FC = () => {
+  const dispatch = useDispatch();
+
   const [title, setTitle] = useState('');
   const [category, setCategory] = useState('');
   const [steps, setSteps] = useState([]);
@@ -25,6 +29,17 @@ const NewTaskScreen: React.FC = () => {
   const [description, setDescription] = useState('');
 
   const handleSubmit = () => {
+    const formData: FormData = new FormData();
+    attachments.forEach(attachment => {
+      const fileType = attachment.split('.').pop();
+      const file = {
+        uri: attachment,
+        name: `photo.${fileType}`,
+        type: `image/${fileType}`
+      };
+      formData.append('images', file);
+    });
+    dispatch(uploadImageAction(formData));
     console.log(
       JSON.stringify({
         title,

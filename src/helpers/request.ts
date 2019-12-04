@@ -5,6 +5,7 @@ interface Options {
   method?: string;
   headers?: any;
   body?: any;
+  isFormData?: boolean;
 }
 
 async function checkStatus(response: any): Promise<any> {
@@ -22,19 +23,28 @@ function parseJSON(response: any): any {
 
 export default async function request(
   url: string = '',
-  options: Options = {}
+  options: Options = {},
 ): Promise<Response> {
-  const { method = 'GET', headers, body = {} } = options;
+  const { method = 'GET', headers, body, isFormData = false } = options;
   const token = await AsyncStorage.getItem('x-access-token');
-  return fetch(`${config.domain}/${url}`, {
+  const internalHeaders = isFormData
+    ? {
+        ...headers,
+        Accept: 'application/json',
+        'x-access-token': token
+      }
+    : {
+        ...headers,
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        'x-access-token': token
+      };
+  return fetch(`${config.domain}${url}`, {
     method,
     headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-      'x-access-token': token,
-      ...headers
+      ...internalHeaders
     },
-    body:  method !== 'GET' ? JSON.stringify(body) : null
+    body: isFormData ? body : JSON.stringify(body)
   })
     .then(checkStatus)
     .then(parseJSON);
