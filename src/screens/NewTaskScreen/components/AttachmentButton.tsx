@@ -4,7 +4,7 @@ import {
   StyleSheet,
   View,
   Modal,
-  Dimensions
+  Dimensions,
 } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import Constants from 'expo-constants';
