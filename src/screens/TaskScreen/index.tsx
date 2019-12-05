@@ -41,7 +41,6 @@ const TaskScreen: React.FC<Props> = ({ navigation }) => {
             Next days
           </Text>
           <TaskList />
-          <TaskList />
         </View>
       </ScrollView>
     </Layout>
