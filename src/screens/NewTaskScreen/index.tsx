@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   StyleSheet,
   View,
@@ -6,8 +6,8 @@ import {
   KeyboardAvoidingView
 } from 'react-native';
 import { Layout, Text, Input, Icon, Button } from 'react-native-ui-kitten';
-import { useSelector, useDispatch } from 'react-redux';
-import { uploadImageAction } from 'src/models/image';
+import { useDispatch } from 'react-redux';
+import { createTaskAction } from 'src/models/task';
 import { Header, StatusBar } from 'src/components';
 import {
   CategoryList,
@@ -39,15 +39,14 @@ const NewTaskScreen: React.FC = () => {
       };
       formData.append('images', file);
     });
-    dispatch(uploadImageAction(formData));
-    console.log(
-      JSON.stringify({
+    dispatch(
+      createTaskAction({
+        images: formData,
         title,
         category,
         steps,
         dueDate,
         reminderDate,
-        attachments,
         description
       })
     );
@@ -63,7 +62,7 @@ const NewTaskScreen: React.FC = () => {
           contentContainerStyle={{ paddingBottom: 80 }}
         >
           <View style={styles.content}>
-            <Text style={{ ...styles.label, marginTop: 10 }} category='label'>
+            <Text style={{ ...styles.label, marginTop: 0 }} category='label'>
               Enter title
             </Text>
             <Input

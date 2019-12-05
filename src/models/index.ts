@@ -4,13 +4,15 @@ import { globalModel } from './global';
 import { loginModel } from './auth/login';
 import { categoryModel } from './category';
 import { imageModel } from './image';
+import { taskModel } from './task';
 
 function* rootSaga() {
   yield all([
     fork(loginModel.effects),
     fork(globalModel.effects),
     fork(categoryModel.effects),
-    fork(imageModel.effects)
+    fork(imageModel.effects),
+    fork(taskModel.effects)
   ]);
 }
 
@@ -18,7 +20,8 @@ const rootReducer = combineReducers({
   global: globalModel.reducer,
   login: loginModel.reducer,
   category: categoryModel.reducer,
-  image: imageModel.reducer
+  image: imageModel.reducer,
+  task: taskModel.reducer
 });
 
 export type AppState = ReturnType<typeof rootReducer>;
