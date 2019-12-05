@@ -34,7 +34,7 @@ const TaskItem: React.FC<Props> = ({
             />
           </TouchableWithoutFeedback>
           <Text category='h4' style={styles.title}>
-            Learn Golang
+            Learn Rust
           </Text>
         </View>
         <Icon
