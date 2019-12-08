@@ -103,7 +103,11 @@ const NewTaskScreen: React.FC = () => {
               onChangeText={text => setDescription(text)}
               icon={() => <Icon name='edit-outline' fill={color.secondary} />}
             />
-            <Button onPress={handleSubmit} style={styles.submit}>
+            <Button
+              disabled={!title || !category}
+              onPress={handleSubmit}
+              style={styles.submit}
+            >
               ADD TASK
             </Button>
           </View>
