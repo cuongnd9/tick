@@ -66,12 +66,12 @@ export const createSuccessTaskAction = (
 function* createTaskAsyncAction({ payload }: CreateTaskActionType) {
   yield put(showLoadingAction());
   try {
-    const images = payload.images
+    const images = payload.images['_parts'].length > 0
       ? yield call(uploadImage, payload.images)
       : null;
     const task = yield call(createTask, {
       ...payload,
-      images: images.map(image => image.id)
+      images: images ? images.map(image => image.id) : []
     });
     yield put(createSuccessTaskAction(task));
     Navigation.navigate('TaskStack');
