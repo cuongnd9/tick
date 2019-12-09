@@ -6,13 +6,17 @@ import StepItem from './StepItem';
 
 interface Props {
   onGetStepList?: Function;
+  reset?: boolean;
 }
 
-const StepList: React.FC<Props> = ({ onGetStepList }) => {
+const StepList: React.FC<Props> = ({ onGetStepList, reset }) => {
   const [stepList, setStepList] = useState([]);
   useEffect(() => {
     onGetStepList(stepList.map(step => ({ title: step.content })));
   }, [stepList]);
+  useEffect(() => {
+    setStepList([]);
+  }, [reset]);
   const handleAddStep = (step: string) => {
     setStepList([...stepList, { id: thinid(), content: step }]);
   };
@@ -46,7 +50,8 @@ const styles = StyleSheet.create({
 });
 
 StepList.defaultProps = {
-  onGetStepList: () => {}
+  onGetStepList: () => {},
+  reset: false
 };
 
 export default StepList;

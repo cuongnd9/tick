@@ -6,13 +6,17 @@ import AttachmentItem from './AtttachmentItem';
 
 interface Props {
   onGetAttachments?: Function;
+  reset?: boolean;
 }
 
-const AttachmentList: React.FC<Props> = ({ onGetAttachments }) => {
+const AttachmentList: React.FC<Props> = ({ onGetAttachments, reset }) => {
   const [images, setImages] = useState([]);
   useEffect(() => {
     onGetAttachments(images.map(image => image.uri));
   }, [images]);
+  useEffect(() => {
+    setImages([]);
+  }, [reset]);
   const handleRemoveItem = (id: string) => {
     setImages(images.filter(image => image.id !== id));
   };
@@ -41,7 +45,8 @@ const AttachmentList: React.FC<Props> = ({ onGetAttachments }) => {
 };
 
 AttachmentList.defaultProps = {
-  onGetAttachments: () => {}
+  onGetAttachments: () => {},
+  reset: false
 };
 
 const styles = StyleSheet.create({

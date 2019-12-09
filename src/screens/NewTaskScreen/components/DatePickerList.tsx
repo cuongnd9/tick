@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 import { View, StyleSheet, TouchableWithoutFeedback } from 'react-native';
 import { Text, Icon } from 'react-native-ui-kitten';
@@ -7,13 +7,19 @@ import { color } from 'src/config/theme';
 
 interface Props {
   onGetDateList?: Function;
+  reset?: boolean;
 }
 
-const DatePickerList: React.FC<Props> = ({ onGetDateList }) => {
+const DatePickerList: React.FC<Props> = ({ onGetDateList, reset }) => {
   const [dueDate, setDueDate] = useState(new Date());
   const [reminderDate, setReminderDate] = useState(new Date());
   const [showDueDate, setShowDueDate] = useState(false);
   const [showReminderDate, setShowReminderDate] = useState(false);
+
+  useEffect(() => {
+    setDueDate(new Date());
+    setReminderDate(new Date());
+  }, [reset]);
   return (
     <View style={styles.container}>
       <TouchableWithoutFeedback onPress={() => setShowDueDate(!showDueDate)}>
@@ -30,8 +36,12 @@ const DatePickerList: React.FC<Props> = ({ onGetDateList }) => {
               fill={color.secondary}
             />
             <View style={styles.textGroup}>
-              <Text style={{ color: color.secondary }}>{moment(dueDate).format('MMM Do YYYY')}</Text>
-              <Text style={{ color: color.secondary }} category='p2'>{moment(dueDate).format('hh:mm:ss A')}</Text>
+              <Text style={{ color: color.secondary }}>
+                {moment(dueDate).format('MMM Do YYYY')}
+              </Text>
+              <Text style={{ color: color.secondary }} category='p2'>
+                {moment(dueDate).format('hh:mm:ss A')}
+              </Text>
             </View>
           </View>
         </View>
@@ -52,7 +62,9 @@ const DatePickerList: React.FC<Props> = ({ onGetDateList }) => {
               fill={color.secondary}
             />
             <View style={styles.textGroup}>
-              <Text style={{ color: color.secondary }}>{moment(reminderDate).format('MMM Do YYYY')}</Text>
+              <Text style={{ color: color.secondary }}>
+                {moment(reminderDate).format('MMM Do YYYY')}
+              </Text>
               <Text style={{ color: color.secondary }} category='p2'>
                 {moment(reminderDate).format('hh:mm:ss A')}
               </Text>
@@ -87,7 +99,8 @@ const DatePickerList: React.FC<Props> = ({ onGetDateList }) => {
 };
 
 DatePickerList.defaultProps = {
-  onGetDateList: () => {}
+  onGetDateList: () => {},
+  reset: false
 };
 
 const styles = StyleSheet.create({
