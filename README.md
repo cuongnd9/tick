@@ -1,6 +1,7 @@
 # tick
 
 [![runs with expo](https://img.shields.io/badge/Runs%20with%20Expo-000.svg?style=flat-square&logo=EXPO&labelColor=f3f3f3&logoColor=000)](https://expo.io/)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2F500lab%2Ftick.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2F500lab%2Ftick?ref=badge_shield)
 
 Tick: Task & Reminder
 
@@ -43,3 +44,7 @@ ff7e67
 <img src="./images/logo.png" width="120"/>
 
 Build with 🙌 and ❤️
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2F500lab%2Ftick.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2F500lab%2Ftick?ref=badge_large)
