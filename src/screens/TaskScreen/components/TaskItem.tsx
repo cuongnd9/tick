@@ -1,22 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { View, StyleSheet, TouchableWithoutFeedback } from 'react-native';
 import { Icon, Text } from 'react-native-ui-kitten';
+import moment from 'moment';
 import { color } from 'src/config/theme';
 import { taskStatus } from 'src/config/constants';
+import { Task } from 'src/models/task';
+import { taskListType } from 'src/config/constants';
+import { categoryIcons, defaultCategoryIcon } from 'src/config/icons';
 
 interface Props {
-  task: any;
-  isActive?: boolean;
-  isLastItem?: boolean;
+  task: Task;
+  listType: string;
   onSelect?: Function;
 }
 
-const TaskItem: React.FC<Props> = ({
-  task,
-  isActive,
-  isLastItem,
-  onSelect
-}) => {
+const TaskItem: React.FC<Props> = ({ listType, task, onSelect }) => {
   return (
     <View style={styles.container}>
       <View style={{ ...styles.contentContainer, marginBottom: 10 }}>
@@ -33,16 +31,23 @@ const TaskItem: React.FC<Props> = ({
               fill={color.primary}
             />
           </TouchableWithoutFeedback>
-          <Text category='h4' style={styles.title}>
-            Learn Rust
+          <Text
+            numberOfLines={1}
+            ellipsizeMode='tail'
+            category='h4'
+            style={styles.title}
+          >
+            {task.title}
           </Text>
         </View>
-        <Icon
-          name='star-outline'
-          width={19}
-          height={19}
-          fill={color.secondary}
-        />
+        <View>
+          <Icon
+            name='star-outline'
+            width={24}
+            height={24}
+            fill={color.primary}
+          />
+        </View>
       </View>
       <View style={styles.contentContainer}>
         <View style={styles.reminderContainer}>
@@ -60,7 +65,11 @@ const TaskItem: React.FC<Props> = ({
             height={19}
             fill={color.secondary}
           />
-          <Text category='s2'>14:00</Text>
+          <Text style={{ marginLeft: 2 }} category='s2'>
+            {listType === taskListType.today
+              ? moment(task.reminderDate).format('hh:mm A')
+              : moment(task.reminderDate).format('MMM Do hh:mm A')}
+          </Text>
           <Icon
             name='minus-outline'
             width={19}
@@ -83,16 +92,24 @@ const TaskItem: React.FC<Props> = ({
         </View>
         <View style={styles.categoryContainer}>
           <Icon
-            name='navigation-2-outline'
+            name={
+              categoryIcons.find(item =>
+                item.nameList.includes(task.category.name.toLowerCase())
+              ).icon || defaultCategoryIcon
+            }
             width={19}
             height={19}
             fill={color.secondary}
           />
-          <Text>Travel</Text>
+          <Text>{task.category.name}</Text>
         </View>
       </View>
     </View>
   );
+};
+
+TaskItem.defaultProps = {
+  onSelect: () => {}
 };
 
 const styles = StyleSheet.create({
@@ -124,7 +141,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row'
   },
   title: {
-    marginLeft: 5
+    marginLeft: 5,
+    width: '80%'
   },
   reminderContainer: {
     display: 'flex',
@@ -137,11 +155,5 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   }
 });
-
-TaskItem.defaultProps = {
-  isActive: false,
-  isLastItem: false,
-  onSelect: () => {}
-};
 
 export default TaskItem;

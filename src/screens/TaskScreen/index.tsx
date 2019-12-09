@@ -2,11 +2,13 @@ import React, { useEffect } from 'react';
 import { StyleSheet, View, ScrollView } from 'react-native';
 import { Layout, Text } from 'react-native-ui-kitten';
 import { NavigationStackProp } from 'react-navigation-stack';
-import { useDispatch, useSelector } from 'react-redux';
-import { getListAction } from 'src/models/category';
+import { useDispatch } from 'react-redux';
+import { getListAction as getCategoryListAction } from 'src/models/category';
+import { getTaskListAction } from 'src/models/task'
 import { SearchHeader, StatusBar } from 'src/components';
 import { CategoryList, TaskList } from './components';
 import { color } from 'src/config/theme';
+import { taskListType } from 'src/config/constants';
 
 interface Props {
   navigation?: NavigationStackProp;
@@ -15,7 +17,8 @@ interface Props {
 const TaskScreen: React.FC<Props> = ({ navigation }) => {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getListAction());
+    dispatch(getCategoryListAction());
+    dispatch(getTaskListAction());
   }, []);
 
   const pressSearchButton = () => {
@@ -29,18 +32,10 @@ const TaskScreen: React.FC<Props> = ({ navigation }) => {
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.main}>
           <CategoryList />
-          <Text category='label' style={styles.label}>
-            Today, 21 Aug 2019
-          </Text>
-          <TaskList />
-          <Text category='label' style={styles.label}>
-            Tomorrow, 21 Aug 2019
-          </Text>
-          <TaskList />
-          <Text category='label' style={styles.label}>
-            Next days
-          </Text>
-          <TaskList />
+          <TaskList listType={taskListType.olderDays} />
+          <TaskList listType={taskListType.today} />
+          <TaskList listType={taskListType.tomorrow} />
+          <TaskList listType={taskListType.nextDays} />
         </View>
       </ScrollView>
     </Layout>
@@ -57,10 +52,6 @@ const styles = StyleSheet.create({
   main: {
     padding: 10,
     paddingTop: 20
-  },
-  label: {
-    marginBottom: 10,
-    marginTop: 20
   }
 });
 
