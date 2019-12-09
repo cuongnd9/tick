@@ -20,6 +20,7 @@ import { color } from 'src/config/theme';
 const NewTaskScreen: React.FC = () => {
   const dispatch = useDispatch();
 
+  const [reset, setReset] = useState(false);
   const [title, setTitle] = useState('');
   const [category, setCategory] = useState('');
   const [steps, setSteps] = useState([]);
@@ -27,6 +28,11 @@ const NewTaskScreen: React.FC = () => {
   const [reminderDate, setReminderDate] = useState(new Date());
   const [attachments, setAttachments] = useState([]);
   const [description, setDescription] = useState('');
+
+  useEffect(() => {
+    setTitle('');
+    setDescription('');
+  }, [reset])
 
   const handleSubmit = () => {
     const formData: FormData = new FormData();
@@ -41,13 +47,16 @@ const NewTaskScreen: React.FC = () => {
     });
     dispatch(
       createTaskAction({
-        images: formData,
-        title,
-        category,
-        steps,
-        dueDate,
-        reminderDate,
-        description
+        taskInput: {
+          images: formData,
+          title,
+          category,
+          steps,
+          dueDate,
+          reminderDate,
+          description
+        },
+        callback: () => setReset(!reset)
       })
     );
   };
@@ -75,12 +84,16 @@ const NewTaskScreen: React.FC = () => {
             <Text style={styles.label} category='label'>
               Choose category
             </Text>
-            <CategoryList onGetSelectedId={id => setCategory(id)} />
+            <CategoryList
+              reset={reset}
+              onGetSelectedId={id => setCategory(id)}
+            />
             <Text style={{ ...styles.label, marginBottom: 5 }} category='label'>
               Enter steps
             </Text>
-            <StepList onGetStepList={list => setSteps(list)} />
+            <StepList reset={reset} onGetStepList={list => setSteps(list)} />
             <DatePickerList
+              reset={reset}
               onGetDateList={(dueDate, reminderDate) => {
                 setDueDate(dueDate);
                 setReminderDate(reminderDate);
@@ -90,6 +103,7 @@ const NewTaskScreen: React.FC = () => {
               Add attachments
             </Text>
             <AttachmentList
+              reset={reset}
               onGetAttachments={images => setAttachments(images)}
             />
             <Text style={{ ...styles.label, marginTop: 10 }} category='label'>

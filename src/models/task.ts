@@ -41,7 +41,10 @@ interface Task {
 }
 interface CreateTaskActionType {
   type: typeof CREAT;
-  payload: TaskInput;
+  payload: {
+    taskInput: TaskInput;
+    callback?: Function;
+  }
 }
 interface CreateSuccessTaskActionType {
   type: typeof CREAT_SUCCESS;
@@ -49,12 +52,21 @@ interface CreateSuccessTaskActionType {
 }
 
 // Actions.
-export const createTaskAction = (
-  taskInput: TaskInput
-): CreateTaskActionType => ({
-  type: CREAT,
-  payload: taskInput
-});
+export const createTaskAction = ({
+  taskInput,
+  callback
+}: {
+  taskInput: TaskInput;
+  callback: Function;
+}): CreateTaskActionType => {
+  return {
+    type: CREAT,
+    payload: {
+      taskInput,
+      callback
+    }
+  }
+};
 export const createSuccessTaskAction = (
   task: Task
 ): CreateSuccessTaskActionType => ({
@@ -66,13 +78,17 @@ export const createSuccessTaskAction = (
 function* createTaskAsyncAction({ payload }: CreateTaskActionType) {
   yield put(showLoadingAction());
   try {
-    const images = payload.images['_parts'].length > 0
-      ? yield call(uploadImage, payload.images)
-      : null;
+    const images =
+      payload.taskInput.images['_parts'].length > 0
+        ? yield call(uploadImage, payload.taskInput.images)
+        : null;
     const task = yield call(createTask, {
-      ...payload,
+      ...payload.taskInput,
       images: images ? images.map(image => image.id) : []
     });
+    if (payload.callback) {
+      payload.callback();
+    }
     yield put(createSuccessTaskAction(task));
     Navigation.navigate('TaskStack');
     yield put(
