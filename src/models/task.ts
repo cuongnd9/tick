@@ -38,6 +38,12 @@ interface Image {
   url: string;
   publicId: string;
 }
+interface Step {
+  id: string;
+  index: number;
+  status: string;
+  title: string;
+}
 export interface Task {
   id?: string;
   index?: number;
@@ -50,6 +56,7 @@ export interface Task {
   reminderDate?: Date;
   isImportant?: boolean;
   category?: Category;
+  steps?: Step[];
   images?: [
     {
       id: string;

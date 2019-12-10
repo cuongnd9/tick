@@ -4,7 +4,7 @@ import { Layout } from 'react-native-ui-kitten';
 import { NavigationStackProp } from 'react-navigation-stack';
 import { useDispatch } from 'react-redux';
 import { getListAction as getCategoryListAction } from 'src/models/category';
-import { getTaskListAction } from 'src/models/task'
+import { getTaskListAction } from 'src/models/task';
 import { SearchHeader, StatusBar } from 'src/components';
 import { CategoryList, TaskList } from './components';
 import { color } from 'src/config/theme';
@@ -32,10 +32,10 @@ const TaskScreen: React.FC<Props> = ({ navigation }) => {
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.main}>
           <CategoryList />
-          <TaskList listType={taskListType.olderDays} />
-          <TaskList listType={taskListType.today} />
-          <TaskList listType={taskListType.tomorrow} />
-          <TaskList listType={taskListType.nextDays} />
+          <TaskList navigation={navigation} listType={taskListType.olderDays} />
+          <TaskList navigation={navigation} listType={taskListType.today} />
+          <TaskList navigation={navigation} listType={taskListType.tomorrow} />
+          <TaskList navigation={navigation} listType={taskListType.nextDays} />
         </View>
       </ScrollView>
     </Layout>
