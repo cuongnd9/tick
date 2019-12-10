@@ -53,11 +53,10 @@ const TaskItem: React.FC<Props> = ({ listType, task, onSelect }) => {
         <View style={styles.reminderContainer}>
           <Text category='s2'>100%</Text>
           <Icon
-            name='minus-outline'
+            name='arrow-right'
             width={19}
             height={19}
             fill={color.secondary}
-            style={{ transform: [{ rotate: '90deg' }] }}
           />
           <Icon
             name='clock-outline'
@@ -71,11 +70,10 @@ const TaskItem: React.FC<Props> = ({ listType, task, onSelect }) => {
               : moment(task.reminderDate).format('MMM Do hh:mm A')}
           </Text>
           <Icon
-            name='minus-outline'
+            name='arrow-right'
             width={19}
             height={19}
             fill={color.secondary}
-            style={{ transform: [{ rotate: '90deg' }] }}
           />
           <Icon
             name='attach-outline'

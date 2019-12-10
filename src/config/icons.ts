@@ -1,15 +1,15 @@
 export const categoryIcons = [
   {
     nameList: ['work', 'job', 'task', 'business', 'employment', 'creation'],
-    icon: 'briefcase-outline'
+    icon: 'briefcase'
   },
   {
     nameList: ['home', 'house', 'family', 'country'],
-    icon: 'home-outline'
+    icon: 'home'
   },
   {
     nameList: ['study', 'learning', 'reading', 'analysis', 'book'],
-    icon: 'book-outline'
+    icon: 'book'
   },
   {
     nameList: [
@@ -24,36 +24,36 @@ export const categoryIcons = [
       'woman',
       'me'
     ],
-    icon: 'person-outline'
+    icon: 'person'
   },
   {
     nameList: ['sport', 'football', 'soccer'],
-    icon: 'droplet-outline'
+    icon: 'droplet'
   },
   {
     nameList: ['health', 'life'],
-    icon: 'heart-outline'
+    icon: 'heart'
   },
   {
     nameList: ['travel', 'discover', 'trip', 'mountain', 'sea'],
-    icon: 'navigation-2-outline'
+    icon: 'navigation-2'
   },
   {
     nameList: ['relax', 'music', 'game'],
-    icon: 'headphones-outline'
+    icon: 'headphones'
   },
   {
     nameList: ['gift', 'birthday'],
-    icon: 'gift-outline'
+    icon: 'gift'
   },
   {
     nameList: ['motor', 'car', 'phone', 'laptop'],
-    icon: 'smartphone-outline'
+    icon: 'smartphone'
   },
   {
     nameList: ['github', 'git', 'gitlab', 'bitbucket'],
-    icon: 'github-outline'
+    icon: 'github'
   }
 ];
 
-export const defaultCategoryIcon = 'flash-outline';
+export const defaultCategoryIcon = 'flash';
