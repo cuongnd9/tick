@@ -2,15 +2,21 @@ import React, { useState } from 'react';
 import { FlatList, View } from 'react-native';
 import { Text } from 'react-native-ui-kitten';
 import { useSelector } from 'react-redux';
+import { NavigationStackProp } from 'react-navigation-stack';
 import { AppState } from 'src/models';
 import TaskItem from './TaskItem';
 
 interface Props {
+  navigation: NavigationStackProp;
   onGetSelectedId?: Function;
   listType: string;
 }
 
-const TaskList: React.FC<Props> = ({ onGetSelectedId, listType }) => {
+const TaskList: React.FC<Props> = ({
+  onGetSelectedId,
+  listType,
+  navigation
+}) => {
   const { list } = useSelector((state: AppState) => state.task);
   const { data = [] } =
     (list && list.find(item => item.type === listType)) || {};
@@ -31,7 +37,12 @@ const TaskList: React.FC<Props> = ({ onGetSelectedId, listType }) => {
         showsHorizontalScrollIndicator={false}
         data={data}
         renderItem={({ item }: { item: any }) => (
-          <TaskItem listType={listType} task={item} onSelect={handleSelect} />
+          <TaskItem
+            navigation={navigation}
+            listType={listType}
+            task={item}
+            onSelect={handleSelect}
+          />
         )}
         keyExtractor={item => item.id}
         extraData={selectedId}
