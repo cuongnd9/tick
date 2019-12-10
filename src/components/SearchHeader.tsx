@@ -24,7 +24,7 @@ const SearchHeader: React.FC<Props> = ({
       {!isfakeSearchInput ? (
         <TextInput
           style={styles.search}
-          onPress={onSearchPress}
+          onEnter={onSearchPress}
           iconName='search-outline'
         />
       ) : (

@@ -11,6 +11,7 @@ import { Icon } from 'react-native-ui-kitten';
 import { color } from 'src/config/theme';
 
 interface Props {
+  autoFocus?: boolean;
   iconName: string;
   placeholder?: string;
   style?: any;
@@ -20,6 +21,7 @@ interface Props {
 }
 
 const TextInput: React.FC<Props> = ({
+  autoFocus,
   iconName,
   placeholder,
   style,
@@ -46,7 +48,7 @@ const TextInput: React.FC<Props> = ({
         style={styles.input}
         placeholder={placeholder}
         underlineColorAndroid='transparent'
-        autoFocus
+        autoFocus={autoFocus}
         onSubmitEditing={handleSubmit}
         ref={refInput}
       />
@@ -57,6 +59,10 @@ const TextInput: React.FC<Props> = ({
       </TouchableWithoutFeedback>
     </View>
   );
+};
+
+TextInput.defaultProps = {
+  autoFocus: false
 };
 
 const styles = StyleSheet.create({
