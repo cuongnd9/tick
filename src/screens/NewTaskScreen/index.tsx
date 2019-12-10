@@ -7,7 +7,7 @@ import {
 } from 'react-native';
 import { Layout, Text, Input, Icon, Button } from 'react-native-ui-kitten';
 import { useDispatch } from 'react-redux';
-import { createTaskAction } from 'src/models/task';
+import { createTaskAction, getTaskListAction } from 'src/models/task';
 import { Header, StatusBar } from 'src/components';
 import {
   CategoryList,
@@ -32,7 +32,7 @@ const NewTaskScreen: React.FC = () => {
   useEffect(() => {
     setTitle('');
     setDescription('');
-  }, [reset])
+  }, [reset]);
 
   const handleSubmit = () => {
     const formData: FormData = new FormData();
@@ -56,7 +56,10 @@ const NewTaskScreen: React.FC = () => {
           reminderDate,
           description
         },
-        callback: () => setReset(!reset)
+        callback: () => {
+          setReset(!reset);
+          dispatch(getTaskListAction());
+        }
       })
     );
   };
