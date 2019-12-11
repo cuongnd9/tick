@@ -2,6 +2,7 @@ import React from 'react';
 import { View, StyleSheet, TouchableWithoutFeedback } from 'react-native';
 import { Icon, Text } from 'react-native-ui-kitten';
 import moment from 'moment';
+import _ from 'lodash';
 import { NavigationStackProp } from 'react-navigation-stack';
 import { color } from 'src/config/theme';
 import { taskStatus } from 'src/config/constants';
@@ -101,9 +102,12 @@ const TaskItem: React.FC<Props> = ({
           <View style={styles.categoryContainer}>
             <Icon
               name={
-                categoryIcons.find(item =>
-                  item.nameList.includes(task.category.name.toLowerCase())
-                ).icon || defaultCategoryIcon
+                _.get(
+                  categoryIcons.find(item =>
+                    item.nameList.includes(task.category.name.toLowerCase())
+                  ),
+                  'icon'
+                ) || defaultCategoryIcon
               }
               width={19}
               height={19}

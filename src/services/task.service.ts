@@ -11,4 +11,12 @@ function createTask(data) {
   });
 }
 
-export { getTaskList, createTask };
+function updateTask(data) {
+  const { id, ...otherData } = data;
+  return request(`/api/task/${id}`, {
+    method: 'PUT',
+    body: otherData
+  });
+}
+
+export { getTaskList, createTask, updateTask };

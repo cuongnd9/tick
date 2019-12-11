@@ -1,17 +1,19 @@
 import { all, call, put, takeEvery } from 'redux-saga/effects';
 import Navigation from 'src/helpers/Navigation';
-import { createTask, getTaskList } from 'src/services/task.service';
+import { createTask, getTaskList, updateTask } from 'src/services/task.service';
 import { uploadImage } from 'src/services/image.service';
 import { showNotificationAction } from 'src/models/global/notification';
 import {
   hideLoadingAction,
   showLoadingAction
 } from 'src/models/global/loading';
-import { taskListType } from 'src/config/constants';
+import { taskListType, taskStatus, taskPriority } from 'src/config/constants';
 
 // Constants.
 export const CREATE = '@task/create';
 export const CREATE_SUCCESS = '@task/create_success';
+export const UPDATE = '@task/update';
+export const UPDATE_SUCCESS = '@task/update_success';
 export const LIST = '@task/list';
 export const LIST_SUCCESS = '@task/list_success';
 
@@ -74,6 +76,35 @@ interface TaskListType {
     | typeof taskListType.tomorrow;
   data: Task[];
 }
+interface UpdateTaskInput {
+  index?: number;
+  title?: string;
+  description?: string;
+  status?:
+    | typeof taskStatus.done
+    | typeof taskStatus.expired
+    | typeof taskStatus.inProcess
+    | typeof taskStatus.todo;
+  priority?:
+    | typeof taskPriority.high
+    | typeof taskPriority.highest
+    | typeof taskPriority.low
+    | typeof taskPriority.lowest
+    | typeof taskPriority.medium;
+  isImportant?: boolean;
+  dueDate?: Date;
+  reminderDate?: Date;
+  doSendMail?: boolean;
+  category?: string;
+  steps?: {
+    newSteps?: Omit<Step, 'id'>[];
+    deleteSteps?: string[];
+  };
+  images?: {
+    newImages?: FormData;
+    deleteImages?: string[];
+  };
+}
 interface CreateTaskActionType {
   type: typeof CREATE;
   payload: {
@@ -91,6 +122,18 @@ interface GetTaskListActionType {
 interface GetTaskListSuccessActionType {
   type: typeof LIST_SUCCESS;
   payload: TaskListType[];
+}
+interface UpdateTaskActionType {
+  type: typeof UPDATE;
+  payload: {
+    id: string;
+    body: UpdateTaskInput;
+    callback?: Function;
+  };
+}
+interface UpdateTaskSuccessActionType {
+  type: typeof UPDATE_SUCCESS;
+  payload: Task;
 }
 
 // Actions.
@@ -123,6 +166,28 @@ export const getTaskListSuccessAction = (
 ): GetTaskListSuccessActionType => ({
   type: LIST_SUCCESS,
   payload: list
+});
+export const updateTaskAction = ({
+  id,
+  body,
+  callback
+}: {
+  id: string;
+  body: UpdateTaskInput;
+  callback: Function;
+}): UpdateTaskActionType => ({
+  type: UPDATE,
+  payload: {
+    id,
+    body,
+    callback
+  }
+});
+export const updateTaskSuccessAction = (
+  task: Task
+): UpdateTaskSuccessActionType => ({
+  type: UPDATE_SUCCESS,
+  payload: task
 });
 
 // Effects.
@@ -179,10 +244,50 @@ function* getTaskListAsyncAction() {
 function* watchGetTaskListAsyncAction() {
   yield takeEvery(LIST, getTaskListAsyncAction);
 }
+function* updateTaskAsyncAction({ payload }: UpdateTaskActionType) {
+  yield put(showLoadingAction());
+  try {
+    const newImages =
+      payload.body.images.newImages['_parts'].length > 0
+        ? yield call(uploadImage, payload.body.images.newImages)
+        : null;
+    const task = yield call(updateTask, {
+      ...payload.body,
+      id: payload.id,
+      images: {
+        ...payload.body.images,
+        newImages: newImages ? newImages.map(image => image.id) : []
+      }
+    });
+    if (payload.callback) {
+      payload.callback();
+    }
+    yield put(createSuccessTaskAction(task));
+    Navigation.navigate('Task');
+    yield put(
+      showNotificationAction({
+        content: 'Task updated successfully',
+        status: 'success'
+      })
+    );
+  } catch (err) {
+    yield put(
+      showNotificationAction({
+        content: err.message,
+        status: 'danger'
+      })
+    );
+  }
+  yield put(hideLoadingAction());
+}
+function* watchUpdateTaskAsyncAction() {
+  yield takeEvery(UPDATE, updateTaskAsyncAction);
+}
 function* effects() {
   yield all([
     call(watchCreateTaskAsyncAction),
-    call(watchGetTaskListAsyncAction)
+    call(watchGetTaskListAsyncAction),
+    call(watchUpdateTaskAsyncAction)
   ]);
 }
 

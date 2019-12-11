@@ -16,6 +16,9 @@ const CategoryList: React.FC<Props> = ({ initialValue, onGetSelectedId, reset })
   useEffect(() => {
     setSelectedId(initialValue.id);
   }, [reset]);
+  useEffect(() => {
+    onGetSelectedId(selectedId)
+  }, [selectedId]);
   const handleSelect = (id: string) => {
     setSelectedId(id);
     onGetSelectedId(id);
