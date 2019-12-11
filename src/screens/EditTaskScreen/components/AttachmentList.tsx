@@ -17,7 +17,25 @@ const AttachmentList: React.FC<Props> = ({
 }) => {
   const [images, setImages] = useState(initialValue.map(item => item.image));
   useEffect(() => {
-    onGetAttachments(images.map(image => image.url));
+    const newImages = [];
+    const deleteImages = [];
+    images.forEach(image => {
+      if (!image.publicId) {
+        newImages.push(image);
+      }
+    });
+    const imageWithIds: string[] = images.map(image => image.id);
+    initialValue
+      .map(item => ({ id: item.id, image: item.image }))
+      .forEach(item => {
+        if (imageWithIds.indexOf(item.image.id) === -1) {
+          deleteImages.push(item.id);
+        }
+      });
+    onGetAttachments({
+      newImages,
+      deleteImages
+    });
   }, [images]);
   useEffect(() => {
     setImages(initialValue.map(item => item.image));

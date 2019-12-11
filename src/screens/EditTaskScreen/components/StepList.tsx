@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, FlatList } from 'react-native';
 import { thinid } from 'thinid';
+import _ from 'lodash';
 import AddStepItem from './AddStepItem';
 import StepItem from './StepItem';
 
@@ -13,7 +14,23 @@ interface Props {
 const StepList: React.FC<Props> = ({ initialValue, onGetStepList, reset }) => {
   const [stepList, setStepList] = useState(initialValue);
   useEffect(() => {
-    onGetStepList(stepList.map(step => ({ title: step.title })));
+    const newSteps = [];
+    const deleteSteps = [];
+    stepList.forEach(step => {
+      if (!step.status) {
+        newSteps.push(_.omit(step, ['id']));
+      }
+    });
+    const stepWithIds: string[] = stepList.map(step => step.id);
+    initialValue.forEach(step => {
+      if (stepWithIds.indexOf(step.id) === -1) {
+        deleteSteps.push(step.id);
+      }
+    });
+    onGetStepList({
+      newSteps,
+      deleteSteps
+    });
   }, [stepList]);
   useEffect(() => {
     setStepList(initialValue);

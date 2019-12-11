@@ -8,7 +8,7 @@ import {
 import { Layout, Text, Input, Icon, Button } from 'react-native-ui-kitten';
 import { useDispatch } from 'react-redux';
 import { NavigationStackProp } from 'react-navigation-stack';
-import { createTaskAction, getTaskListAction, Task } from 'src/models/task';
+import { updateTaskAction, getTaskListAction, Task } from 'src/models/task';
 import { Header, StatusBar } from 'src/components';
 import {
   CategoryList,
@@ -30,10 +30,15 @@ const EditTaskScreen: React.FC<Props> = ({ navigation }) => {
   const [reset, setReset] = useState(false);
   const [title, setTitle] = useState(task.title);
   const [category, setCategory] = useState('');
-  const [steps, setSteps] = useState([]);
+  const [steps, setSteps] = useState<{ newSteps?: any[]; deleteSteps?: any[] }>(
+    {}
+  );
   const [dueDate, setDueDate] = useState(new Date());
   const [reminderDate, setReminderDate] = useState(new Date());
-  const [attachments, setAttachments] = useState([]);
+  const [attachments, setAttachments] = useState<{
+    newImages?: any[];
+    deleteImages?: any[];
+  }>({});
   const [description, setDescription] = useState(task.description);
 
   useEffect(() => {
@@ -43,22 +48,29 @@ const EditTaskScreen: React.FC<Props> = ({ navigation }) => {
 
   const handleSubmit = () => {
     const formData: FormData = new FormData();
-    attachments.forEach(attachment => {
-      const fileType = attachment.split('.').pop();
+    attachments.newImages.forEach(attachment => {
+      const fileType = attachment.url.split('.').pop();
       const file = {
-        uri: attachment,
+        uri: attachment.url,
         name: `photo.${fileType}`,
         type: `image/${fileType}`
       };
       formData.append('images', file);
     });
     dispatch(
-      createTaskAction({
-        taskInput: {
-          images: formData,
+      updateTaskAction({
+        id: task.id,
+        body: {
+          images: {
+            newImages: formData,
+            deleteImages: attachments.deleteImages
+          },
           title,
           category,
-          steps,
+          steps: {
+            newSteps: steps.newSteps,
+            deleteSteps: steps.deleteSteps
+          },
           dueDate,
           reminderDate,
           description
