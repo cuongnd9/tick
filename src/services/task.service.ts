@@ -19,4 +19,10 @@ function updateTask(data) {
   });
 }
 
-export { getTaskList, createTask, updateTask };
+function deleteTask(id) {
+  return request(`/api/task/${id}`, {
+    method: 'DELETE'
+  });
+}
+
+export { getTaskList, createTask, updateTask, deleteTask };

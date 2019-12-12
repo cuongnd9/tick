@@ -1,6 +1,11 @@
 import { all, call, put, takeEvery } from 'redux-saga/effects';
 import Navigation from 'src/helpers/Navigation';
-import { createTask, getTaskList, updateTask } from 'src/services/task.service';
+import {
+  createTask,
+  getTaskList,
+  updateTask,
+  deleteTask
+} from 'src/services/task.service';
 import { uploadImage } from 'src/services/image.service';
 import { showNotificationAction } from 'src/models/global/notification';
 import {
@@ -16,6 +21,8 @@ export const UPDATE = '@task/update';
 export const UPDATE_SUCCESS = '@task/update_success';
 export const LIST = '@task/list';
 export const LIST_SUCCESS = '@task/list_success';
+export const DELETE = '@task/delete';
+export const DELETE_SUCCESS = '@task/delete_success';
 
 // Action types.
 interface StepInput {
@@ -139,6 +146,18 @@ interface UpdateTaskSuccessActionType {
   type: typeof UPDATE_SUCCESS;
   payload: Task;
 }
+interface DeleteTaskActionType {
+  type: typeof DELETE;
+  payload: {
+    id: string;
+  };
+}
+interface DeleteTaskSuccessActionType {
+  type: typeof DELETE_SUCCESS;
+  payload: {
+    task: Task;
+  };
+}
 
 // Actions.
 export const createTaskAction = ({
@@ -200,6 +219,24 @@ export const updateTaskSuccessAction = (
 ): UpdateTaskSuccessActionType => ({
   type: UPDATE_SUCCESS,
   payload: task
+});
+export const deleteTaskAction = ({
+  id
+}: {
+  id: string;
+}): DeleteTaskActionType => ({
+  type: DELETE,
+  payload: {
+    id
+  }
+});
+export const deleteTaskSuccessAction = (
+  task: Task
+): DeleteTaskSuccessActionType => ({
+  type: DELETE_SUCCESS,
+  payload: {
+    task
+  }
 });
 
 // Effects.
@@ -296,32 +333,42 @@ function* updateTaskAsyncAction({ payload }: UpdateTaskActionType) {
 function* watchUpdateTaskAsyncAction() {
   yield takeEvery(UPDATE, updateTaskAsyncAction);
 }
+function* deleteTaskAsyncAction({ payload }: DeleteTaskActionType) {
+  try {
+    const deletedTask = yield call(deleteTask, payload.id);
+    yield put(deleteTaskSuccessAction(deletedTask));
+  } catch (err) {
+    yield put(
+      showNotificationAction({
+        content: err.message,
+        status: 'danger'
+      })
+    );
+  }
+}
+function* watchDeleteTaskAsyncAction() {
+  yield takeEvery(DELETE, deleteTaskAsyncAction);
+}
 function* effects() {
   yield all([
     call(watchCreateTaskAsyncAction),
     call(watchGetTaskListAsyncAction),
-    call(watchUpdateTaskAsyncAction)
+    call(watchUpdateTaskAsyncAction),
+    call(watchDeleteTaskAsyncAction)
   ]);
 }
 
 // Reducer
 interface State {
-  task: Task;
   list: TaskListType[];
 }
 type Action = CreateSuccessTaskActionType | GetTaskListSuccessActionType;
 const initialState: State = {
-  task: {},
   list: []
 };
 
 const reducer = (state: State = initialState, action: Action): State => {
   switch (action.type) {
-    case CREATE_SUCCESS:
-      return {
-        ...state,
-        task: action.payload
-      };
     case LIST_SUCCESS:
       return {
         ...state,
