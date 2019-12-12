@@ -7,9 +7,15 @@ interface Props {
   iconName: string;
   style?: any;
   showShadow?: boolean;
+  onPress?: any;
 }
 
-const IconButton: React.FC<Props> = ({ iconName, style, showShadow }) => {
+const IconButton: React.FC<Props> = ({
+  iconName,
+  style,
+  showShadow,
+  onPress
+}) => {
   const mainStyle = showShadow
     ? {
         ...styles.container,
@@ -21,7 +27,7 @@ const IconButton: React.FC<Props> = ({ iconName, style, showShadow }) => {
         ...style
       };
   return (
-    <TouchableWithoutFeedback>
+    <TouchableWithoutFeedback onPress={onPress}>
       <View style={mainStyle}>
         <Icon name={iconName} width={24} height={24} fill={color.primary} />
       </View>
@@ -45,7 +51,8 @@ const styles = StyleSheet.create({
 });
 
 IconButton.defaultProps = {
-  showShadow: true
+  showShadow: true,
+  onPress: () => {}
 };
 
 export default IconButton;

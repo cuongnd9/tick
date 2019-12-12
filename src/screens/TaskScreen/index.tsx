@@ -17,7 +17,7 @@ import { color } from 'src/config/theme';
 import { taskListType } from 'src/config/constants';
 
 interface Props {
-  navigation?: NavigationStackProp;
+  navigation: NavigationStackProp;
 }
 
 const TaskScreen: React.FC<Props> = ({ navigation }) => {
@@ -84,7 +84,11 @@ const TaskScreen: React.FC<Props> = ({ navigation }) => {
   return (
     <Layout style={styles.container}>
       <StatusBar />
-      <SearchHeader isfakeSearchInput onSearchPress={pressSearchButton} />
+      <SearchHeader
+        navigation={navigation}
+        isfakeSearchInput
+        onSearchPress={pressSearchButton}
+      />
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.main}>
           <CategoryList />

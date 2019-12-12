@@ -1,5 +1,11 @@
 import React from 'react';
-import { StyleSheet, View, Platform } from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Platform,
+  TouchableWithoutFeedback
+} from 'react-native';
+import { NavigationStackProp } from 'react-navigation-stack';
 import TextInput from './TextInput';
 import IconButton from './IconButon';
 import Button from './Button';
@@ -7,6 +13,7 @@ import FakeSearchInput from './FakeSearchInput';
 import { color } from 'src/config/theme';
 
 interface Props {
+  navigation?: NavigationStackProp;
   showNoti?: boolean;
   showSearchBtn?: boolean;
   isfakeSearchInput?: boolean;
@@ -14,6 +21,7 @@ interface Props {
 }
 
 const SearchHeader: React.FC<Props> = ({
+  navigation,
   showNoti,
   showSearchBtn,
   isfakeSearchInput,
@@ -33,7 +41,12 @@ const SearchHeader: React.FC<Props> = ({
       {showNoti && !showSearchBtn && (
         <IconButton style={styles.filter} iconName='bell-outline' />
       )}
-      {!showSearchBtn && <IconButton iconName='person-outline' />}
+      {!showSearchBtn && (
+        <IconButton
+          onPress={() => navigation.navigate('Profile')}
+          iconName='person-outline'
+        />
+      )}
       {showSearchBtn && <Button showShadow={false} title='Close' />}
     </View>
   );
