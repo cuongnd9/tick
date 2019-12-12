@@ -4,7 +4,7 @@ import {
   StyleSheet,
   View,
   Modal,
-  Dimensions,
+  Dimensions
 } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import Constants from 'expo-constants';
@@ -106,7 +106,10 @@ const AttachmentButton: React.FC<Props> = ({ onGetImages }) => {
                   borderBottomStartRadius: 10
                 }}
               >
-                <Text style={{ textAlign: 'center', color: '#fff' }} category='s2'>
+                <Text
+                  style={{ textAlign: 'center', color: '#fff' }}
+                  category='s2'
+                >
                   Cancel
                 </Text>
               </View>
