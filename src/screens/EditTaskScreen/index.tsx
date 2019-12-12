@@ -77,7 +77,7 @@ const EditTaskScreen: React.FC<Props> = ({ navigation }) => {
         },
         callback: () => {
           setReset(!reset);
-          dispatch(getTaskListAction());
+          dispatch(getTaskListAction({}));
         }
       })
     );

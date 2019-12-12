@@ -275,7 +275,7 @@ function* updateTaskAsyncAction({ payload }: UpdateTaskActionType) {
       payload.callback();
     }
     yield put(createSuccessTaskAction(task));
-    Navigation.navigate('Task');
+    payload.isLoading && Navigation.navigate('Task');
     payload.isLoading &&
       (yield put(
         showNotificationAction({

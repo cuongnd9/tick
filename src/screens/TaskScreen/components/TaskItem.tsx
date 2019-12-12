@@ -28,6 +28,7 @@ const TaskItem: React.FC<Props> = ({
   const [status, setStatus] = useState(task.status);
   const updateStatus = _.debounce(
     () =>
+      status !== task.status &&
       dispatch(
         updateTaskAction({
           id: task.id,
@@ -38,12 +39,10 @@ const TaskItem: React.FC<Props> = ({
           callback: () => dispatch(getTaskListAction({ isLoading: false }))
         })
       ),
-    1000
+    10000
   );
   const handleChangeStatus = () => {
-    setStatus(
-      task.status !== taskStatus.done ? taskStatus.done : taskStatus.todo
-    );
+    setStatus(status !== taskStatus.done ? taskStatus.done : taskStatus.todo);
     updateStatus();
   };
   return (
@@ -52,8 +51,8 @@ const TaskItem: React.FC<Props> = ({
     >
       <View style={styles.container}>
         <View style={{ ...styles.contentContainer, marginBottom: 10 }}>
-          <View style={styles.titleContainer}>
-            <TouchableWithoutFeedback onPress={handleChangeStatus}>
+          <TouchableWithoutFeedback onPress={handleChangeStatus}>
+            <View style={styles.titleContainer}>
               <Icon
                 name={
                   status === taskStatus.done
@@ -64,20 +63,20 @@ const TaskItem: React.FC<Props> = ({
                 height={32}
                 fill={color.primary}
               />
-            </TouchableWithoutFeedback>
-            <Text
-              numberOfLines={1}
-              ellipsizeMode='tail'
-              category='h4'
-              style={{
-                ...styles.title,
-                textDecorationLine:
-                  status === taskStatus.done ? 'line-through' : 'none'
-              }}
-            >
-              {task.title}
-            </Text>
-          </View>
+              <Text
+                numberOfLines={1}
+                ellipsizeMode='tail'
+                category='h4'
+                style={{
+                  ...styles.title,
+                  textDecorationLine:
+                    status === taskStatus.done ? 'line-through' : 'none'
+                }}
+              >
+                {task.title}
+              </Text>
+            </View>
+          </TouchableWithoutFeedback>
           <View>
             <Icon
               name='star-outline'
@@ -183,7 +182,7 @@ const styles = StyleSheet.create({
   },
   title: {
     marginLeft: 5,
-    width: '80%'
+    maxWidth: '80%'
   },
   reminderContainer: {
     display: 'flex',
