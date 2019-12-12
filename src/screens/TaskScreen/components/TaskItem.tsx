@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { View, StyleSheet, TouchableWithoutFeedback } from 'react-native';
 import { Icon, Text } from 'react-native-ui-kitten';
 import moment from 'moment';
@@ -6,7 +7,7 @@ import _ from 'lodash';
 import { NavigationStackProp } from 'react-navigation-stack';
 import { color } from 'src/config/theme';
 import { taskStatus } from 'src/config/constants';
-import { Task } from 'src/models/task';
+import { Task, updateTaskAction, getTaskListAction } from 'src/models/task';
 import { taskListType } from 'src/config/constants';
 import { categoryIcons, defaultCategoryIcon } from 'src/config/icons';
 
@@ -23,6 +24,28 @@ const TaskItem: React.FC<Props> = ({
   task,
   onSelect
 }) => {
+  const dispatch = useDispatch();
+  const [status, setStatus] = useState(task.status);
+  const updateStatus = _.debounce(
+    () =>
+      dispatch(
+        updateTaskAction({
+          id: task.id,
+          body: {
+            status
+          },
+          isLoading: false,
+          callback: () => dispatch(getTaskListAction({ isLoading: false }))
+        })
+      ),
+    1000
+  );
+  const handleChangeStatus = () => {
+    setStatus(
+      task.status !== taskStatus.done ? taskStatus.done : taskStatus.todo
+    );
+    updateStatus();
+  };
   return (
     <TouchableWithoutFeedback
       onPress={() => navigation.navigate('EditTask', { task })}
@@ -30,10 +53,10 @@ const TaskItem: React.FC<Props> = ({
       <View style={styles.container}>
         <View style={{ ...styles.contentContainer, marginBottom: 10 }}>
           <View style={styles.titleContainer}>
-            <TouchableWithoutFeedback>
+            <TouchableWithoutFeedback onPress={handleChangeStatus}>
               <Icon
                 name={
-                  taskStatus.done
+                  status === taskStatus.done
                     ? 'checkmark-square-2-outline'
                     : 'square-outline'
                 }
@@ -46,7 +69,11 @@ const TaskItem: React.FC<Props> = ({
               numberOfLines={1}
               ellipsizeMode='tail'
               category='h4'
-              style={styles.title}
+              style={{
+                ...styles.title,
+                textDecorationLine:
+                  status === taskStatus.done ? 'line-through' : 'none'
+              }}
             >
               {task.title}
             </Text>
@@ -87,6 +114,7 @@ const TaskItem: React.FC<Props> = ({
               fill={color.secondary}
             />
             <Icon
+              vis={false}
               name='attach-outline'
               width={19}
               height={19}

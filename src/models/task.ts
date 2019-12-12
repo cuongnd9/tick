@@ -118,6 +118,9 @@ interface CreateSuccessTaskActionType {
 }
 interface GetTaskListActionType {
   type: typeof LIST;
+  payload: {
+    isLoading?: boolean;
+  };
 }
 interface GetTaskListSuccessActionType {
   type: typeof LIST_SUCCESS;
@@ -128,6 +131,7 @@ interface UpdateTaskActionType {
   payload: {
     id: string;
     body: UpdateTaskInput;
+    isLoading?: boolean;
     callback?: Function;
   };
 }
@@ -158,8 +162,13 @@ export const createSuccessTaskAction = (
   type: CREATE_SUCCESS,
   payload: task
 });
-export const getTaskListAction = (): GetTaskListActionType => ({
-  type: LIST
+export const getTaskListAction = ({
+  isLoading = true
+}): GetTaskListActionType => ({
+  type: LIST,
+  payload: {
+    isLoading
+  }
 });
 export const getTaskListSuccessAction = (
   list: TaskListType[]
@@ -170,16 +179,19 @@ export const getTaskListSuccessAction = (
 export const updateTaskAction = ({
   id,
   body,
+  isLoading = true,
   callback
 }: {
   id: string;
   body: UpdateTaskInput;
-  callback: Function;
+  isLoading?: boolean;
+  callback?: Function;
 }): UpdateTaskActionType => ({
   type: UPDATE,
   payload: {
     id,
     body,
+    isLoading,
     callback
   }
 });
@@ -226,8 +238,8 @@ function* createTaskAsyncAction({ payload }: CreateTaskActionType) {
 function* watchCreateTaskAsyncAction() {
   yield takeEvery(CREATE, createTaskAsyncAction);
 }
-function* getTaskListAsyncAction() {
-  yield put(showLoadingAction());
+function* getTaskListAsyncAction({ payload }: GetTaskListActionType) {
+  payload.isLoading && (yield put(showLoadingAction()));
   try {
     const list = (yield call(getTaskList)) as TaskListType[];
     yield put(getTaskListSuccessAction(list));
@@ -239,16 +251,16 @@ function* getTaskListAsyncAction() {
       })
     );
   }
-  yield put(hideLoadingAction());
+  payload.isLoading && (yield put(hideLoadingAction()));
 }
 function* watchGetTaskListAsyncAction() {
   yield takeEvery(LIST, getTaskListAsyncAction);
 }
 function* updateTaskAsyncAction({ payload }: UpdateTaskActionType) {
-  yield put(showLoadingAction());
+  payload.isLoading && (yield put(showLoadingAction()));
   try {
     const newImages =
-      payload.body.images.newImages['_parts'].length > 0
+      payload.body.images && payload.body.images.newImages['_parts'].length > 0
         ? yield call(uploadImage, payload.body.images.newImages)
         : null;
     const task = yield call(updateTask, {
@@ -264,12 +276,13 @@ function* updateTaskAsyncAction({ payload }: UpdateTaskActionType) {
     }
     yield put(createSuccessTaskAction(task));
     Navigation.navigate('Task');
-    yield put(
-      showNotificationAction({
-        content: 'Task updated successfully',
-        status: 'success'
-      })
-    );
+    payload.isLoading &&
+      (yield put(
+        showNotificationAction({
+          content: 'Task updated successfully',
+          status: 'success'
+        })
+      ));
   } catch (err) {
     yield put(
       showNotificationAction({
@@ -278,7 +291,7 @@ function* updateTaskAsyncAction({ payload }: UpdateTaskActionType) {
       })
     );
   }
-  yield put(hideLoadingAction());
+  payload.isLoading && (yield put(hideLoadingAction()));
 }
 function* watchUpdateTaskAsyncAction() {
   yield takeEvery(UPDATE, updateTaskAsyncAction);

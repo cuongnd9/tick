@@ -18,7 +18,7 @@ const TaskScreen: React.FC<Props> = ({ navigation }) => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getCategoryListAction());
-    dispatch(getTaskListAction());
+    dispatch(getTaskListAction({}));
   }, []);
 
   const pressSearchButton = () => {

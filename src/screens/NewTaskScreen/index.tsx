@@ -58,7 +58,7 @@ const NewTaskScreen: React.FC = () => {
         },
         callback: () => {
           setReset(!reset);
-          dispatch(getTaskListAction());
+          dispatch(getTaskListAction({}));
         }
       })
     );
