@@ -6,6 +6,7 @@ import { View, StyleSheet, TouchableWithoutFeedback } from 'react-native';
 import { Icon, Text } from 'react-native-ui-kitten';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 import { NavigationStackProp } from 'react-navigation-stack';
+import StepList from './StepList';
 import { color } from 'src/config/theme';
 import { taskStatus } from 'src/config/constants';
 import {
@@ -82,7 +83,10 @@ const TaskItem: React.FC<Props> = ({
   return (
     <Swipeable renderRightActions={renderDeleteButton}>
       <TouchableWithoutFeedback
-        onPress={() => {navigation.navigate('EditTask', { task }); onSelect(task.id)}}
+        onPress={() => {
+          navigation.navigate('EditTask', { task });
+          onSelect(task.id);
+        }}
       >
         <View style={styles.container}>
           <View style={{ ...styles.contentContainer, marginBottom: 10 }}>
@@ -178,6 +182,7 @@ const TaskItem: React.FC<Props> = ({
               <Text>{task.category.name}</Text>
             </View>
           </View>
+          <StepList steps={task.steps} />
         </View>
       </TouchableWithoutFeedback>
     </Swipeable>
@@ -215,7 +220,8 @@ const styles = StyleSheet.create({
   },
   titleContainer: {
     display: 'flex',
-    flexDirection: 'row'
+    flexDirection: 'row',
+    alignItems: 'center'
   },
   title: {
     marginLeft: 5,
@@ -230,7 +236,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center'
-  }
+  },
 });
 
 export default TaskItem;
