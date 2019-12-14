@@ -24,6 +24,9 @@ const CategoryItem: React.FC<Props> = ({ id, name, onSelect }) => {
       }
     });
   }, [name]);
+  const random = length => {
+    return Math.floor(Math.random() * length);
+  };
   return (
     <TouchableWithoutFeedback onPress={() => onSelect(id)}>
       <View style={styles.container}>
@@ -34,14 +37,14 @@ const CategoryItem: React.FC<Props> = ({ id, name, onSelect }) => {
           </Text>
         </View>
         <View style={styles.content}>
-          <Text category='s2'>20%</Text>
+          <Text category='s2'>{`${(random(10) / 10) * 100}%`}</Text>
           <Icon
             name='arrow-right'
             width={19}
             height={19}
             fill={color.secondary}
           />
-          <Text category='s2'>4 tasks</Text>
+          <Text category='s2'>{`${random(10)} tasks`}</Text>
         </View>
       </View>
     </TouchableWithoutFeedback>

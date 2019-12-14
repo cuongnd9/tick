@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import _ from 'lodash';
 import { View, StyleSheet, TouchableWithoutFeedback } from 'react-native';
 import { Icon, Text } from 'react-native-ui-kitten';
 import { Step } from 'src/models/task';
@@ -7,10 +8,19 @@ import StepItem from './StepItem';
 
 interface Props {
   steps: Step[];
+  onPress: Function;
 }
 
-const StepList: React.FC<Props> = ({ steps }) => {
+const StepList: React.FC<Props> = ({ steps, onPress }) => {
+  const [currentSteps, setCurrentSteps] = useState(steps);
   const [isExpand, setIsExpand] = useState(false);
+  const handlePressItem = (step: Step) => {
+    const pressedIndex = currentSteps.findIndex(item => item.id == step.id);
+    const cloneSteps = _.cloneDeep(currentSteps);
+    cloneSteps.splice(pressedIndex, 1, step);
+    onPress(cloneSteps);
+    setCurrentSteps(cloneSteps);
+  };
   return (
     <View
       style={{
@@ -33,9 +43,10 @@ const StepList: React.FC<Props> = ({ steps }) => {
         </View>
       </TouchableWithoutFeedback>
       <View style={{ ...styles.stepsContainer }}>
-        {isExpand && steps.map(step => (
-          <StepItem key={step.id} step={step} />
-        ))}
+        {isExpand &&
+          currentSteps.map(step => (
+            <StepItem key={step.id} step={step} onPress={handlePressItem} />
+          ))}
       </View>
     </View>
   );

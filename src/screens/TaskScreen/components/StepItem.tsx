@@ -11,9 +11,10 @@ import { updateStepStatus } from 'src/services/step.service';
 
 interface Props {
   step: Step;
+  onPress: Function;
 }
 
-const StepItem: React.FC<Props> = ({ step }) => {
+const StepItem: React.FC<Props> = ({ step, onPress }) => {
   const dispatch = useDispatch();
   const [status, setStatus] = useState(step.status);
   const updateStatus = _.debounce(async () => {
@@ -23,13 +24,17 @@ const StepItem: React.FC<Props> = ({ step }) => {
     }
   }, 3000);
   const handleChangeStatus = () => {
+    onPress({
+      ...step,
+      status: status !== stepStatus.done ? stepStatus.done : stepStatus.todo
+    });
     setStatus(status !== stepStatus.done ? stepStatus.done : stepStatus.todo);
     updateStatus();
   };
 
   return (
     <TouchableWithoutFeedback onPress={handleChangeStatus}>
-      <View style={styles.titleContainer}>
+      <View style={styles.container}>
         <Icon
           name={
             status === stepStatus.done
@@ -58,10 +63,11 @@ const StepItem: React.FC<Props> = ({ step }) => {
 };
 
 const styles = StyleSheet.create({
-  titleContainer: {
+  container: {
     display: 'flex',
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
+    paddingVertical: 5
   },
   title: {
     marginLeft: 5,
