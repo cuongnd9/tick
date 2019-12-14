@@ -8,12 +8,13 @@ import Swipeable from 'react-native-gesture-handler/Swipeable';
 import { NavigationStackProp } from 'react-navigation-stack';
 import StepList from './StepList';
 import { color } from 'src/config/theme';
-import { taskStatus } from 'src/config/constants';
+import { taskStatus, stepStatus } from 'src/config/constants';
 import {
   Task,
   updateTaskAction,
   getTaskListAction,
-  deleteTaskAction
+  deleteTaskAction,
+  Step
 } from 'src/models/task';
 import { taskListType } from 'src/config/constants';
 import { categoryIcons, defaultCategoryIcon } from 'src/config/icons';
@@ -34,13 +35,14 @@ const TaskItem: React.FC<Props> = ({
   onRemove
 }) => {
   const dispatch = useDispatch();
+  const [currentTask, setCurrentTask] = useState(task);
   const [status, setStatus] = useState(task.status);
   const updateStatus = _.debounce(
     () =>
-      status !== task.status &&
+      status !== currentTask.status &&
       dispatch(
         updateTaskAction({
-          id: task.id,
+          id: currentTask.id,
           body: {
             status
           },
@@ -57,10 +59,10 @@ const TaskItem: React.FC<Props> = ({
   const handleDeleteTask = () => {
     dispatch(
       deleteTaskAction({
-        id: task.id
+        id: currentTask.id
       })
     );
-    onRemove(task.id);
+    onRemove(currentTask.id);
   };
   const renderDeleteButton = () => (
     <TouchableWithoutFeedback onPress={handleDeleteTask}>
@@ -80,6 +82,13 @@ const TaskItem: React.FC<Props> = ({
       </View>
     </TouchableWithoutFeedback>
   );
+  const handleProcess = () => {
+    const cloneTask = _.cloneDeep(currentTask);
+    const completedSteps = cloneTask.steps.filter(
+      step => step.status === stepStatus.done
+    );
+    return `${(completedSteps.length * 100) / currentTask.steps.length}%`;
+  };
   return (
     <Swipeable renderRightActions={renderDeleteButton}>
       <TouchableWithoutFeedback
@@ -112,7 +121,7 @@ const TaskItem: React.FC<Props> = ({
                       status === taskStatus.done ? 'line-through' : 'none'
                   }}
                 >
-                  {task.title}
+                  {currentTask.title}
                 </Text>
               </View>
             </TouchableWithoutFeedback>
@@ -127,7 +136,9 @@ const TaskItem: React.FC<Props> = ({
           </View>
           <View style={styles.contentContainer}>
             <View style={styles.reminderContainer}>
-              <Text category='s2'>100%</Text>
+              {currentTask.steps.length > 0 && (
+                <Text category='s2'>{handleProcess()}</Text>
+              )}
               <Icon
                 name='arrow-right'
                 width={19}
@@ -142,8 +153,8 @@ const TaskItem: React.FC<Props> = ({
               />
               <Text style={{ marginLeft: 2 }} category='s2'>
                 {listType === taskListType.today
-                  ? moment(task.reminderDate).format('hh:mm A')
-                  : moment(task.reminderDate).format('MMM Do hh:mm A')}
+                  ? moment(currentTask.reminderDate).format('hh:mm A')
+                  : moment(currentTask.reminderDate).format('MMM Do hh:mm A')}
               </Text>
               <Icon
                 name='arrow-right'
@@ -170,7 +181,9 @@ const TaskItem: React.FC<Props> = ({
                 name={
                   _.get(
                     categoryIcons.find(item =>
-                      item.nameList.includes(task.category.name.toLowerCase())
+                      item.nameList.includes(
+                        currentTask.category.name.toLowerCase()
+                      )
                     ),
                     'icon'
                   ) || defaultCategoryIcon
@@ -179,10 +192,18 @@ const TaskItem: React.FC<Props> = ({
                 height={19}
                 fill={color.secondary}
               />
-              <Text>{task.category.name}</Text>
+              <Text>{currentTask.category.name}</Text>
             </View>
           </View>
-          <StepList steps={task.steps} />
+          <StepList
+            onPress={(steps: Step[]) =>
+              setCurrentTask({
+                ...currentTask,
+                steps
+              })
+            }
+            steps={currentTask.steps}
+          />
         </View>
       </TouchableWithoutFeedback>
     </Swipeable>
@@ -236,7 +257,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center'
-  },
+  }
 });
 
 export default TaskItem;
