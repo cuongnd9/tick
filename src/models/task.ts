@@ -47,7 +47,7 @@ interface Image {
   url: string;
   publicId: string;
 }
-interface Step {
+export interface Step {
   id: string;
   index: number;
   status: string;
