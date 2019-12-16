@@ -13,6 +13,7 @@ import {
   showLoadingAction
 } from 'src/models/global/loading';
 import { taskListType, taskStatus, taskPriority } from 'src/config/constants';
+import { List } from 'react-native-ui-kitten';
 
 // Constants.
 export const CREATE = '@task/create';
@@ -23,6 +24,7 @@ export const LIST = '@task/list';
 export const LIST_SUCCESS = '@task/list_success';
 export const DELETE = '@task/delete';
 export const DELETE_SUCCESS = '@task/delete_success';
+export const FILTER_BY_CATEGORY = '@task/filter_by_category';
 
 // Action types.
 interface StepInput {
@@ -158,6 +160,12 @@ interface DeleteTaskSuccessActionType {
     task: Task;
   };
 }
+interface FilterByCategoryActionType {
+  type: typeof FILTER_BY_CATEGORY;
+  payload: {
+    categoryId: string;
+  };
+}
 
 // Actions.
 export const createTaskAction = ({
@@ -236,6 +244,14 @@ export const deleteTaskSuccessAction = (
   type: DELETE_SUCCESS,
   payload: {
     task
+  }
+});
+export const filterByCategoryAction = (
+  categoryId: string
+): FilterByCategoryActionType => ({
+  type: FILTER_BY_CATEGORY,
+  payload: {
+    categoryId
   }
 });
 
@@ -361,10 +377,15 @@ function* effects() {
 // Reducer
 interface State {
   list: TaskListType[];
+  filterList: TaskListType[];
 }
-type Action = CreateSuccessTaskActionType | GetTaskListSuccessActionType;
+type Action =
+  | CreateSuccessTaskActionType
+  | GetTaskListSuccessActionType
+  | FilterByCategoryActionType;
 const initialState: State = {
-  list: []
+  list: [],
+  filterList: []
 };
 
 const reducer = (state: State = initialState, action: Action): State => {
@@ -372,7 +393,21 @@ const reducer = (state: State = initialState, action: Action): State => {
     case LIST_SUCCESS:
       return {
         ...state,
-        list: action.payload
+        list: action.payload,
+        filterList: action.payload
+      };
+    case FILTER_BY_CATEGORY:
+      return {
+        ...state,
+        filterList:
+          action.payload.categoryId === 'cuongw77777777'
+            ? [...state.list]
+            : state.list.map((item: TaskListType) => ({
+                ...item,
+                data: item.data.filter(
+                  (task: Task) => task.category.id === action.payload.categoryId
+                )
+              }))
       };
     default:
       return state;

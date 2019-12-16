@@ -9,13 +9,22 @@ interface Props {
 }
 
 const CategoryList: React.FC<Props> = ({ onGetSelectedId }) => {
-  const data = useSelector((state: AppState) => state.category.categoryList);
-  const [selectedId, setSelectedId] = useState(null);
+  const defaultId = 'cuongw77777777';
+  const data = useSelector((state: AppState) => [
+    {
+      id: defaultId,
+      name: 'ALL'
+    },
+    ...state.category.categoryList
+  ]);
+  const [selectedId, setSelectedId] = useState(defaultId);
   const handleSelect = (id: string) => {
     setSelectedId(id);
     onGetSelectedId(id);
   };
-
+  if (data.length <= 1) {
+    return <View />;
+  }
   return (
     <View>
       <FlatList
