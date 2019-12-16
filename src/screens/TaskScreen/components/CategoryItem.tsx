@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, TouchableWithoutFeedback } from 'react-native';
 import { Icon, Text } from 'react-native-ui-kitten';
+import { useDispatch } from 'react-redux';
+import { filterByCategoryAction } from 'src/models/task';
 import { color } from 'src/config/theme';
 import { categoryIcons, defaultCategoryIcon } from 'src/config/icons';
 
@@ -19,6 +21,7 @@ const CategoryItem: React.FC<Props> = ({
   isLastItem,
   onSelect
 }) => {
+  const dispatch = useDispatch();
   const [iconName, setIconName] = useState(defaultCategoryIcon);
   useEffect(() => {
     categoryIcons.forEach(categoryIcon => {
@@ -49,8 +52,12 @@ const CategoryItem: React.FC<Props> = ({
         ...styles.name,
         color: color.secondary
       };
+  const handleSelect = () => {
+    onSelect(id);
+    dispatch(filterByCategoryAction(id));
+  };
   return (
-    <TouchableWithoutFeedback onPress={() => onSelect(id)}>
+    <TouchableWithoutFeedback onPress={handleSelect}>
       <View style={containerStyle}>
         <Icon
           name={iconName}

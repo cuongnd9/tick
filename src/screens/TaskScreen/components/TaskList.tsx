@@ -20,7 +20,7 @@ const TaskList: React.FC<Props> = ({
 }) => {
   const [taskList, setTaskList] = useState([]);
   const [selectedId, setSelectedId] = useState(null);
-  const { list } = useSelector((state: AppState) => state.task);
+  const { filterList: list } = useSelector((state: AppState) => state.task);
   const { data = [] } =
     (list && list.find(item => item.type === listType)) || {};
 
