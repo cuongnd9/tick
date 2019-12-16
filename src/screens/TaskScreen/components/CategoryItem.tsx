@@ -5,7 +5,7 @@ import { color } from 'src/config/theme';
 import { categoryIcons, defaultCategoryIcon } from 'src/config/icons';
 
 interface Props {
-  id: string;
+  id?: string;
   name: string;
   isActive?: boolean;
   isLastItem?: boolean;

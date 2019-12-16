@@ -134,17 +134,19 @@ const TaskItem: React.FC<Props> = ({
               />
             </View>
           </View>
-          <View style={styles.contentContainer}>
+          <View style={{ ...styles.contentContainer, paddingLeft: 3 }}>
             <View style={styles.reminderContainer}>
               {currentTask.steps.length > 0 && (
-                <Text category='s2'>{handleProcess()}</Text>
+                <>
+                  <Text category='s2'>{handleProcess()}</Text>
+                  <Icon
+                    name='arrow-right'
+                    width={19}
+                    height={19}
+                    fill={color.secondary}
+                  />
+                </>
               )}
-              <Icon
-                name='arrow-right'
-                width={19}
-                height={19}
-                fill={color.secondary}
-              />
               <Icon
                 name='clock-outline'
                 width={19}

@@ -21,6 +21,7 @@ const StepList: React.FC<Props> = ({ steps, onPress }) => {
     onPress(cloneSteps);
     setCurrentSteps(cloneSteps);
   };
+  if (currentSteps.length === 0) return <View />;
   return (
     <View
       style={{
@@ -38,7 +39,7 @@ const StepList: React.FC<Props> = ({ steps, onPress }) => {
             fill={color.secondary}
           />
           <Text category='s2' style={{ color: color.secondary, marginLeft: 5 }}>
-            Steps
+            {currentSteps.length > 0 && `${currentSteps.length} steps`}
           </Text>
         </View>
       </TouchableWithoutFeedback>
