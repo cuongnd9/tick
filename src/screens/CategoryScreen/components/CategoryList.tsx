@@ -26,8 +26,7 @@ const CategoryList: React.FC<Props> = ({ onGetSelectedId, reset }) => {
       {data.map(item => (
         <CategoryItem
           key={item.id}
-          id={item.id}
-          name={item.name}
+          category={item}
           onSelect={handleSelect}
         />
       ))}
