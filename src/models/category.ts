@@ -7,10 +7,15 @@ export const GET_LIST = '@category/get_list';
 export const GET_LIST_SUCCESS = '@category/get_list_success';
 
 // Action types.
-interface Category {
+interface Task {
+  id: string;
+  status: string;
+}
+export interface Category {
   id: string;
   index: number;
   name: string;
+  tasks: Task[];
 }
 interface GetListType {
   type: typeof GET_LIST;

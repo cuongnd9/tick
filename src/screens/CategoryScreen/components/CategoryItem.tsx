@@ -6,45 +6,58 @@ import {
   Dimensions
 } from 'react-native';
 import { Icon, Text } from 'react-native-ui-kitten';
+import _ from 'lodash';
+import { Category } from 'src/models/category';
 import { color } from 'src/config/theme';
+import { taskStatus } from 'src/config/constants';
 import { categoryIcons, defaultCategoryIcon } from 'src/config/icons';
 
 interface Props {
-  id: string;
-  name: string;
+  category: Category;
   onSelect?: Function;
 }
 
-const CategoryItem: React.FC<Props> = ({ id, name, onSelect }) => {
+const CategoryItem: React.FC<Props> = ({ category, onSelect }) => {
   const [iconName, setIconName] = useState(defaultCategoryIcon);
   useEffect(() => {
     categoryIcons.forEach(categoryIcon => {
-      if (categoryIcon.nameList.includes(name.toLowerCase())) {
+      if (categoryIcon.nameList.includes(category.name.toLowerCase())) {
         setIconName(categoryIcon.icon);
       }
     });
-  }, [name]);
-  const random = length => {
-    return Math.floor(Math.random() * length);
+  }, [category.name]);
+  const handleProcess = () => {
+    if (category.tasks.length === 0) {
+      return '0%';
+    }
+    const cloneTasks = _.cloneDeep(category.tasks);
+    const completedTasks = cloneTasks.filter(
+      task => task.status === taskStatus.done
+    );
+    return `${(completedTasks.length * 100) / category.tasks.length}%`;
   };
   return (
-    <TouchableWithoutFeedback onPress={() => onSelect(id)}>
+    <TouchableWithoutFeedback onPress={() => onSelect(category.id)}>
       <View style={styles.container}>
         <View style={{ ...styles.content, marginBottom: 10 }}>
           <Icon name={iconName} width={32} height={32} fill={color.primary} />
           <Text style={{ marginLeft: 5 }} category='h4'>
-            {name}
+            {category.name}
           </Text>
         </View>
         <View style={styles.content}>
-          <Text category='s2'>{`${(random(10) / 10) * 100}%`}</Text>
-          <Icon
-            name='arrow-right'
-            width={19}
-            height={19}
-            fill={color.secondary}
-          />
-          <Text category='s2'>{`${random(10)} tasks`}</Text>
+          {category.tasks.length > 0 && (
+            <>
+              <Text category='s2'>{handleProcess()}</Text>
+              <Icon
+                name='arrow-right'
+                width={19}
+                height={19}
+                fill={color.secondary}
+              />
+            </>
+          )}
+          <Text category='s2'>{`${category.tasks.length} tasks`}</Text>
         </View>
       </View>
     </TouchableWithoutFeedback>
