@@ -17,7 +17,9 @@ interface Props {
   showNoti?: boolean;
   showSearchBtn?: boolean;
   isfakeSearchInput?: boolean;
+  autoFocus?: boolean;
   onSearchPress?: Function;
+  onClear?: Function;
 }
 
 const SearchHeader: React.FC<Props> = ({
@@ -25,14 +27,18 @@ const SearchHeader: React.FC<Props> = ({
   showNoti,
   showSearchBtn,
   isfakeSearchInput,
-  onSearchPress
+  autoFocus,
+  onSearchPress,
+  onClear
 }) => {
   return (
     <View style={styles.container}>
       {!isfakeSearchInput ? (
         <TextInput
           style={styles.search}
+          autoFocus={autoFocus}
           onEnter={onSearchPress}
+          onClear={onClear}
           iconName='search-outline'
         />
       ) : (
@@ -47,7 +53,13 @@ const SearchHeader: React.FC<Props> = ({
           iconName='person-outline'
         />
       )}
-      {showSearchBtn && <Button showShadow={false} title='Close' />}
+      {showSearchBtn && (
+        <Button
+          onPress={() => navigation.goBack()}
+          showShadow={false}
+          title='Close'
+        />
+      )}
     </View>
   );
 };
@@ -74,7 +86,8 @@ const styles = StyleSheet.create({
 SearchHeader.defaultProps = {
   showNoti: true,
   showSearchBtn: false,
-  isfakeSearchInput: false
+  isfakeSearchInput: false,
+  autoFocus: false
 };
 
 export default SearchHeader;
