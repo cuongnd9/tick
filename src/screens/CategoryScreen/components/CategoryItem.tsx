@@ -73,7 +73,7 @@ const CategoryItem: React.FC<Props> = ({
       style={{
         display: 'flex',
         justifyContent: 'center',
-        marginLeft: 5
+        marginHorizontal: 5
       }}
     >
       <TouchableWithoutFeedback onPress={handleFilterTaskByCategory}>
