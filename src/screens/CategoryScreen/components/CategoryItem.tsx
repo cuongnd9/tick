@@ -10,7 +10,7 @@ import _ from 'lodash';
 import { useDispatch } from 'react-redux';
 import { NavigationStackProp } from 'react-navigation-stack';
 import { Category } from 'src/models/category';
-import {filterByCategoryAction} from 'src/models/task'
+import { filterByCategoryAction } from 'src/models/task';
 import { color } from 'src/config/theme';
 import { taskStatus } from 'src/config/constants';
 import { categoryIcons, defaultCategoryIcon } from 'src/config/icons';
@@ -42,10 +42,12 @@ const CategoryItem: React.FC<Props> = ({ category, onSelect, navigation }) => {
     return `${(completedTasks.length * 100) / category.tasks.length}%`;
   };
   const handlePress = () => {
-    // onSelect(category.id);
-    // navigation.navigate('EditCategory');
-    dispatch(filterByCategoryAction(category.id));
-    navigation.navigate('TaskByCategory');
+    onSelect(category.id);
+    navigation.navigate('EditCategory', {
+      category
+    });
+    // dispatch(filterByCategoryAction(category.id));
+    // navigation.navigate('TaskByCategory');
   };
   return (
     <TouchableWithoutFeedback onPress={handlePress}>
