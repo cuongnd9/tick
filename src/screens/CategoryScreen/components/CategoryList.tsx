@@ -1,16 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { useSelector } from 'react-redux';
+import { NavigationStackProp } from 'react-navigation-stack';
 import { AppState } from 'src/models';
 import CategoryItem from './CategoryItem';
 import AddCategoryItem from './AddCategoryItem';
 
 interface Props {
+  navigation: NavigationStackProp;
   onGetSelectedId?: Function;
   reset?: boolean;
 }
 
-const CategoryList: React.FC<Props> = ({ onGetSelectedId, reset }) => {
+const CategoryList: React.FC<Props> = ({
+  onGetSelectedId,
+  reset,
+  navigation
+}) => {
   const data = useSelector((state: AppState) => state.category.categoryList);
   const [selectedId, setSelectedId] = useState(null);
   useEffect(() => {
@@ -25,6 +31,7 @@ const CategoryList: React.FC<Props> = ({ onGetSelectedId, reset }) => {
     <View style={styles.container}>
       {data.map(item => (
         <CategoryItem
+          navigation={navigation}
           key={item.id}
           category={item}
           onSelect={handleSelect}
