@@ -7,17 +7,19 @@ import {
 } from 'react-native';
 import { Icon, Text } from 'react-native-ui-kitten';
 import _ from 'lodash';
+import { NavigationStackProp } from 'react-navigation-stack';
 import { Category } from 'src/models/category';
 import { color } from 'src/config/theme';
 import { taskStatus } from 'src/config/constants';
 import { categoryIcons, defaultCategoryIcon } from 'src/config/icons';
 
 interface Props {
+  navigation: NavigationStackProp;
   category: Category;
   onSelect?: Function;
 }
 
-const CategoryItem: React.FC<Props> = ({ category, onSelect }) => {
+const CategoryItem: React.FC<Props> = ({ category, onSelect, navigation }) => {
   const [iconName, setIconName] = useState(defaultCategoryIcon);
   useEffect(() => {
     categoryIcons.forEach(categoryIcon => {
@@ -36,8 +38,12 @@ const CategoryItem: React.FC<Props> = ({ category, onSelect }) => {
     );
     return `${(completedTasks.length * 100) / category.tasks.length}%`;
   };
+  const handlePress = () => {
+    onSelect(category.id);
+    navigation.navigate('EditCategory');
+  };
   return (
-    <TouchableWithoutFeedback onPress={() => onSelect(category.id)}>
+    <TouchableWithoutFeedback onPress={handlePress}>
       <View style={styles.container}>
         <View style={{ ...styles.content, marginBottom: 10 }}>
           <Icon name={iconName} width={32} height={32} fill={color.primary} />

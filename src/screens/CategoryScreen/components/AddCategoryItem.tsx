@@ -6,13 +6,18 @@ import {
   Dimensions
 } from 'react-native';
 import { Icon } from 'react-native-ui-kitten';
+import { NavigationStackProp } from 'react-navigation-stack';
 import { color } from 'src/config/theme';
 
-interface Props {}
+interface Props {
+  navigation: NavigationStackProp;
+}
 
-const AddCategoryItem: React.FC<Props> = () => {
+const AddCategoryItem: React.FC<Props> = ({ navigation }) => {
   return (
-    <TouchableWithoutFeedback>
+    <TouchableWithoutFeedback
+      onPress={() => navigation.navigate('NewCategory')}
+    >
       <View style={styles.container}>
         <Icon name='plus' width={24} height={24} fill='#fff' />
       </View>

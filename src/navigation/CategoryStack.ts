@@ -1,10 +1,16 @@
 import { createStackNavigator } from 'react-navigation-stack';
-import { CategoryScreen } from 'src/screens';
+import { CategoryScreen, NewCategoryScreen } from 'src/screens';
 
 const CategoryNavigator = createStackNavigator(
   {
     Category: {
       screen: CategoryScreen,
+      navigationOptions: {
+        header: null
+      }
+    },
+    NewCategory: {
+      screen: NewCategoryScreen,
       navigationOptions: {
         header: null
       }

@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, View, ScrollView } from 'react-native';
-import { Layout, Text } from 'react-native-ui-kitten';
+import { Layout } from 'react-native-ui-kitten';
 import { NavigationStackProp } from 'react-navigation-stack';
 import { SearchHeader, StatusBar } from 'src/components';
 import { CategoryList } from './components';
@@ -17,7 +17,7 @@ const CategoryScreen: React.FC<Props> = ({ navigation }) => {
       <SearchHeader navigation={navigation} showNoti={false} />
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.main}>
-          <CategoryList />
+          <CategoryList navigation={navigation} />
         </View>
       </ScrollView>
     </Layout>

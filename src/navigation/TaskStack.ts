@@ -1,10 +1,16 @@
 import { createStackNavigator } from 'react-navigation-stack';
-import { TaskScreen, SearchTaskScreen, EditTaskScreen } from 'src/screens';
+import { TaskScreen, SearchTaskScreen, EditTaskScreen, NewTaskScreen } from 'src/screens';
 
 const TaskNavigator = createStackNavigator(
   {
     Task: {
       screen: TaskScreen,
+      navigationOptions: {
+        header: null
+      }
+    },
+    NewTask: {
+      screen: NewTaskScreen,
       navigationOptions: {
         header: null
       }
