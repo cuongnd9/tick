@@ -17,7 +17,7 @@ const CategoryScreen: React.FC<Props> = ({ navigation }) => {
       <SearchHeader navigation={navigation} showNoti={false} />
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.main}>
-          <CategoryList />
+          <CategoryList navigation={navigation} />
         </View>
       </ScrollView>
     </Layout>
