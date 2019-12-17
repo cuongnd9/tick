@@ -37,7 +37,7 @@ const CategoryList: React.FC<Props> = ({
           onSelect={handleSelect}
         />
       ))}
-      <AddCategoryItem />
+      {data.length > 0 && <AddCategoryItem navigation={navigation} />}
     </View>
   );
 };

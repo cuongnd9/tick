@@ -42,9 +42,11 @@ const CategoryItem: React.FC<Props> = ({ category, onSelect, navigation }) => {
     return `${(completedTasks.length * 100) / category.tasks.length}%`;
   };
   const handlePress = () => {
+    // onSelect(category.id);
+    // navigation.navigate('EditCategory');
     dispatch(filterByCategoryAction(category.id));
     navigation.navigate('TaskByCategory');
-  }
+  };
   return (
     <TouchableWithoutFeedback onPress={handlePress}>
       <View style={styles.container}>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, View, ScrollView } from 'react-native';
-import { Layout, Text } from 'react-native-ui-kitten';
+import { Layout } from 'react-native-ui-kitten';
 import { NavigationStackProp } from 'react-navigation-stack';
 import { SearchHeader, StatusBar } from 'src/components';
 import { CategoryList } from './components';
