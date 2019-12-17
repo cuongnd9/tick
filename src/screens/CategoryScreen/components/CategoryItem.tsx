@@ -6,11 +6,13 @@ import {
   Dimensions
 } from 'react-native';
 import { Icon, Text } from 'react-native-ui-kitten';
+import Swipeable from 'react-native-gesture-handler/Swipeable';
 import _ from 'lodash';
 import { useDispatch } from 'react-redux';
 import { NavigationStackProp } from 'react-navigation-stack';
 import { Category } from 'src/models/category';
 import { filterByCategoryAction } from 'src/models/task';
+import { getListAction, deleteCategoryAction } from 'src/models/category';
 import { color } from 'src/config/theme';
 import { taskStatus } from 'src/config/constants';
 import { categoryIcons, defaultCategoryIcon } from 'src/config/icons';
@@ -19,9 +21,10 @@ interface Props {
   navigation: NavigationStackProp;
   category: Category;
   onSelect?: Function;
+  onRemove: Function;
 }
 
-const CategoryItem: React.FC<Props> = ({ category, onSelect, navigation }) => {
+const CategoryItem: React.FC<Props> = ({ category, onSelect, navigation, onRemove }) => {
   const dispatch = useDispatch();
   const [iconName, setIconName] = useState(defaultCategoryIcon);
   useEffect(() => {
@@ -49,31 +52,60 @@ const CategoryItem: React.FC<Props> = ({ category, onSelect, navigation }) => {
     // dispatch(filterByCategoryAction(category.id));
     // navigation.navigate('TaskByCategory');
   };
-  return (
-    <TouchableWithoutFeedback onPress={handlePress}>
-      <View style={styles.container}>
-        <View style={{ ...styles.content, marginBottom: 10 }}>
-          <Icon name={iconName} width={32} height={32} fill={color.primary} />
-          <Text style={{ marginLeft: 5 }} category='h4'>
-            {category.name}
-          </Text>
-        </View>
-        <View style={styles.content}>
-          {category.tasks.length > 0 && (
-            <>
-              <Text category='s2'>{handleProcess()}</Text>
-              <Icon
-                name='arrow-right'
-                width={19}
-                height={19}
-                fill={color.secondary}
-              />
-            </>
-          )}
-          <Text category='s2'>{`${category.tasks.length} tasks`}</Text>
-        </View>
+  const handleDelete = () => {
+    onRemove(category.id);
+    dispatch(
+      deleteCategoryAction({
+        id: category.id,
+        callback: () => dispatch(getListAction())
+      })
+    );
+  };
+  const renderButtonGroup = () => (
+    <TouchableWithoutFeedback onPress={handleDelete}>
+      <View
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          backgroundColor: '#FF3D71',
+          padding: 30,
+          marginBottom: 10,
+          marginLeft: 10,
+          borderRadius: 10
+        }}
+      >
+        <Icon name='trash' width={24} height={24} fill='#fff' />
       </View>
     </TouchableWithoutFeedback>
+  );
+  return (
+    <Swipeable renderRightActions={renderButtonGroup}>
+      <TouchableWithoutFeedback onPress={handlePress}>
+        <View style={styles.container}>
+          <View style={{ ...styles.content, marginBottom: 10 }}>
+            <Icon name={iconName} width={32} height={32} fill={color.primary} />
+            <Text style={{ marginLeft: 5 }} category='h4'>
+              {category.name}
+            </Text>
+          </View>
+          <View style={styles.content}>
+            {category.tasks.length > 0 && (
+              <>
+                <Text category='s2'>{handleProcess()}</Text>
+                <Icon
+                  name='arrow-right'
+                  width={19}
+                  height={19}
+                  fill={color.secondary}
+                />
+              </>
+            )}
+            <Text category='s2'>{`${category.tasks.length} tasks`}</Text>
+          </View>
+        </View>
+      </TouchableWithoutFeedback>
+    </Swipeable>
   );
 };
 

@@ -1,8 +1,10 @@
+import _ from 'lodash';
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { useSelector } from 'react-redux';
 import { NavigationStackProp } from 'react-navigation-stack';
 import { AppState } from 'src/models';
+import { Category } from 'src/models/category';
 import CategoryItem from './CategoryItem';
 import AddCategoryItem from './AddCategoryItem';
 
@@ -19,6 +21,7 @@ const CategoryList: React.FC<Props> = ({
 }) => {
   const data = useSelector((state: AppState) => state.category.categoryList);
   const [selectedId, setSelectedId] = useState(null);
+  const [list, setList] = useState<Category[]>(data);
   useEffect(() => {
     setSelectedId(null);
   }, [reset]);
@@ -26,18 +29,25 @@ const CategoryList: React.FC<Props> = ({
     setSelectedId(id);
     onGetSelectedId(id);
   };
+  const handleRemove = (id: string) => {
+    const removedIndex = list.findIndex(item => item.id === id);
+    const cloneList = _.cloneDeep(list);
+    cloneList.splice(removedIndex, 1);
+    setList(cloneList);
+  };
 
   return (
     <View style={styles.container}>
-      {data.map(item => (
+      {list.map(item => (
         <CategoryItem
           navigation={navigation}
           key={item.id}
           category={item}
+          onRemove={handleRemove}
           onSelect={handleSelect}
         />
       ))}
-      {data.length > 0 && <AddCategoryItem navigation={navigation} />}
+      {list.length > 0 && <AddCategoryItem navigation={navigation} />}
     </View>
   );
 };
