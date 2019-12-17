@@ -7,3 +7,4 @@ export { default as EditTaskScreen } from './EditTaskScreen';
 export { default as SearchTaskScreen } from './SearchTaskScreen';
 export { default as ProfileScreen } from './ProfileScreen';
 export { default as NewCategoryScreen } from './NewCategoryScreen';
+export { default as TaskByCategoryScreen } from './TaskByCategoryScreen';
