@@ -2,7 +2,8 @@ import { createStackNavigator } from 'react-navigation-stack';
 import {
   CategoryScreen,
   NewCategoryScreen,
-  TaskByCategoryScreen
+  TaskByCategoryScreen,
+  EditCategoryScreen
 } from 'src/screens';
 
 const CategoryNavigator = createStackNavigator(
@@ -15,6 +16,12 @@ const CategoryNavigator = createStackNavigator(
     },
     NewCategory: {
       screen: NewCategoryScreen,
+      navigationOptions: {
+        header: null
+      }
+    },
+    EditCategory: {
+      screen: EditCategoryScreen,
       navigationOptions: {
         header: null
       }
