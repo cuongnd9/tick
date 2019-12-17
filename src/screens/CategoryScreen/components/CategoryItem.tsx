@@ -24,7 +24,12 @@ interface Props {
   onRemove: Function;
 }
 
-const CategoryItem: React.FC<Props> = ({ category, onSelect, navigation, onRemove }) => {
+const CategoryItem: React.FC<Props> = ({
+  category,
+  onSelect,
+  navigation,
+  onRemove
+}) => {
   const dispatch = useDispatch();
   const [iconName, setIconName] = useState(defaultCategoryIcon);
   useEffect(() => {
@@ -49,8 +54,10 @@ const CategoryItem: React.FC<Props> = ({ category, onSelect, navigation, onRemov
     navigation.navigate('EditCategory', {
       category
     });
-    // dispatch(filterByCategoryAction(category.id));
-    // navigation.navigate('TaskByCategory');
+  };
+  const handleFilterTaskByCategory = () => {
+    dispatch(filterByCategoryAction(category.id));
+    navigation.navigate('TaskByCategory');
   };
   const handleDelete = () => {
     onRemove(category.id);
@@ -62,22 +69,47 @@ const CategoryItem: React.FC<Props> = ({ category, onSelect, navigation, onRemov
     );
   };
   const renderButtonGroup = () => (
-    <TouchableWithoutFeedback onPress={handleDelete}>
-      <View
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          backgroundColor: '#FF3D71',
-          padding: 30,
-          marginBottom: 10,
-          marginLeft: 10,
-          borderRadius: 10
-        }}
-      >
-        <Icon name='trash' width={24} height={24} fill='#fff' />
-      </View>
-    </TouchableWithoutFeedback>
+    <View
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+        marginLeft: 5
+      }}
+    >
+      <TouchableWithoutFeedback onPress={handleFilterTaskByCategory}>
+        <View
+          style={{
+            display: 'flex',
+            flex: 1,
+            justifyContent: 'center',
+            alignItems: 'center',
+            backgroundColor: '#0095FF',
+            padding: 20,
+            borderRadius: 10,
+            marginTop: 5
+          }}
+        >
+          <Icon name='cube' width={24} height={24} fill='#fff' />
+        </View>
+      </TouchableWithoutFeedback>
+      <View style={{ height: 10 }} />
+      <TouchableWithoutFeedback onPress={handleDelete}>
+        <View
+          style={{
+            display: 'flex',
+            flex: 1,
+            justifyContent: 'center',
+            alignItems: 'center',
+            backgroundColor: '#FF3D71',
+            padding: 20,
+            borderRadius: 10,
+            marginBottom: 5
+          }}
+        >
+          <Icon name='trash' width={24} height={24} fill='#fff' />
+        </View>
+      </TouchableWithoutFeedback>
+    </View>
   );
   return (
     <Swipeable renderRightActions={renderButtonGroup}>
