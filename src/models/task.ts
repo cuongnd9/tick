@@ -13,7 +13,6 @@ import {
   showLoadingAction
 } from 'src/models/global/loading';
 import { taskListType, taskStatus, taskPriority } from 'src/config/constants';
-import { List } from 'react-native-ui-kitten';
 
 // Constants.
 export const CREATE = '@task/create';
@@ -25,6 +24,7 @@ export const LIST_SUCCESS = '@task/list_success';
 export const DELETE = '@task/delete';
 export const DELETE_SUCCESS = '@task/delete_success';
 export const FILTER_BY_CATEGORY = '@task/filter_by_category';
+export const SEARCH = '@task/search';
 
 // Action types.
 interface StepInput {
@@ -166,6 +166,12 @@ interface FilterByCategoryActionType {
     categoryId: string;
   };
 }
+interface SearchActionType {
+  type: typeof SEARCH;
+  payload: {
+    keyword: string;
+  };
+}
 
 // Actions.
 export const createTaskAction = ({
@@ -252,6 +258,12 @@ export const filterByCategoryAction = (
   type: FILTER_BY_CATEGORY,
   payload: {
     categoryId
+  }
+});
+export const searchAction = (keyword: string): SearchActionType => ({
+  type: SEARCH,
+  payload: {
+    keyword
   }
 });
 
@@ -378,14 +390,17 @@ function* effects() {
 interface State {
   list: TaskListType[];
   filterList: TaskListType[];
+  searchList: TaskListType[];
 }
 type Action =
   | CreateSuccessTaskActionType
   | GetTaskListSuccessActionType
-  | FilterByCategoryActionType;
+  | FilterByCategoryActionType
+  | SearchActionType;
 const initialState: State = {
   list: [],
-  filterList: []
+  filterList: [],
+  searchList: []
 };
 
 const reducer = (state: State = initialState, action: Action): State => {
@@ -408,6 +423,18 @@ const reducer = (state: State = initialState, action: Action): State => {
                   (task: Task) => task.category.id === action.payload.categoryId
                 )
               }))
+      };
+    case SEARCH:
+      return {
+        ...state,
+        searchList: state.list.map((item: TaskListType) => ({
+          ...item,
+          data: item.data.filter((task: Task) =>
+            task.title
+              .toLocaleLowerCase()
+              .includes(action.payload.keyword.toLowerCase())
+          )
+        }))
       };
     default:
       return state;

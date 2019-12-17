@@ -7,9 +7,10 @@ interface Props {
   title: string;
   style?: any;
   showShadow?: boolean;
+  onPress?: Function;
 }
 
-const Button: React.FC<Props> = ({ title, style, showShadow }) => {
+const Button: React.FC<Props> = ({ title, style, showShadow, onPress }) => {
   const mainStyle = showShadow
     ? {
         ...styles.container,
@@ -21,7 +22,7 @@ const Button: React.FC<Props> = ({ title, style, showShadow }) => {
         ...style
       };
   return (
-    <TouchableWithoutFeedback>
+    <TouchableWithoutFeedback onPress={() => onPress()}>
       <View style={mainStyle}>
         <Text style={styles.text} category='s1'>
           {title}

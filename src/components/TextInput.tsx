@@ -18,6 +18,7 @@ interface Props {
   width?: number;
   height?: number;
   onEnter?: Function;
+  onClear?: Function;
 }
 
 const TextInput: React.FC<Props> = ({
@@ -27,7 +28,8 @@ const TextInput: React.FC<Props> = ({
   style,
   width,
   height,
-  onEnter
+  onEnter,
+  onClear
 }) => {
   const refInput = useRef(null);
   const handleSubmit = (
@@ -52,7 +54,12 @@ const TextInput: React.FC<Props> = ({
         onSubmitEditing={handleSubmit}
         ref={refInput}
       />
-      <TouchableWithoutFeedback onPress={() => refInput.current.clear()}>
+      <TouchableWithoutFeedback
+        onPress={() => {
+          refInput.current.clear();
+          onClear();
+        }}
+      >
         <View style={styles.iconRight}>
           <Icon name='close-outline' width={15} height={15} fill={color.text} />
         </View>
