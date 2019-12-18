@@ -86,7 +86,11 @@ const EditTaskScreen: React.FC<Props> = ({ navigation }) => {
   return (
     <Layout style={styles.container}>
       <StatusBar />
-      <Header title='Edit task' />
+      <Header
+        title='Edit task'
+        leftIconName='arrow-back-outline'
+        leftPress={() => navigation.goBack()}
+      />
       <KeyboardAvoidingView behavior='padding' enabled>
         <ScrollView
           showsVerticalScrollIndicator={false}
