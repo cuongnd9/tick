@@ -3,7 +3,8 @@ import {
   CategoryScreen,
   NewCategoryScreen,
   TaskByCategoryScreen,
-  EditCategoryScreen
+  EditCategoryScreen,
+  ProfileScreen
 } from 'src/screens';
 
 const CategoryNavigator = createStackNavigator(
@@ -28,6 +29,12 @@ const CategoryNavigator = createStackNavigator(
     },
     TaskByCategory: {
       screen: TaskByCategoryScreen,
+      navigationOptions: {
+        header: null
+      }
+    },
+    Profile: {
+      screen: ProfileScreen,
       navigationOptions: {
         header: null
       }
