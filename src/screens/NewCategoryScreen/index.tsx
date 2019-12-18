@@ -2,11 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Layout, Text, Input, Icon, Button } from 'react-native-ui-kitten';
 import { useDispatch } from 'react-redux';
+import { NavigationStackProp } from 'react-navigation-stack';
 import { createCategoryAction, getListAction } from 'src/models/category';
 import { Header, StatusBar } from 'src/components';
 import { color } from 'src/config/theme';
 
-const NewCategoryScreen: React.FC = () => {
+interface Props {
+  navigation: NavigationStackProp;
+}
+
+const NewCategoryScreen: React.FC<Props> = ({ navigation }) => {
   const dispatch = useDispatch();
 
   const [reset, setReset] = useState(false);
@@ -31,7 +36,11 @@ const NewCategoryScreen: React.FC = () => {
   return (
     <Layout style={styles.container}>
       <StatusBar />
-      <Header title='New category' />
+      <Header
+        title='New category'
+        leftIconName='arrow-back-outline'
+        leftPress={() => navigation.goBack()}
+      />
       <View style={styles.content}>
         <Text style={{ ...styles.label, marginTop: 0 }} category='label'>
           Enter name

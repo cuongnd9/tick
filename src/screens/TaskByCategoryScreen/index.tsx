@@ -16,7 +16,11 @@ const TaskByCategoryScreen: React.FC<Props> = ({ navigation }) => {
   return (
     <Layout style={styles.container}>
       <StatusBar />
-      <Header title='Edit task' />
+      <Header
+        title='Tasks'
+        leftIconName='arrow-back-outline'
+        leftPress={() => navigation.goBack()}
+      />
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.main}>
           <TaskList navigation={navigation} listType={taskListType.olderDays} />

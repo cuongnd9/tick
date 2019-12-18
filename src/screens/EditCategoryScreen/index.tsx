@@ -3,7 +3,11 @@ import { StyleSheet, View } from 'react-native';
 import { Layout, Text, Input, Icon, Button } from 'react-native-ui-kitten';
 import { useDispatch } from 'react-redux';
 import { NavigationStackProp } from 'react-navigation-stack';
-import { updateCategoryAction, getListAction, Category } from 'src/models/category';
+import {
+  updateCategoryAction,
+  getListAction,
+  Category
+} from 'src/models/category';
 import { Header, StatusBar } from 'src/components';
 import { color } from 'src/config/theme';
 
@@ -39,7 +43,11 @@ const EditCategoryScreen: React.FC<Props> = ({ navigation }) => {
   return (
     <Layout style={styles.container}>
       <StatusBar />
-      <Header title='Edit category' />
+      <Header
+        title='Edit category'
+        leftIconName='arrow-back-outline'
+        leftPress={() => navigation.goBack()}
+      />
       <View style={styles.content}>
         <Text style={{ ...styles.label, marginTop: 0 }} category='label'>
           Enter name
