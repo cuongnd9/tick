@@ -39,7 +39,6 @@ const TaskItem: React.FC<Props> = ({
   const [status, setStatus] = useState(task.status);
   const updateStatus = _.debounce(
     () =>
-      status !== currentTask.status &&
       dispatch(
         updateTaskAction({
           id: currentTask.id,
