@@ -339,7 +339,7 @@ function* updateTaskAsyncAction({ payload }: UpdateTaskActionType) {
     if (payload.callback) {
       payload.callback();
     }
-    yield put(createSuccessTaskAction(task));
+    yield put(updateTaskSuccessAction(task));
     payload.isLoading && Navigation.navigate('Task');
     payload.isLoading &&
       (yield put(
