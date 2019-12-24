@@ -13,6 +13,7 @@ import { NavigationStackProp } from 'react-navigation-stack';
 import { Category } from 'src/models/category';
 import { filterByCategoryAction } from 'src/models/task';
 import { getListAction, deleteCategoryAction } from 'src/models/category';
+import {getTaskListAction} from 'src/models/task'
 import { color } from 'src/config/theme';
 import { taskStatus } from 'src/config/constants';
 import { categoryIcons, defaultCategoryIcon } from 'src/config/icons';
@@ -64,7 +65,10 @@ const CategoryItem: React.FC<Props> = ({
     dispatch(
       deleteCategoryAction({
         id: category.id,
-        callback: () => dispatch(getListAction())
+        callback: () => {
+          dispatch(getListAction());
+          dispatch(getTaskListAction({}));
+        }
       })
     );
   };

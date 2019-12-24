@@ -23,6 +23,9 @@ const CategoryList: React.FC<Props> = ({
   const [selectedId, setSelectedId] = useState(null);
   const [list, setList] = useState<Category[]>(data);
   useEffect(() => {
+    setList(data);
+  }, [data])
+  useEffect(() => {
     setSelectedId(null);
   }, [reset]);
   const handleSelect = (id: string) => {

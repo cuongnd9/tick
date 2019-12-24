@@ -8,6 +8,7 @@ import {
   getListAction,
   Category
 } from 'src/models/category';
+import { getTaskListAction } from 'src/models/task';
 import { Header, StatusBar } from 'src/components';
 import { color } from 'src/config/theme';
 
@@ -35,6 +36,7 @@ const EditCategoryScreen: React.FC<Props> = ({ navigation }) => {
         callback: () => {
           setReset(!reset);
           dispatch(getListAction());
+          dispatch(getTaskListAction({}));
         }
       })
     );
