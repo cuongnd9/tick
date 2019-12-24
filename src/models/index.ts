@@ -2,6 +2,7 @@ import { all, fork } from 'redux-saga/effects';
 import { combineReducers } from 'redux';
 import { globalModel } from './global';
 import { loginModel } from './auth/login';
+import { registerModel } from './auth/register';
 import { categoryModel } from './category';
 import { imageModel } from './image';
 import { taskModel } from './task';
@@ -9,6 +10,7 @@ import { taskModel } from './task';
 function* rootSaga() {
   yield all([
     fork(loginModel.effects),
+    fork(registerModel.effects),
     fork(globalModel.effects),
     fork(categoryModel.effects),
     fork(imageModel.effects),

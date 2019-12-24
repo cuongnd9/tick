@@ -1,15 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { StyleSheet, View } from 'react-native';
 import { Layout, Text, Button, Input, Icon } from 'react-native-ui-kitten';
 import { NavigationStackProp } from 'react-navigation-stack';
 import { Header, StatusBar } from 'src/components';
 import { color } from 'src/config/theme';
+import { requireCodeAction } from 'src/models/auth/register';
 
 interface Props {
   navigation: NavigationStackProp;
 }
 
 const RequiredCodeScreen: React.FC<Props> = ({ navigation }) => {
+  const dispatch = useDispatch();
+  const [email, setEmail] = useState('');
+  const [validEmail, setValidEmail] = useState(true);
+  const handleSubmit = async () => {
+    const pattern = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const valid = pattern.test(email);
+    if (valid) {
+      dispatch(requireCodeAction(email));
+    } else {
+      setValidEmail(false);
+    }
+  };
   return (
     <Layout style={styles.container}>
       <StatusBar />
@@ -26,14 +40,16 @@ const RequiredCodeScreen: React.FC<Props> = ({ navigation }) => {
           placeholder='Email'
           style={styles.input}
           icon={() => <Icon name='person-outline' />}
-          caption={'Invalid email'}
+          onChangeText={(text: string) => setEmail(text)}
+          caption={!validEmail ? 'Invalid email' : ''}
           captionTextStyle={{ color: '#FF3D71' }}
         />
         <Button
-          style={styles.btn}
+          disabled={!email}
+          style={email ? styles.btn : styles.disabledBtn}
           textStyle={{ color: 'white' }}
           size='large'
-          onPress={() => navigation.navigate('EnterCode')}
+          onPress={handleSubmit}
         >
           CONTINUE
         </Button>
@@ -58,7 +74,7 @@ const styles = StyleSheet.create({
     marginBottom: 20
   },
   input: {
-    marginBottom: 50,
+    marginBottom: 50
   },
   btn: {
     width: '100%',
