@@ -41,7 +41,7 @@ const RegisterScreen: React.FC<Props> = ({ navigation }) => {
           style={styles.btn}
           textStyle={{ color: 'white' }}
           size='large'
-          onPress={() => navigation.navigate('EnterCode')}
+          onPress={() => navigation.navigate('Congratulation')}
         >
           REGISTER
         </Button>
