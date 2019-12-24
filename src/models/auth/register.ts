@@ -125,7 +125,11 @@ function* registerAsyncAction({ payload }: RegisterActionType) {
   yield put(showLoadingAction());
   try {
     yield call(register, payload);
-    Navigation.navigate('Congratulation');
+    const { username, password } = payload;
+    Navigation.navigate('Congratulation', {
+      username,
+      password
+    });
   } catch (err) {
     yield put(
       showNotificationAction({
