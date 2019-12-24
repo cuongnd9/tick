@@ -3,6 +3,7 @@ export { default as RequiredCodeScreen } from './RequiredCodeScreen';
 export { default as EnterCodeScreen } from './EnterCodeScreen';
 export { default as RegisterScreen } from './RegisterScreen';
 export { default as CongratulationScreen } from './CongratulationScreen';
+export { default as ForgotPasswordScreen } from './ForgotPasswordScreen';
 export { default as LoginScreen } from './LoginScreen';
 export { default as TaskScreen } from './TaskScreen';
 export { default as CategoryScreen } from './CategoryScreen';
