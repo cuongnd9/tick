@@ -1,4 +1,5 @@
 import { AsyncStorage } from 'react-native';
+import Navigation from 'src/helpers/Navigation';
 import config from 'src/config';
 
 interface Options {
@@ -12,8 +13,13 @@ async function checkStatus(response: any): Promise<any> {
   if (response.status >= 200 && response.status < 300) {
     return response;
   } else {
-    const error: Error = new Error((await response.json()).message);
-    throw error;
+    const responseData = await response.json();
+    const { message, statusCode, error } = responseData;
+    if (statusCode === 401 &&  error === 'Unauthorized') {
+      Navigation.navigate('Login');
+    }
+    const err: Error = new Error(message);
+    throw err;
   }
 }
 
