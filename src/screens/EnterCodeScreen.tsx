@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Text as TextCore } from 'react-native';
 import { Layout, Text, Button, Input, Icon } from 'react-native-ui-kitten';
 import { NavigationStackProp } from 'react-navigation-stack';
 import { Header, StatusBar } from 'src/components';
@@ -9,7 +9,7 @@ interface Props {
   navigation: NavigationStackProp;
 }
 
-const RequiredCodeScreen: React.FC<Props> = ({ navigation }) => {
+const EnterCodeScreen: React.FC<Props> = ({ navigation }) => {
   return (
     <Layout style={styles.container}>
       <StatusBar />
@@ -20,21 +20,30 @@ const RequiredCodeScreen: React.FC<Props> = ({ navigation }) => {
       />
       <View style={styles.content}>
         <Text category='s2' style={styles.title}>
-          Enter your email to continue
+          Open your email and enter your code
         </Text>
         <Input
-          placeholder='Email'
+          placeholder='Code'
           style={styles.input}
           icon={() => <Icon name='person-outline' />}
-          caption={'Invalid email'}
+          caption={'Invalid code'}
           captionTextStyle={{ color: '#FF3D71' }}
         />
-        <Button
-          style={styles.btn}
-          textStyle={{ color: 'white' }}
-          size='large'
-          onPress={() => navigation.navigate('EnterCode')}
-        >
+        <View style={styles.resendContainer}>
+          <Text category='p2' style={{ ...styles.title, marginTop: 17 }}>
+            Code is expired after 100 seconds.
+          </Text>
+          <Button
+            size='small'
+            appearance='ghost'
+            activeOpacity={0.75}
+            style={styles.resendBtn}
+            textStyle={{ color: color.secondary }}
+          >
+            Resend code
+          </Button>
+        </View>
+        <Button style={styles.btn} textStyle={{ color: 'white' }} size='large'>
           CONTINUE
         </Button>
       </View>
@@ -58,7 +67,7 @@ const styles = StyleSheet.create({
     marginBottom: 20
   },
   input: {
-    marginBottom: 50,
+    marginBottom: 15
   },
   btn: {
     width: '100%',
@@ -71,7 +80,17 @@ const styles = StyleSheet.create({
     backgroundColor: '#EDF1F7',
     borderColor: 'rgba(237, 241, 247, 0.2)',
     marginBottom: 10
+  },
+  resendContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    marginBottom: 50,
+    justifyContent: 'space-between',
+    alignItems: 'center'
+  },
+  resendBtn: {
+    paddingHorizontal: 0
   }
 });
 
-export default RequiredCodeScreen;
+export default EnterCodeScreen;

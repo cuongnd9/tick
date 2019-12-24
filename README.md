@@ -1,5 +1,6 @@
 # tick
 
+[![Made with love](https://img.shields.io/badge/made-with%20❤️-blue)](https://github.com/cuongw)
 [![runs with expo](https://img.shields.io/badge/Runs%20with%20Expo-000.svg?style=flat-square&logo=EXPO&labelColor=f3f3f3&logoColor=000)](https://expo.io/)
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2F500lab%2Ftick.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2F500lab%2Ftick?ref=badge_shield)
 
