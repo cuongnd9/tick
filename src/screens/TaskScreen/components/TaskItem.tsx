@@ -37,21 +37,21 @@ const TaskItem: React.FC<Props> = ({
   const dispatch = useDispatch();
   const [currentTask, setCurrentTask] = useState(task);
   const [status, setStatus] = useState(task.status);
-  const updateStatus = _.debounce(
-    () =>
-      status !== currentTask.status &&
+  const updateStatus = _.debounce(() => {
+    status === currentTask.status &&
       dispatch(
         updateTaskAction({
           id: currentTask.id,
           body: {
-            status
+            status:
+              status !== taskStatus.done ? taskStatus.done : taskStatus.todo
           },
           isLoading: false,
           callback: () => dispatch(getTaskListAction({ isLoading: false }))
         })
       ),
-    3000
-  );
+      3000;
+  });
   const handleChangeStatus = () => {
     setStatus(status !== taskStatus.done ? taskStatus.done : taskStatus.todo);
     updateStatus();
