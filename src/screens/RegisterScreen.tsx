@@ -1,15 +1,38 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { StyleSheet, View } from 'react-native';
 import { Layout, Text, Button, Input, Icon } from 'react-native-ui-kitten';
 import { NavigationStackProp } from 'react-navigation-stack';
 import { Header, StatusBar } from 'src/components';
 import { color } from 'src/config/theme';
+import { registerAction } from 'src/models/auth/register';
 
 interface Props {
   navigation: NavigationStackProp;
 }
 
 const RegisterScreen: React.FC<Props> = ({ navigation }) => {
+  const dispatch = useDispatch();
+  const email = navigation.getParam('email');
+  const code = navigation.getParam('code');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [validUsername, setValidUsername] = useState(true);
+  const [validPassword, setValidPassword] = useState(true);
+
+  const changeUsername = text => {
+    setUsername(text);
+    text && text.length > 3 ? setValidUsername(true) : setValidUsername(false);
+  };
+
+  const changePassword = text => {
+    setPassword(text);
+    text && text.length > 3 ? setValidPassword(true) : setValidPassword(false);
+  };
+
+  const handleRegister = () => {
+    dispatch(registerAction({ username, password, email, code }));
+  };
   return (
     <Layout style={styles.container}>
       <StatusBar />
@@ -23,25 +46,34 @@ const RegisterScreen: React.FC<Props> = ({ navigation }) => {
           Enter your account to register
         </Text>
         <Input
+          value={username}
           placeholder='Username'
+          onChangeText={changeUsername}
           style={styles.input}
           icon={() => <Icon name='person-outline' />}
-          caption={'Invalid username'}
+          caption={!validUsername ? 'Invalid username' : ''}
           captionTextStyle={{ color: '#FF3D71' }}
         />
         <Input
+          value={password}
           secureTextEntry
           placeholder='Password'
+          onChangeText={changePassword}
           style={styles.input}
           icon={() => <Icon name='lock-outline' />}
-          caption={'Invalid password'}
+          caption={!validPassword ? 'Invalid password' : ''}
           captionTextStyle={{ color: '#FF3D71' }}
         />
         <Button
-          style={styles.btn}
+          disabled={!username || !password || !validUsername || !validPassword}
+          style={
+            !username || !password || !validUsername || !validPassword
+              ? styles.disabledBtn
+              : styles.btn
+          }
           textStyle={{ color: 'white' }}
           size='large'
-          onPress={() => navigation.navigate('Congratulation')}
+          onPress={handleRegister}
         >
           REGISTER
         </Button>

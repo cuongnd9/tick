@@ -49,7 +49,7 @@ const EnterCodeScreen: React.FC<Props> = ({ navigation }) => {
         />
         <View style={styles.resendContainer}>
           <Text category='p2' style={{ ...styles.title, marginTop: 17 }}>
-            Code is expired after 100 seconds.
+            Code is expired after 120 seconds.
           </Text>
           <Button
             size='small'
