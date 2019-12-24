@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text as TextCore } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { Layout, Text, Button, Input, Icon } from 'react-native-ui-kitten';
 import { NavigationStackProp } from 'react-navigation-stack';
 import { Header, StatusBar } from 'src/components';
@@ -9,7 +9,7 @@ interface Props {
   navigation: NavigationStackProp;
 }
 
-const EnterCodeScreen: React.FC<Props> = ({ navigation }) => {
+const RegisterScreen: React.FC<Props> = ({ navigation }) => {
   return (
     <Layout style={styles.container}>
       <StatusBar />
@@ -20,36 +20,30 @@ const EnterCodeScreen: React.FC<Props> = ({ navigation }) => {
       />
       <View style={styles.content}>
         <Text category='s2' style={styles.title}>
-          Open your email and enter your code
+          Enter your account to register
         </Text>
         <Input
-          placeholder='Code'
+          placeholder='Username'
           style={styles.input}
-          icon={() => <Icon name='hash-outline' />}
-          caption={'Invalid code'}
+          icon={() => <Icon name='person-outline' />}
+          caption={'Invalid username'}
           captionTextStyle={{ color: '#FF3D71' }}
         />
-        <View style={styles.resendContainer}>
-          <Text category='p2' style={{ ...styles.title, marginTop: 17 }}>
-            Code is expired after 100 seconds.
-          </Text>
-          <Button
-            size='small'
-            appearance='ghost'
-            activeOpacity={0.75}
-            style={styles.resendBtn}
-            textStyle={{ color: color.secondary }}
-          >
-            Resend code
-          </Button>
-        </View>
+        <Input
+          secureTextEntry
+          placeholder='Password'
+          style={styles.input}
+          icon={() => <Icon name='lock-outline' />}
+          caption={'Invalid password'}
+          captionTextStyle={{ color: '#FF3D71' }}
+        />
         <Button
           style={styles.btn}
           textStyle={{ color: 'white' }}
           size='large'
-          onPress={() => navigation.navigate('Register')}
+          onPress={() => navigation.navigate('EnterCode')}
         >
-          CONTINUE
+          REGISTER
         </Button>
       </View>
     </Layout>
@@ -78,24 +72,16 @@ const styles = StyleSheet.create({
     width: '100%',
     backgroundColor: color.primary,
     borderColor: 'rgba(255, 126, 103, 0.2)',
+    marginTop: 50,
     marginBottom: 10
   },
   disabledBtn: {
     width: '100%',
     backgroundColor: '#EDF1F7',
     borderColor: 'rgba(237, 241, 247, 0.2)',
+    marginTop: 50,
     marginBottom: 10
-  },
-  resendContainer: {
-    display: 'flex',
-    flexDirection: 'row',
-    marginBottom: 50,
-    justifyContent: 'space-between',
-    alignItems: 'center'
-  },
-  resendBtn: {
-    paddingHorizontal: 0
   }
 });
 
-export default EnterCodeScreen;
+export default RegisterScreen;
