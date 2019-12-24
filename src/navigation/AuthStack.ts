@@ -3,7 +3,8 @@ import {
   LoginScreen,
   RequiredCodeScreen,
   EnterCodeScreen,
-  RegisterScreen
+  RegisterScreen,
+  CongratulationScreen
 } from 'src/screens';
 
 const AuthNavigator = createStackNavigator(
@@ -28,6 +29,12 @@ const AuthNavigator = createStackNavigator(
     },
     Register: {
       screen: RegisterScreen,
+      navigationOptions: {
+        header: null
+      }
+    },
+    Congratulation: {
+      screen: CongratulationScreen,
       navigationOptions: {
         header: null
       }
