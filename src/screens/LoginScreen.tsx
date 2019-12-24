@@ -37,7 +37,7 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
     <Layout style={styles.container}>
       <StatusBar/>
       <Image style={styles.logo} source={require('../../assets/logo.png')} />
-      <Text category='p1' style={styles.title}>
+      <Text category='s2' style={styles.title}>
         Sign in to continue
       </Text>
       <Input
@@ -88,7 +88,7 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
         activeOpacity={0.75}
         style={styles.registerBnt}
         textStyle={{ color: color.secondary }}
-        onPress={() => navigation.navigate('Task')}
+        onPress={() => navigation.navigate('RequiredCode')}
       >
         Don't have an account? Create
       </Button>
