@@ -1,15 +1,31 @@
-import React from 'react';
-import { StyleSheet, View, Text as TextCore } from 'react-native';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { StyleSheet, View } from 'react-native';
 import { Layout, Text, Button, Input, Icon } from 'react-native-ui-kitten';
 import { NavigationStackProp } from 'react-navigation-stack';
 import { Header, StatusBar } from 'src/components';
 import { color } from 'src/config/theme';
+import { checkCodeAction, requireCodeAction } from 'src/models/auth/register';
 
 interface Props {
   navigation: NavigationStackProp;
 }
 
 const EnterCodeScreen: React.FC<Props> = ({ navigation }) => {
+  const dispatch = useDispatch();
+  const email = navigation.getParam('email');
+  const [code, setCode] = useState('');
+  const [validCode, setValidCode] = useState(true);
+  const handleSubmit = () => {
+    if (code.length === 4) {
+      dispatch(checkCodeAction({ email, code }));
+    } else {
+      setValidCode(false);
+    }
+  };
+  const handleResendCode = () => {
+    dispatch(requireCodeAction(email));
+  };
   return (
     <Layout style={styles.container}>
       <StatusBar />
@@ -20,13 +36,15 @@ const EnterCodeScreen: React.FC<Props> = ({ navigation }) => {
       />
       <View style={styles.content}>
         <Text category='s2' style={styles.title}>
-          Open your email and enter your code
+          Open your email and enter your code.
         </Text>
         <Input
+          keyboardType='numeric'
+          onChangeText={(text: string) => setCode(text)}
           placeholder='Code'
           style={styles.input}
-          icon={() => <Icon name='hash-outline' />}
-          caption={'Invalid code'}
+          icon={() => <Icon name='compass-outline' />}
+          caption={!validCode ? 'Code must contain 4 numeric characters' : ''}
           captionTextStyle={{ color: '#FF3D71' }}
         />
         <View style={styles.resendContainer}>
@@ -39,15 +57,17 @@ const EnterCodeScreen: React.FC<Props> = ({ navigation }) => {
             activeOpacity={0.75}
             style={styles.resendBtn}
             textStyle={{ color: color.secondary }}
+            onPress={handleResendCode}
           >
             Resend code
           </Button>
         </View>
         <Button
-          style={styles.btn}
+          disabled={!code}
+          style={code ? styles.btn : styles.disabledBtn}
           textStyle={{ color: 'white' }}
           size='large'
-          onPress={() => navigation.navigate('Register')}
+          onPress={handleSubmit}
         >
           CONTINUE
         </Button>

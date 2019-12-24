@@ -83,7 +83,7 @@ function* requireCodeAsyncAction({ payload }: RequireCodeActionType) {
   yield put(showLoadingAction());
   try {
     yield call(requireCode, payload.email);
-    Navigation.navigate('EnterCode');
+    Navigation.navigate('EnterCode', { email: payload.email });
   } catch (err) {
     yield put(
       showNotificationAction({
@@ -101,10 +101,13 @@ function* watchRequireCodeAsyncAction() {
 function* checkCodeAsyncAction({ payload }: CheckCodeActionType) {
   yield put(showLoadingAction());
   try {
-    const data = yield call(checkCode, payload);
-    console.log(data, '-----------data for check code');
-    Navigation.navigate('Register', data);
+    const { code, email } = yield call(checkCode, payload);
+    Navigation.navigate('Register', {
+      code,
+      email
+    });
   } catch (err) {
+    console.log(err);
     yield put(
       showNotificationAction({
         content: err.message,
