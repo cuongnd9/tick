@@ -32,7 +32,7 @@ const ProfileScreen: React.FC<Props> = ({ navigation }) => {
         />
         <View style={styles.body}>
           <View style={styles.bodyContent}>
-            <Text style={styles.name}>Cuong Duy Nguyen</Text>
+            <Text style={styles.name}>@cuongw</Text>
             <Text style={styles.info}>Software Architect </Text>
             <Button
               style={{
