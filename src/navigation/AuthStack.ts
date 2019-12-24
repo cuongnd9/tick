@@ -1,5 +1,5 @@
 import { createStackNavigator } from 'react-navigation-stack';
-import { LoginScreen, RequiredCodeScreen } from 'src/screens';
+import { LoginScreen, RequiredCodeScreen, EnterCodeScreen } from 'src/screens';
 
 const AuthNavigator = createStackNavigator(
   {
@@ -11,6 +11,12 @@ const AuthNavigator = createStackNavigator(
     },
     RequiredCode: {
       screen: RequiredCodeScreen,
+      navigationOptions: {
+        header: null
+      }
+    },
+    EnterCode: {
+      screen: EnterCodeScreen,
       navigationOptions: {
         header: null
       }

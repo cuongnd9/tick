@@ -10,3 +10,4 @@ export { default as NewCategoryScreen } from './NewCategoryScreen';
 export { default as TaskByCategoryScreen } from './TaskByCategoryScreen';
 export { default as EditCategoryScreen } from './EditCategoryScreen';
 export { default as RequiredCodeScreen } from './RequiredCodeScreen';
+export { default as EnterCodeScreen } from './EnterCodeScreen';
