@@ -1,16 +1,24 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { StyleSheet, View, Dimensions } from 'react-native';
 import { Layout, Text, Button } from 'react-native-ui-kitten';
 import ConfettiCannon from 'react-native-confetti-cannon';
 import { NavigationStackProp } from 'react-navigation-stack';
 import { Header, StatusBar } from 'src/components';
 import { color } from 'src/config/theme';
+import { loginAction } from 'src/models/auth/login';
 
 interface Props {
   navigation: NavigationStackProp;
 }
 
 const CongratulationScreen: React.FC<Props> = ({ navigation }) => {
+  const dispatch = useDispatch();
+  const username = navigation.getParam('username');
+  const password = navigation.getParam('password');
+  const goToApp = () => {
+    dispatch(loginAction({ username, password }));
+  };
   return (
     <Layout style={styles.container}>
       <StatusBar />
@@ -30,7 +38,7 @@ const CongratulationScreen: React.FC<Props> = ({ navigation }) => {
           style={styles.btn}
           textStyle={{ color: 'white' }}
           size='large'
-          onPress={() => navigation.navigate('Task')}
+          onPress={goToApp}
         >
           GO TO APP
         </Button>
@@ -39,7 +47,7 @@ const CongratulationScreen: React.FC<Props> = ({ navigation }) => {
         count={200}
         origin={{
           x: Dimensions.get('window').width / 2,
-          y: Dimensions.get('window').height
+          y: Dimensions.get('window').height + 200
         }}
       />
     </Layout>
