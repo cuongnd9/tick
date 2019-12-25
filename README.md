@@ -6,8 +6,7 @@
 
 Tick: Task & Reminder
 
-<span style="margin: 30px"><img src="./images/cat.gif" height=200 /></span>
-<a href="https://expo.io/@cuongndt/tick"><img src="./images/qr_code.png" height=200 /></a>
+<span style="margin: 30px"><img src="./images/chat.gif" width=400 /></span>
 
 ## Require
 
@@ -21,6 +20,11 @@ Tick: Task & Reminder
 $ yarn
 $ yarn start
 ```
+
+## Download app
+
+<a href="https://expo.io/@cuongndt/tick"><img src="./images/qr_code.png" height=200 /></a>
+
 ## Design
 
 ### Color
