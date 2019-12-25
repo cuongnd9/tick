@@ -87,7 +87,7 @@ const TaskItem: React.FC<Props> = ({
     const completedSteps = cloneTask.steps.filter(
       step => step.status === stepStatus.done
     );
-    return `${(completedSteps.length * 100) / currentTask.steps.length}%`;
+    return `${((completedSteps.length * 100) / currentTask.steps.length).toFixed(0)}%`;
   };
   return (
     <Swipeable renderRightActions={renderDeleteButton}>
