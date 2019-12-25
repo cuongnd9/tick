@@ -6,7 +6,7 @@
 
 Tick: Task & Reminder
 
-<span style="margin: 30px"><img src="./images/tick.gif" width=400 /></span>
+<span style="margin: 30px"><img src="./images/tick.gif" width=300 /></span>
 
 ## Require
 
