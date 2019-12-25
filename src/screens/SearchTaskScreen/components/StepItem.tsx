@@ -18,10 +18,11 @@ const StepItem: React.FC<Props> = ({ step, onPress }) => {
   const dispatch = useDispatch();
   const [status, setStatus] = useState(step.status);
   const updateStatus = _.debounce(async () => {
-    if (status !== step.status) {
-      await updateStepStatus({ id: step.id, status });
-      dispatch(getTaskListAction({ isLoading: false }));
-    }
+    await updateStepStatus({
+      id: step.id,
+      status: status !== stepStatus.done ? stepStatus.done : stepStatus.todo
+    });
+    dispatch(getTaskListAction({ isLoading: false }));
   }, 3000);
   const handleChangeStatus = () => {
     onPress({

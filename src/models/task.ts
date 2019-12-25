@@ -1,5 +1,7 @@
+import _ from 'lodash';
 import { all, call, put, takeEvery } from 'redux-saga/effects';
 import Navigation from 'src/helpers/Navigation';
+import { handleNotifications } from 'src/helpers/notification';
 import {
   createTask,
   getTaskList,
@@ -406,6 +408,8 @@ const initialState: State = {
 const reducer = (state: State = initialState, action: Action): State => {
   switch (action.type) {
     case LIST_SUCCESS:
+      const data = (state.list && _.flatten([...state.list].map(item => item.data))) || [];
+      handleNotifications(data);
       return {
         ...state,
         list: action.payload,
