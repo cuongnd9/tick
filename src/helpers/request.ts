@@ -30,7 +30,7 @@ function parseJSON(response: any): any {
 export default async function request(
   url: string = '',
   options: Options = {},
-): Promise<Response> {
+): Promise<any> {
   const { method = 'GET', headers, body, isFormData = false } = options;
   const token = await AsyncStorage.getItem('x-access-token');
   const internalHeaders = isFormData
