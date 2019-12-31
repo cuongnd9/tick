@@ -10,6 +10,7 @@ import { AppState } from './models';
 import AppContainer from './navigation/AppContainer';
 import { GlobalLoading, GlobalNotification } from './components';
 import Navigation from './helpers/Navigation';
+import request from './helpers/request';
 
 const customMapping = {
   ...mapping,
@@ -25,6 +26,7 @@ function Main() {
     (state: AppState) => state.global.notification
   );
   const [fontLoaded, setFontLoaded] = useState<boolean>(false);
+  const [awaked, setAwaked] = useState<boolean>(false);
   const loadFont = async () => {
     await Font.loadAsync({
       'dosis-bold': require('../assets/fonts/Dosis-Bold.ttf'),
@@ -37,14 +39,23 @@ function Main() {
     });
     setFontLoaded(true);
   };
+  const awakeService = async () => {
+    const data = await request('/api/awake');
+    if (data === 'Hi, You!') {
+      setAwaked(true);
+    } else {
+      setAwaked(false);
+    }
+  }
   useAsyncEffect(async () => {
     await loadFont();
+    await awakeService();
   }, []);
   return (
     <>
       <IconRegistry icons={EvaIconsPack} />
       <ApplicationProvider mapping={customMapping} theme={lightTheme}>
-        {fontLoaded ? (
+        {fontLoaded && awaked ? (
           <>
             <AppContainer
               ref={navigatorRef => {
@@ -64,8 +75,8 @@ function Main() {
             />
           </>
         ) : (
-          <AppLoading />
-        )}
+            <AppLoading />
+          )}
       </ApplicationProvider>
     </>
   );
