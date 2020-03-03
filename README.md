@@ -25,29 +25,6 @@ $ yarn start
 
 <a href="https://expo.io/@cuongndt/tick"><img src="./images/qr_code.png" height=200 /></a>
 
-## Design
-
-### Color
-
-<a href="https://colorhunt.co/palette/66990">
-  <img src="./images/Color_Palette.png" width="200"/>
-</a>
-
-```
-07689f
-a2d5f2
-fafafa
-ff7e67
-```
-
-### Font
-
-[Dosis](https://fonts.google.com/specimen/Dosis)
-
-### Logo
-
-<img src="./images/logo.png" width="120"/>
-
 Build with 🙌 and ❤️
 
 
