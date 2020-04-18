@@ -27,6 +27,9 @@ $ yarn start
 
 Build with 🙌 and ❤️
 
+## Service repository
+
+[https://github.com/103cuong/tick](https://github.com/103cuong/tick)
 
 ## License
 
