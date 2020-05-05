@@ -29,7 +29,7 @@ Build with 🙌 and ❤️
 
 ## Service repository
 
-[https://github.com/103cuong/tick](https://github.com/103cuong/tick)
+[https://github.com/103cuong/tick-service](https://github.com/103cuong/tick-service)
 
 ## License
 
