@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, FlatList } from 'react-native';
-import { thinid } from 'thinid';
+import { diana } from 'diana-js';
 import AddStepItem from './AddStepItem';
 import StepItem from './StepItem';
 
@@ -18,7 +18,7 @@ const StepList: React.FC<Props> = ({ onGetStepList, reset }) => {
     setStepList([]);
   }, [reset]);
   const handleAddStep = (step: string) => {
-    setStepList([...stepList, { id: thinid(), content: step }]);
+    setStepList([...stepList, { id: diana(), content: step }]);
   };
   const handleRemoveItem = (id: string) => {
     setStepList([...stepList].filter(step => step.id !== id));
@@ -35,7 +35,7 @@ const StepList: React.FC<Props> = ({ onGetStepList, reset }) => {
             onRemove={handleRemoveItem}
           />
         )}
-        keyExtractor={_ => thinid()}
+        keyExtractor={_ => diana()}
         extraData={stepList}
       />
       <AddStepItem onAddStep={handleAddStep} />
