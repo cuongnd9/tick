@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { thinid } from 'thinid';
+import { diana } from 'diana-js';
 import { StyleSheet, View, ScrollView } from 'react-native';
 import { Layout } from 'react-native-ui-kitten';
 import { NavigationStackProp } from 'react-navigation-stack';
@@ -17,7 +17,7 @@ interface Props {
 const SearchTaskScreen: React.FC<Props> = ({ navigation }) => {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(searchAction(thinid()));
+    dispatch(searchAction(diana()));
   }, []);
   const handleSearch = (keyword: string) => {
     dispatch(searchAction(keyword));
@@ -30,7 +30,7 @@ const SearchTaskScreen: React.FC<Props> = ({ navigation }) => {
         showSearchBtn
         autoFocus
         onSearchPress={handleSearch}
-        onClear={() => handleSearch(thinid())}
+        onClear={() => handleSearch(diana())}
       />
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.main}>

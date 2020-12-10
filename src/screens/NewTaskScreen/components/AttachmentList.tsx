@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, FlatList } from 'react-native';
-import { thinid } from 'thinid';
+import { diana } from 'diana-js';
 import AttachmentButton from './AttachmentButton';
 import AttachmentItem from './AtttachmentItem';
 
@@ -24,7 +24,7 @@ const AttachmentList: React.FC<Props> = ({ onGetAttachments, reset }) => {
     <View style={styles.container}>
       <AttachmentButton
         onGetImages={image => {
-          setImages([...images, { id: thinid(), uri: image }]);
+          setImages([...images, { id: diana(), uri: image }]);
         }}
       />
       <FlatList
@@ -38,7 +38,7 @@ const AttachmentList: React.FC<Props> = ({ onGetAttachments, reset }) => {
             onRemove={handleRemoveItem}
           />
         )}
-        keyExtractor={_ => thinid()}
+        keyExtractor={_ => diana()}
       />
     </View>
   );
