@@ -1,7 +1,7 @@
 # tick
 
-[![Made with love](https://img.shields.io/badge/made-with%20❤️-blue)](https://github.com/cuongw)
-[![StackShare](http://img.shields.io/badge/tech-stack-0690fa.svg?style=flat)](https://stackshare.io/cuongw/tick)
+[![Made with love](https://img.shields.io/badge/made-with%20❤️-blue)](https://github.com/harrytran103)
+[![StackShare](http://img.shields.io/badge/tech-stack-0690fa.svg?style=flat)](https://stackshare.io/harrytran103/tick)
 [![runs with expo](https://img.shields.io/badge/Runs%20with%20Expo-000.svg?style=flat-square&logo=EXPO&labelColor=f3f3f3&logoColor=000)](https://expo.io/)
 
 Tick: Task & Reminder
