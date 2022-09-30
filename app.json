@@ -2,6 +2,7 @@
   "expo": {
     "name": "Tick",
     "slug": "tick",
+    "owner": "harrytran103",
     "privacy": "public",
     "platforms": [
       "ios",
@@ -26,7 +27,7 @@
       "supportsTablet": true
     },
     "android": {
-      "package": "harry.tran103.tick"
+      "package": "me.harrytran103.tick"
     }
   }
 }
