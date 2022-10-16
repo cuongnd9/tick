@@ -1,4 +1,8 @@
 {
+  "name": "Tick",
+  "version": "1.0.0",
+  "description": "",
+  "author": "harrytran103",
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "start": "expo start",
