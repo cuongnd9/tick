@@ -419,7 +419,7 @@ const reducer = (state: State = initialState, action: Action): State => {
       return {
         ...state,
         filterList:
-          action.payload.categoryId === 'cuongw77777777'
+          action.payload.categoryId === 'cuongw77777777' // FIXME
             ? [...state.list]
             : state.list.map((item: TaskListType) => ({
                 ...item,

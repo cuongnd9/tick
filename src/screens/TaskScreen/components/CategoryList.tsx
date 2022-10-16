@@ -9,7 +9,7 @@ interface Props {
 }
 
 const CategoryList: React.FC<Props> = ({ onGetSelectedId }) => {
-  const defaultId = 'cuongw77777777';
+  const defaultId = 'cuongw77777777'; // FIXME
   const data = useSelector((state: AppState) => [
     {
       id: defaultId,

@@ -2,6 +2,7 @@
   "expo": {
     "name": "Tick",
     "slug": "tick",
+    "owner": "harrytran103",
     "privacy": "public",
     "platforms": [
       "ios",
@@ -23,10 +24,16 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "me.harrytran103.tick"
     },
     "android": {
-      "package": "me.cuongw.tick"
+      "package": "me.harrytran103.tick"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "92e04330-4c4e-4934-848b-20ed130149a1"
+      }
     }
   }
 }

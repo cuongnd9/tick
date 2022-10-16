@@ -20,7 +20,7 @@ const ForgotPasswordScreen: React.FC<Props> = ({ navigation }) => {
       />
       <View style={styles.content}>
         <Text category='s2' style={styles.title}>
-          This feature is not available. Please contact author cuongw.me@gmail.com to
+          This feature is not available. Please contact author harrytran103@gmail.com to
           support it.
         </Text>
         <Button
